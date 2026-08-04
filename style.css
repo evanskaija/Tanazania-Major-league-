@@ -9500,87 +9500,104 @@ body.fdl-page .league-tab-btn.active {
 }
 
 .contender-card {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 1.75rem 1.25rem;
   position: relative;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  min-height: 380px;
+  box-sizing: border-box;
 }
 
 .contender-card:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-8px);
 }
 
 .card-yanga-gold {
-  border: 2px solid rgba(255, 180, 0, 0.5);
-  background: linear-gradient(145deg, rgba(255, 180, 0, 0.08), rgba(15, 23, 42, 0.85));
-  box-shadow: 0 12px 35px rgba(255, 180, 0, 0.15);
+  border: 1px solid #ffb400 !important;
+  box-shadow: 0 0 25px rgba(255, 180, 0, 0.3) !important;
+  background: linear-gradient(180deg, rgba(255, 180, 0, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);
+}
+
+.card-yanga-gold:hover {
+  box-shadow: 0 0 40px rgba(255, 180, 0, 0.5) !important;
 }
 
 .card-simba-red {
-  border: 2px solid rgba(239, 68, 68, 0.5);
-  background: linear-gradient(145deg, rgba(239, 68, 68, 0.08), rgba(15, 23, 42, 0.85));
-  box-shadow: 0 12px 35px rgba(239, 68, 68, 0.15);
+  border: 1px solid #ff3b30 !important;
+  box-shadow: 0 0 25px rgba(255, 59, 48, 0.3) !important;
+  background: linear-gradient(180deg, rgba(255, 59, 48, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);
+}
+
+.card-simba-red:hover {
+  box-shadow: 0 0 40px rgba(255, 59, 48, 0.5) !important;
 }
 
 .card-azam-blue {
-  border: 2px solid rgba(56, 189, 248, 0.5);
-  background: linear-gradient(145deg, rgba(56, 189, 248, 0.08), rgba(15, 23, 42, 0.85));
-  box-shadow: 0 12px 35px rgba(56, 189, 248, 0.15);
+  border: 1px solid #00d4ff !important;
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.3) !important;
+  background: linear-gradient(180deg, rgba(0, 212, 255, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);
+}
+
+.card-azam-blue:hover {
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.5) !important;
 }
 
 .contender-top-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.3rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 12px;
   font-family: var(--font-heading);
   font-weight: 900;
   font-size: 0.72rem;
   letter-spacing: 0.5px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .badge-gold { background: #ffb400; color: #000; }
-.badge-red { background: #ef4444; color: #fff; }
-.badge-blue { background: #0284c7; color: #fff; }
+.badge-red { background: #ff3b30; color: #fff; }
+.badge-blue { background: #00d4ff; color: #000; }
 
-.contender-header {
+.contender-center-logo {
+  margin: 0.75rem 0;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.85rem;
-  margin-bottom: 1.25rem;
+  height: 70px;
 }
 
-img.contender-logo,
-.contender-header img,
-.contender-logo {
-  width: 50px !important;
-  height: 50px !important;
-  min-width: 50px !important;
-  max-width: 50px !important;
-  min-height: 50px !important;
-  max-height: 50px !important;
-  border-radius: 50% !important;
-  object-fit: cover !important;
-  border: 2px solid rgba(255, 255, 255, 0.2) !important;
-  flex-shrink: 0 !important;
+.contender-logo-img {
+  width: 70px !important;
+  height: 70px !important;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  min-height: 70px !important;
+  max-height: 70px !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5));
 }
 
 .contender-name {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 900;
   color: #ffffff;
-  margin: 0;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: 0.5px;
 }
 
 .contender-tagline {
   font-size: 0.75rem;
   color: #94a3b8;
+  margin-bottom: 1.25rem;
 }
 
 .contender-stats-row {
@@ -9900,31 +9917,39 @@ img.contender-logo,
 
 /* 4 Metric Cards Grid */
 .four-metrics-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
 
 .metric-card {
-  background: rgba(30, 41, 59, 0.7);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 0.75rem 0.85rem;
-  display: flex; align-items: center; gap: 0.65rem;
   transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.metric-card:hover { transform: translateY(-3px); }
+.metric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
 
 .shadow-gold { border-left: 3px solid #ffb400; }
-.shadow-cyan { border-left: 3px solid #38bdf8; }
-.shadow-red { border-left: 3px solid #ef4444; }
+.shadow-cyan { border-left: 3px solid #00d4ff; }
+.shadow-red { border-left: 3px solid #ff3b30; }
 
-.metric-icon { font-size: 1.3rem; }
-
+.metric-icon { font-size: 1.6rem; }
 .metric-info { display: flex; flex-direction: column; }
-
-.metric-title { font-size: 0.7rem; color: #94a3b8; font-weight: 700; }
-
-.metric-value { font-size: 0.82rem; color: #ffffff; font-weight: 900; }
+.metric-huge-val { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 900; color: #ffffff; line-height: 1; }
+.metric-sub-lbl { font-size: 0.65rem; color: #ffb400; font-weight: 800; text-transform: uppercase; margin: 0.15rem 0; }
+.metric-title { font-size: 0.72rem; color: #94a3b8; font-weight: 700; }
+.ai-brain-icon { font-size: 1.25rem; }
 
 /* ==========================================================================
    📱 MOBILE-OPTIMIZED COMPACT & ATTRACTIVE UI LAYOUTS (HOMEPAGE)
@@ -9953,29 +9978,36 @@ img.contender-logo,
 
   .contender-cards-grid {
     display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    gap: 0.5rem !important;
-    padding: 0.2rem 0.2rem 0.65rem 0.2rem !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-  }
-
-  .contender-cards-grid::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    width: 100% !important;
   }
 
   .contender-card {
-    flex: 0 0 195px !important;
-    min-width: 195px !important;
-    max-width: 200px !important;
-    scroll-snap-align: start !important;
-    padding: 0.75rem !important;
-    border-radius: 12px !important;
+    flex: unset !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 1.25rem 1rem !important;
+    border-radius: 16px !important;
+    min-height: auto !important;
+  }
+
+  .contender-center-logo {
+    height: 60px !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  .contender-logo-img {
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+    object-fit: contain !important;
   }
 
   .contender-top-badge {
