@@ -1919,6 +1919,66 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSliderArrows('.comp-prev-btn', '.comp-next-btn', '.competitions-grid');
   setupSliderArrows('.games-prev-btn', '.games-next-btn', '.games-grid');
 
+  // Animated News Box Auto-Slider
+  const newsSlides = document.querySelectorAll('.news-animated-slide');
+  const newsDots = document.querySelectorAll('.news-dot');
+  const newsPrevBtn = document.querySelector('.news-prev-btn');
+  const newsNextBtn = document.querySelector('.news-next-btn');
+  let newsCurrentIndex = 0;
+  let newsAutoTimer = null;
+
+  const showNewsSlide = (index) => {
+    newsSlides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+    newsDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+    newsCurrentIndex = index;
+  };
+
+  const nextNewsSlide = () => {
+    if (newsSlides.length === 0) return;
+    const nextIdx = (newsCurrentIndex + 1) % newsSlides.length;
+    showNewsSlide(nextIdx);
+  };
+
+  const prevNewsSlide = () => {
+    if (newsSlides.length === 0) return;
+    const prevIdx = (newsCurrentIndex - 1 + newsSlides.length) % newsSlides.length;
+    showNewsSlide(prevIdx);
+  };
+
+  if (newsSlides.length > 0) {
+    newsAutoTimer = setInterval(nextNewsSlide, 3500);
+
+    if (newsNextBtn) {
+      newsNextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clearInterval(newsAutoTimer);
+        nextNewsSlide();
+        newsAutoTimer = setInterval(nextNewsSlide, 3500);
+      });
+    }
+
+    if (newsPrevBtn) {
+      newsPrevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clearInterval(newsAutoTimer);
+        prevNewsSlide();
+        newsAutoTimer = setInterval(nextNewsSlide, 3500);
+      });
+    }
+
+    newsDots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        clearInterval(newsAutoTimer);
+        showNewsSlide(idx);
+        newsAutoTimer = setInterval(nextNewsSlide, 3500);
+      });
+    });
+  }
+
 }); // end DOMContentLoaded
 
 

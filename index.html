@@ -728,44 +728,59 @@
           </div>
         </div>
 
-        <!-- 3 Secondary Compact News Cards (110px Height Each) -->
-        <div class="news-side-grid">
-          <!-- Secondary Card 1: Coach Spotlight -->
-          <div class="news-side-card reveal-fade-right stagger-1">
-            <div class="news-thumb-box">
-              <img src="images/miguael-gamondi.png" alt="Miguel Gamondi" class="news-thumb-img">
-              <div class="news-thumb-tag" data-en="📍 Coach Spotlight" data-sw="📍 Mfano wa Kocha">📍 Coach Spotlight</div>
+        <!-- Animated News Box Slider (Moving transition box) -->
+        <div class="news-animated-slider-box reveal-fade-right">
+          <div class="news-slides-wrapper">
+            <!-- Slide 1: Coach Spotlight (Miguel Gamondi) -->
+            <div class="news-animated-slide active">
+              <div class="news-thumb-box">
+                <img src="images/miguael-gamondi.png" alt="Miguel Gamondi" class="news-thumb-img">
+                <div class="news-thumb-tag" data-en="📍 Coach Spotlight" data-sw="📍 Mfano wa Kocha">📍 Coach Spotlight</div>
+              </div>
+              <div class="news-side-content">
+                <div class="news-side-meta" data-en="⏱ 3 min read" data-sw="⏱ Dakika 3 kusoma">⏱ 3 min read</div>
+                <h4 class="news-side-headline" data-en="Miguel Gamondi: Building Champions Through Discipline" data-sw="Miguel Gamondi: Kuunda Mabingwa Kupitia Nidhamu">Miguel Gamondi: Building Champions Through Discipline</h4>
+                <a href="nbc-premier-league.html#tab-news" class="news-side-action" data-en="Watch Interview →" data-sw="Tazama Mahojiano →">Watch Interview →</a>
+              </div>
             </div>
-            <div class="news-side-content">
-              <div class="news-side-meta" data-en="⏱ 3 min read" data-sw="⏱ Dakika 3 kusoma">⏱ 3 min read</div>
-              <h4 class="news-side-headline" data-en="Miguel Gamondi: Building Champions Through Discipline" data-sw="Miguel Gamondi: Kuunda Mabingwa Kupitia Nidhamu">Miguel Gamondi: Building Champions Through Discipline</h4>
-              <a href="nbc-premier-league.html#tab-news" class="news-side-action" data-en="Watch Interview →" data-sw="Tazama Mahojiano →">Watch Interview →</a>
+
+            <!-- Slide 2: Transfer Window -->
+            <div class="news-animated-slide">
+              <div class="news-thumb-box">
+                <img src="images/player_3.png" alt="Summer Transfer Updates" class="news-thumb-img">
+                <div class="news-thumb-tag" data-en="🔥 Transfer Window" data-sw="🔥 Dirisha la Usajili">🔥 Transfer Window</div>
+              </div>
+              <div class="news-side-content">
+                <div class="news-side-meta" data-en="⏱ 4 min read" data-sw="⏱ Dakika 4 kusoma">⏱ 4 min read</div>
+                <h4 class="news-side-headline" data-en="Summer 2026 Transfer Updates: Confirmed Signings" data-sw="Taarifa za Usajili Msimu wa Joto 2026: Usajili Uliothibitishwa">Summer 2026 Transfer Updates: Confirmed Signings</h4>
+                <a href="nbc-premier-league.html#tab-transfers" class="news-side-action" data-en="View Transfers →" data-sw="Tazama Usajili →">View Transfers →</a>
+              </div>
+            </div>
+
+            <!-- Slide 3: Player Story (Clement Mzize) -->
+            <div class="news-animated-slide">
+              <div class="news-thumb-box">
+                <img src="images/clement-mzize.png" alt="Clement Mzize" class="news-thumb-img">
+                <div class="news-thumb-tag" data-en="⚡ Player Story" data-sw="⚡ Habari ya Mchezaji">⚡ Player Story</div>
+              </div>
+              <div class="news-side-content">
+                <div class="news-side-meta" data-en="⏱ 4 min read" data-sw="⏱ Dakika 4 kusoma">⏱ 4 min read</div>
+                <h4 class="news-side-headline" data-en="Clement Mzize Fires Yanga To Title Glory" data-sw="Clement Mzize Aipa Yanga Ubingwa Wa Ligi">Clement Mzize Fires Yanga To Title Glory</h4>
+                <a href="nbc-premier-league.html#tab-news" class="news-side-action" data-en="Read Analysis →" data-sw="Soma Uchambuzi →">Read Analysis →</a>
+              </div>
             </div>
           </div>
 
-          <!-- Secondary Card 2: Transfer Updates -->
-          <div class="news-side-card reveal-fade-right stagger-2">
-            <div class="news-thumb-box">
-              <img src="images/player_3.png" alt="Summer Transfer Updates" class="news-thumb-img">
-              <div class="news-thumb-tag" data-en="🔥 Transfer Window" data-sw="🔥 Dirisha la Usajili">🔥 Transfer Window</div>
+          <!-- Slide Controls -->
+          <div class="news-slider-controls">
+            <div class="news-slider-dots">
+              <span class="news-dot active" data-index="0"></span>
+              <span class="news-dot" data-index="1"></span>
+              <span class="news-dot" data-index="2"></span>
             </div>
-            <div class="news-side-content">
-              <div class="news-side-meta" data-en="⏱ 4 min read" data-sw="⏱ Dakika 4 kusoma">⏱ 4 min read</div>
-              <h4 class="news-side-headline" data-en="Summer 2026 Transfer Updates: Confirmed Signings" data-sw="Taarifa za Usajili Msimu wa Joto 2026: Usajili Uliothibitishwa">Summer 2026 Transfer Updates: Confirmed Signings</h4>
-              <a href="nbc-premier-league.html#tab-transfers" class="news-side-action" data-en="View Transfers →" data-sw="Tazama Usajili →">View Transfers →</a>
-            </div>
-          </div>
-
-          <!-- Secondary Card 3: Clement Mzize Story -->
-          <div class="news-side-card reveal-fade-right stagger-3">
-            <div class="news-thumb-box">
-              <img src="images/clement-mzize.png" alt="Clement Mzize" class="news-thumb-img">
-              <div class="news-thumb-tag" data-en="⚡ Player Story" data-sw="⚡ Habari ya Mchezaji">⚡ Player Story</div>
-            </div>
-            <div class="news-side-content">
-              <div class="news-side-meta" data-en="⏱ 4 min read" data-sw="⏱ Dakika 4 kusoma">⏱ 4 min read</div>
-              <h4 class="news-side-headline" data-en="Clement Mzize Fires Yanga To Title Glory" data-sw="Clement Mzize Aipa Yanga Ubingwa Wa Ligi">Clement Mzize Fires Yanga To Title Glory</h4>
-              <a href="nbc-premier-league.html#tab-news" class="news-side-action" data-en="Read Analysis →" data-sw="Soma Uchambuzi →">Read Analysis →</a>
+            <div class="news-arrow-nav" style="display:flex; gap:0.4rem;">
+              <button class="news-nav-btn news-prev-btn" aria-label="Previous News"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="news-nav-btn news-next-btn" aria-label="Next News"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
         </div>
