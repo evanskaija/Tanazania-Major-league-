@@ -713,77 +713,75 @@
         <a href="nbc-premier-league.html#tab-news" style="color:var(--primary-gold); font-size:0.85rem; font-weight:700;" data-en="See all →" data-sw="Tazama zote →">See all →</a>
       </div>
 
-      <div class="news-tff-grid">
-        <!-- Top Featured Story Card (260px Height) -->
-        <div class="news-main-card reveal-fade-left">
-          <img src="images/kmc-complex.png" alt="KMC Stadium Champions">
-          <div class="news-overlay-content">
-            <div style="display:flex; gap:0.5rem; margin-bottom:0.4rem;">
-              <span class="badge-pill" style="background:#dc2626; color:#fff; font-size:0.7rem; font-weight:800;" data-en="🔴 BREAKING NEWS" data-sw="🔴 HABARI MUHIMU">🔴 BREAKING NEWS</span>
-              <span class="badge-pill" style="background:rgba(255,255,255,0.25); backdrop-filter:blur(8px); color:#fff; font-size:0.7rem; font-weight:800;" data-en="🏆 Champions" data-sw="🏆 Mabingwa">🏆 Champions</span>
+      <!-- Single Full-Box Image Animated News Hero Slider (Replaces 2 stacked boxes) -->
+      <div class="slider-container-wrapper">
+        <button class="slider-side-arrow arrow-left full-news-prev-btn" aria-label="Previous News"><i class="fa-solid fa-chevron-left"></i></button>
+
+        <div class="full-news-slider-card">
+          <!-- Slide 1: Yanga SC Champions -->
+          <div class="full-news-slide active">
+            <img src="images/kmc-complex.png" alt="Yanga SC Champions" class="full-news-bg-img">
+            <div class="full-news-overlay">
+              <div class="full-news-badges-row">
+                <span class="badge-pill pill-red" data-en="🔴 BREAKING NEWS" data-sw="🔴 HABARI MUHIMU">🔴 BREAKING NEWS</span>
+                <span class="badge-pill pill-glass" data-en="🏆 Champions" data-sw="🏆 Mabingwa">🏆 Champions</span>
+              </div>
+              <div class="full-news-meta">⏱ 5 min read &nbsp;•&nbsp; ⚡ Trending</div>
+              <h3 class="full-news-headline" data-en="Yanga SC Crowned NBC Premier League Champions" data-sw="Yanga SC Watawazwa Mabingwa wa NBC Premier League">Yanga SC Crowned NBC Premier League Champions</h3>
+              <a href="nbc-premier-league.html#tab-news" class="btn-primary full-news-btn" data-en="Read Full Story →" data-sw="Soma Habari Kamili →">Read Full Story →</a>
             </div>
-            <div class="news-overlay-meta">⏱ 5 min read &nbsp;•&nbsp; ⚡ Trending</div>
-            <h3 class="news-main-title" data-en="Yanga SC Crowned NBC Premier League Champions" data-sw="Yanga SC Watawazwa Mabingwa wa NBC Premier League">Yanga SC Crowned NBC Premier League Champions</h3>
-            <a href="nbc-premier-league.html#tab-news" class="news-main-link" data-en="Read Full Story →" data-sw="Soma Habari Kamili →">Read Full Story →</a>
+          </div>
+
+          <!-- Slide 2: Miguel Gamondi -->
+          <div class="full-news-slide">
+            <img src="images/miguael-gamondi.png" alt="Miguel Gamondi" class="full-news-bg-img">
+            <div class="full-news-overlay">
+              <div class="full-news-badges-row">
+                <span class="badge-pill pill-gold" data-en="📍 Coach Spotlight" data-sw="📍 Mfano wa Kocha">📍 Coach Spotlight</span>
+              </div>
+              <div class="full-news-meta">⏱ 3 min read &nbsp;•&nbsp; 📋 Tactical Analysis</div>
+              <h3 class="full-news-headline" data-en="Miguel Gamondi: Building Champions Through Discipline" data-sw="Miguel Gamondi: Kuunda Mabingwa Kupitia Nidhamu">Miguel Gamondi: Building Champions Through Discipline</h3>
+              <a href="nbc-premier-league.html#tab-news" class="btn-primary full-news-btn" data-en="Watch Interview →" data-sw="Tazama Mahojiano →">Watch Interview →</a>
+            </div>
+          </div>
+
+          <!-- Slide 3: Summer Transfer Updates -->
+          <div class="full-news-slide">
+            <img src="images/player_3.png" alt="Summer Transfer Updates" class="full-news-bg-img">
+            <div class="full-news-overlay">
+              <div class="full-news-badges-row">
+                <span class="badge-pill pill-cyan" data-en="🔥 Transfer Window" data-sw="🔥 Dirisha la Usajili">🔥 Transfer Window</span>
+              </div>
+              <div class="full-news-meta">⏱ 4 min read &nbsp;•&nbsp; ⚽ Confirmed Signings</div>
+              <h3 class="full-news-headline" data-en="Summer 2026 Transfer Updates: Confirmed Signings" data-sw="Taarifa za Usajili Msimu wa Joto 2026: Usajili Uliothibitishwa">Summer 2026 Transfer Updates: Confirmed Signings</h3>
+              <a href="nbc-premier-league.html#tab-transfers" class="btn-primary full-news-btn" data-en="View Transfers →" data-sw="Tazama Usajili →">View Transfers →</a>
+            </div>
+          </div>
+
+          <!-- Slide 4: Clement Mzize -->
+          <div class="full-news-slide">
+            <img src="images/clement-mzize.png" alt="Clement Mzize" class="full-news-bg-img">
+            <div class="full-news-overlay">
+              <div class="full-news-badges-row">
+                <span class="badge-pill pill-gold" data-en="⚡ Player Story" data-sw="⚡ Habari ya Mchezaji">⚡ Player Story</span>
+              </div>
+              <div class="full-news-meta">⏱ 4 min read &nbsp;•&nbsp; 🌟 Star Striker</div>
+              <h3 class="full-news-headline" data-en="Clement Mzize Fires Yanga To Title Glory" data-sw="Clement Mzize Aipa Yanga Ubingwa Wa Ligi">Clement Mzize Fires Yanga To Title Glory</h3>
+              <a href="nbc-premier-league.html#tab-news" class="btn-primary full-news-btn" data-en="Read Analysis →" data-sw="Soma Uchambuzi →">Read Analysis →</a>
+            </div>
+          </div>
+
+          <!-- Dot Indicators -->
+          <div class="full-news-dots">
+            <span class="full-dot active" data-index="0"></span>
+            <span class="full-dot" data-index="1"></span>
+            <span class="full-dot" data-index="2"></span>
+            <span class="full-dot" data-index="3"></span>
           </div>
         </div>
 
-        <!-- Animated News Box Slider (Moving transition box) -->
-        <div class="news-animated-slider-box reveal-fade-right">
-          <div class="news-slides-wrapper">
-            <!-- Slide 1: Coach Spotlight (Miguel Gamondi) -->
-            <div class="news-animated-slide active">
-              <div class="news-thumb-box">
-                <img src="images/miguael-gamondi.png" alt="Miguel Gamondi" class="news-thumb-img">
-                <div class="news-thumb-tag" data-en="📍 Coach Spotlight" data-sw="📍 Mfano wa Kocha">📍 Coach Spotlight</div>
-              </div>
-              <div class="news-side-content">
-                <div class="news-side-meta" data-en="⏱ 3 min read" data-sw="⏱ Dakika 3 kusoma">⏱ 3 min read</div>
-                <h4 class="news-side-headline" data-en="Miguel Gamondi: Building Champions Through Discipline" data-sw="Miguel Gamondi: Kuunda Mabingwa Kupitia Nidhamu">Miguel Gamondi: Building Champions Through Discipline</h4>
-                <a href="nbc-premier-league.html#tab-news" class="news-side-action" data-en="Watch Interview →" data-sw="Tazama Mahojiano →">Watch Interview →</a>
-              </div>
-            </div>
-
-            <!-- Slide 2: Transfer Window -->
-            <div class="news-animated-slide">
-              <div class="news-thumb-box">
-                <img src="images/player_3.png" alt="Summer Transfer Updates" class="news-thumb-img">
-                <div class="news-thumb-tag" data-en="🔥 Transfer Window" data-sw="🔥 Dirisha la Usajili">🔥 Transfer Window</div>
-              </div>
-              <div class="news-side-content">
-                <div class="news-side-meta" data-en="⏱ 4 min read" data-sw="⏱ Dakika 4 kusoma">⏱ 4 min read</div>
-                <h4 class="news-side-headline" data-en="Summer 2026 Transfer Updates: Confirmed Signings" data-sw="Taarifa za Usajili Msimu wa Joto 2026: Usajili Uliothibitishwa">Summer 2026 Transfer Updates: Confirmed Signings</h4>
-                <a href="nbc-premier-league.html#tab-transfers" class="news-side-action" data-en="View Transfers →" data-sw="Tazama Usajili →">View Transfers →</a>
-              </div>
-            </div>
-
-            <!-- Slide 3: Player Story (Clement Mzize) -->
-            <div class="news-animated-slide">
-              <div class="news-thumb-box">
-                <img src="images/clement-mzize.png" alt="Clement Mzize" class="news-thumb-img">
-                <div class="news-thumb-tag" data-en="⚡ Player Story" data-sw="⚡ Habari ya Mchezaji">⚡ Player Story</div>
-              </div>
-              <div class="news-side-content">
-                <div class="news-side-meta" data-en="⏱ 4 min read" data-sw="⏱ Dakika 4 kusoma">⏱ 4 min read</div>
-                <h4 class="news-side-headline" data-en="Clement Mzize Fires Yanga To Title Glory" data-sw="Clement Mzize Aipa Yanga Ubingwa Wa Ligi">Clement Mzize Fires Yanga To Title Glory</h4>
-                <a href="nbc-premier-league.html#tab-news" class="news-side-action" data-en="Read Analysis →" data-sw="Soma Uchambuzi →">Read Analysis →</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide Controls -->
-          <div class="news-slider-controls">
-            <div class="news-slider-dots">
-              <span class="news-dot active" data-index="0"></span>
-              <span class="news-dot" data-index="1"></span>
-              <span class="news-dot" data-index="2"></span>
-            </div>
-            <div class="news-arrow-nav" style="display:flex; gap:0.4rem;">
-              <button class="news-nav-btn news-prev-btn" aria-label="Previous News"><i class="fa-solid fa-chevron-left"></i></button>
-              <button class="news-nav-btn news-next-btn" aria-label="Next News"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
-          </div>
-        </div>
+        <button class="slider-side-arrow arrow-right full-news-next-btn" aria-label="Next News"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
       </div>
 
     </div>
