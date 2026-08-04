@@ -9555,11 +9555,19 @@ body.fdl-page .league-tab-btn.active {
   margin-bottom: 1.25rem;
 }
 
+img.contender-logo,
+.contender-header img,
 .contender-logo {
-  width: 50px; height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+  min-height: 50px !important;
+  max-height: 50px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  flex-shrink: 0 !important;
 }
 
 .contender-name {
@@ -10611,20 +10619,44 @@ body.fdl-page .league-tab-btn.active {
     height: 72px !important;
   }
 
-  /* Lock Contender Cards Grid into 3 Columns */
-  .contender-cards-grid {
+  /* Lock Contender Cards Grid into 3 Columns on Desktop */
+  .contender-cards-grid,
+  .slider-container-wrapper .contender-cards-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
+    grid-auto-flow: row !important;
+    flex-direction: row !important;
     gap: 1.5rem !important;
     overflow: visible !important;
+    scroll-snap-type: none !important;
     padding: 0 !important;
+    width: 100% !important;
   }
 
-  .contender-card {
+  .contender-card,
+  .contender-cards-grid .contender-card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
     flex: unset !important;
     min-width: 0 !important;
     max-width: 100% !important;
     width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  img.contender-logo,
+  .contender-header img,
+  .contender-card img.contender-logo {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
   }
 
   .slider-side-arrow.contender-prev-btn,
