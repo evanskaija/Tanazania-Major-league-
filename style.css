@@ -9764,7 +9764,20 @@ body.fdl-page .league-tab-btn.active {
 }
 
 .match-teams { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: #fff; }
-.tiny-logo { width: 22px; height: 22px; border-radius: 50%; }
+.tiny-logo,
+.match-teams img,
+img.tiny-logo {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  min-height: 24px !important;
+  max-height: 24px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
 
 .match-date-badge { font-size: 0.7rem; color: #94a3b8; }
 .derby-pill { font-size: 0.7rem; font-weight: 900; color: #ffb400; }
