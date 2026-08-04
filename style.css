@@ -9744,6 +9744,27 @@ body.fdl-page .league-tab-btn.active {
 .match-date-badge { font-size: 0.7rem; color: #94a3b8; }
 .derby-pill { font-size: 0.7rem; font-weight: 900; color: #ffb400; }
 
+/* Pair of Equal Small Side-by-Side Dashboard Boxes */
+.two-small-boxes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.small-equal-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+
+.command-dashboard-secondary-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 /* AI Insight Box */
 .command-ai-insight-box {
   background: linear-gradient(135deg, rgba(255, 180, 0, 0.12), rgba(15, 23, 42, 0.9));
