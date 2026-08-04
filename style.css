@@ -9920,6 +9920,20 @@ body.fdl-page .league-tab-btn.active {
    📱 MOBILE-OPTIMIZED COMPACT & ATTRACTIVE UI LAYOUTS (HOMEPAGE)
    ========================================================================== */
 @media (max-width: 767px) {
+  /* Mobile Rounded Floating Header Navbar */
+  .navbar {
+    top: 8px !important;
+    left: 10px !important;
+    width: calc(100% - 20px) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(0, 212, 255, 0.25) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6) !important;
+    background: rgba(7, 26, 61, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    height: 60px !important;
+  }
+
   .title-race-command-header { margin-bottom: 1.25rem !important; }
   .command-title { font-size: 1.05rem !important; margin-bottom: 0.35rem !important; }
   .command-badge { font-size: 0.62rem !important; padding: 0.2rem 0.55rem !important; }
