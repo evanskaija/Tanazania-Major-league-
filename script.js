@@ -1915,6 +1915,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setupSliderArrows('.historic-prev-btn', '.historic-next-btn', '.historic-clashes-grid');
   setupSliderArrows('.spotlight-prev-btn', '.spotlight-next-btn', '.spotlight-cards-grid');
+  setupSliderArrows('.contender-prev-btn', '.contender-next-btn', '.contender-cards-grid');
+  setupSliderArrows('.comp-prev-btn', '.comp-next-btn', '.competitions-grid');
+  setupSliderArrows('.games-prev-btn', '.games-next-btn', '.games-grid');
 
 }); // end DOMContentLoaded
 
