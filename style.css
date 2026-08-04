@@ -10068,7 +10068,7 @@ body.fdl-page .league-tab-btn.active {
     font-size: 0.75rem !important;
   }
 
-  /* 3. HISTORIC STORIES & CLASSIC CLASHES — Reduced Size & Left/Right Horizontal Scroll */
+  /* 3. HISTORIC STORIES & CLASSIC CLASHES — Ultra Compact & Left/Right Arrow Scroll */
   .historic-stories-section {
     padding: 1.25rem 0 !important;
   }
@@ -10096,8 +10096,8 @@ body.fdl-page .league-tab-btn.active {
     flex-direction: row !important;
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
-    gap: 0.65rem !important;
-    padding: 0.2rem 0.2rem 0.75rem 0.2rem !important;
+    gap: 0.5rem !important;
+    padding: 0.2rem 0.2rem 0.65rem 0.2rem !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: thin !important;
   }
@@ -10112,50 +10112,50 @@ body.fdl-page .league-tab-btn.active {
   }
 
   .clash-card-tile {
-    flex: 0 0 210px !important;
-    min-width: 210px !important;
-    max-width: 215px !important;
+    flex: 0 0 175px !important;
+    min-width: 175px !important;
+    max-width: 180px !important;
     scroll-snap-align: start !important;
-    border-radius: 12px !important;
+    border-radius: 10px !important;
     margin: 0 !important;
   }
 
   .clash-img-box {
-    height: 85px !important;
+    height: 68px !important;
   }
 
   .clash-tag-pill {
-    font-size: 0.58rem !important;
-    padding: 2px 6px !important;
+    font-size: 0.55rem !important;
+    padding: 1px 5px !important;
   }
 
   .clash-card-content {
-    padding: 0.55rem !important;
+    padding: 0.4rem !important;
   }
 
   .clash-scorebar {
-    margin-bottom: 0.3rem !important;
-    font-size: 0.72rem !important;
+    margin-bottom: 0.2rem !important;
+    font-size: 0.68rem !important;
   }
 
   .clash-score-badge {
-    padding: 1px 6px !important;
-    font-size: 0.7rem !important;
+    padding: 1px 5px !important;
+    font-size: 0.65rem !important;
   }
 
   .clash-team-lbl {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
   }
 
   .clash-title-text {
-    font-size: 0.82rem !important;
-    margin-bottom: 0.2rem !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.15rem !important;
   }
 
   .clash-desc-text {
-    font-size: 0.66rem !important;
-    line-height: 1.25 !important;
-    margin-bottom: 0.4rem !important;
+    font-size: 0.6rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.35rem !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
@@ -10163,12 +10163,12 @@ body.fdl-page .league-tab-btn.active {
   }
 
   .clash-sub-tag {
-    font-size: 0.62rem !important;
+    font-size: 0.58rem !important;
   }
 
   .clash-read-btn {
-    padding: 0.22rem 0.5rem !important;
-    font-size: 0.65rem !important;
+    padding: 0.2rem 0.45rem !important;
+    font-size: 0.62rem !important;
   }
 
   .clash-img-box {

@@ -1893,18 +1893,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  const clashReadBtns = document.querySelectorAll('.clash-read-btn');
-  clashReadBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const clashCard = btn.closest('.clash-card-tile');
-      if (clashCard) {
-        clashCard.classList.toggle('story-expanded');
-        const isExpanded = clashCard.classList.contains('story-expanded');
-        btn.textContent = isExpanded ? 'Hide Story ↑' : 'Read Story →';
-      }
-    });
-  });
+  // Slider Arrow Scroll Handlers
+  const setupSliderArrows = (prevSelector, nextSelector, containerSelector) => {
+    const prevBtn = document.querySelector(prevSelector);
+    const nextBtn = document.querySelector(nextSelector);
+    const container = document.querySelector(containerSelector);
+
+    if (prevBtn && container) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        container.scrollBy({ left: -220, behavior: 'smooth' });
+      });
+    }
+    if (nextBtn && container) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        container.scrollBy({ left: 220, behavior: 'smooth' });
+      });
+    }
+  };
+
+  setupSliderArrows('.historic-prev-btn', '.historic-next-btn', '.historic-clashes-grid');
+  setupSliderArrows('.spotlight-prev-btn', '.spotlight-next-btn', '.spotlight-cards-grid');
 
 }); // end DOMContentLoaded
 
