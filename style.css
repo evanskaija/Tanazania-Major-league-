@@ -9741,16 +9741,20 @@ body.fdl-page .league-tab-btn.active {
    📱 MOBILE-OPTIMIZED COMPACT & ATTRACTIVE UI LAYOUTS (HOMEPAGE)
    ========================================================================== */
 @media (max-width: 767px) {
-  .command-title { font-size: 1.35rem !important; }
-  .command-alert-banner { font-size: 0.75rem !important; padding: 0.35rem 0.85rem !important; }
-  
+  .title-race-command-header { margin-bottom: 1.25rem !important; }
+  .command-title { font-size: 1.05rem !important; margin-bottom: 0.35rem !important; }
+  .command-badge { font-size: 0.62rem !important; padding: 0.2rem 0.55rem !important; }
+  .matchday-pill { font-size: 0.62rem !important; padding: 0.2rem 0.55rem !important; }
+  .command-alert-banner { font-size: 0.68rem !important; padding: 0.25rem 0.65rem !important; }
+  .pulse-pts { font-size: 0.85rem !important; }
+
   .contender-cards-grid {
     display: flex !important;
     flex-direction: row !important;
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
-    gap: 0.75rem !important;
-    padding: 0.25rem 0.25rem 0.85rem 0.25rem !important;
+    gap: 0.5rem !important;
+    padding: 0.2rem 0.2rem 0.65rem 0.2rem !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: thin !important;
   }
@@ -9764,16 +9768,69 @@ body.fdl-page .league-tab-btn.active {
   }
 
   .contender-card {
-    flex: 0 0 260px !important;
-    min-width: 260px !important;
-    max-width: 270px !important;
+    flex: 0 0 195px !important;
+    min-width: 195px !important;
+    max-width: 200px !important;
     scroll-snap-align: start !important;
-    padding: 1rem !important;
+    padding: 0.75rem !important;
+    border-radius: 12px !important;
+  }
+
+  .contender-top-badge {
+    font-size: 0.58rem !important;
+    padding: 0.15rem 0.45rem !important;
+    margin-bottom: 0.4rem !important;
+    border-radius: 8px !important;
+  }
+
+  .contender-header {
+    gap: 0.45rem !important;
+    margin-bottom: 0.65rem !important;
+  }
+
+  .contender-logo {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .contender-name {
+    font-size: 0.85rem !important;
+  }
+
+  .contender-tagline {
+    font-size: 0.6rem !important;
+  }
+
+  .contender-stats-row {
+    padding: 0.45rem !important;
+    margin-bottom: 0.55rem !important;
+    border-radius: 8px !important;
+    gap: 0.25rem !important;
+  }
+
+  .stat-val {
+    font-size: 0.95rem !important;
+  }
+
+  .stat-lbl {
+    font-size: 0.55rem !important;
+  }
+
+  .contender-momentum {
+    padding-top: 0.35rem !important;
+  }
+
+  .momentum-lbl {
+    font-size: 0.65rem !important;
+  }
+
+  .form-fire {
+    font-size: 0.72rem !important;
   }
 
   .command-dashboard-grid {
     grid-template-columns: 1fr !important;
-    gap: 1rem !important;
+    gap: 0.85rem !important;
   }
   /* 1. HONORS & SPOTLIGHTS — Sleek Horizontal Swipe Slider */
   .honors-history-section {
