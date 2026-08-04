@@ -10011,7 +10011,7 @@ body.fdl-page .league-tab-btn.active {
     font-size: 0.75rem !important;
   }
 
-  /* 3. HISTORIC STORIES & CLASSIC CLASHES — 100% Full Width Fit */
+  /* 3. HISTORIC STORIES & CLASSIC CLASHES — Reduced Size & Left/Right Horizontal Scroll */
   .historic-stories-section {
     padding: 1.25rem 0 !important;
   }
@@ -10036,18 +10036,82 @@ body.fdl-page .league-tab-btn.active {
 
   .historic-clashes-grid {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
     gap: 0.65rem !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+    padding: 0.2rem 0.2rem 0.75rem 0.2rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+
+  .historic-clashes-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .historic-clashes-grid::-webkit-scrollbar-thumb {
+    background: #ffb400;
+    border-radius: 4px;
   }
 
   .clash-card-tile {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
+    flex: 0 0 210px !important;
+    min-width: 210px !important;
+    max-width: 215px !important;
+    scroll-snap-align: start !important;
     border-radius: 12px !important;
     margin: 0 !important;
+  }
+
+  .clash-img-box {
+    height: 85px !important;
+  }
+
+  .clash-tag-pill {
+    font-size: 0.58rem !important;
+    padding: 2px 6px !important;
+  }
+
+  .clash-card-content {
+    padding: 0.55rem !important;
+  }
+
+  .clash-scorebar {
+    margin-bottom: 0.3rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  .clash-score-badge {
+    padding: 1px 6px !important;
+    font-size: 0.7rem !important;
+  }
+
+  .clash-team-lbl {
+    font-size: 0.7rem !important;
+  }
+
+  .clash-title-text {
+    font-size: 0.82rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .clash-desc-text {
+    font-size: 0.66rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.4rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .clash-sub-tag {
+    font-size: 0.62rem !important;
+  }
+
+  .clash-read-btn {
+    padding: 0.22rem 0.5rem !important;
+    font-size: 0.65rem !important;
   }
 
   .clash-img-box {
