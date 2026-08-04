@@ -9410,7 +9410,7 @@ body.fdl-page .league-tab-btn.active {
 
   /* 2. TITLE RACE COMMAND CENTER & LEAGUE METRICS */
   .title-race-section {
-    padding: 1.75rem 0 !important;
+    padding: 1.5rem 0 !important;
   }
 
   .title-race-badge {
@@ -9419,138 +9419,161 @@ body.fdl-page .league-tab-btn.active {
   }
 
   .title-race-title {
-    font-size: 1.2rem !important;
+    font-size: 1.15rem !important;
     line-height: 1.25 !important;
-    margin-top: 0.4rem !important;
-    margin-bottom: 0.3rem !important;
+    margin-top: 0.35rem !important;
+    margin-bottom: 0.25rem !important;
   }
 
   .title-race-subtitle {
-    font-size: 0.75rem !important;
+    font-size: 0.72rem !important;
     line-height: 1.3 !important;
   }
 
   .standings-panel {
-    padding: 0.85rem !important;
+    padding: 0.75rem !important;
     border-radius: 14px !important;
   }
 
+  /* Horizontally Scrollable Standings Cards on Mobile (Left <-> Right) */
   .title-ranking-cards-mobile {
-    gap: 0.45rem !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 0.65rem !important;
+    padding: 0.25rem 0.25rem 0.75rem 0.25rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+
+  .title-ranking-cards-mobile::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .title-ranking-cards-mobile::-webkit-scrollbar-thumb {
+    background: #ffb400;
+    border-radius: 4px;
   }
 
   .mobile-rank-card {
-    padding: 0.55rem 0.75rem !important;
+    flex: 0 0 230px !important;
+    min-width: 230px !important;
+    max-width: 240px !important;
+    scroll-snap-align: start !important;
+    padding: 0.6rem 0.75rem !important;
     border-radius: 12px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
   }
 
   .mobile-rank-badge {
-    width: 24px !important;
-    height: 24px !important;
-    font-size: 0.75rem !important;
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 0.7rem !important;
   }
 
   .mobile-club-logo {
-    width: 32px !important;
-    height: 32px !important;
+    width: 30px !important;
+    height: 30px !important;
   }
 
   .mobile-club-info h4 {
-    font-size: 0.88rem !important;
+    font-size: 0.85rem !important;
   }
 
   .mobile-rank-subtitle {
-    font-size: 0.68rem !important;
+    font-size: 0.65rem !important;
   }
 
   .mobile-rank-pts .pts-big {
-    font-size: 1.15rem !important;
+    font-size: 1.1rem !important;
   }
 
   .mobile-full-standings-btn {
-    padding: 0.6rem 1rem !important;
-    font-size: 0.8rem !important;
+    padding: 0.55rem 0.9rem !important;
+    font-size: 0.78rem !important;
     margin-top: 0.35rem !important;
   }
 
   /* Championship Probability & Key Metrics on Mobile */
   .analytics-panel {
-    padding: 0.85rem !important;
+    padding: 0.75rem !important;
     border-radius: 14px !important;
-    gap: 0.85rem !important;
+    gap: 0.75rem !important;
   }
 
   .analytics-panel h3 {
-    font-size: 0.95rem !important;
-    margin-bottom: 0.75rem !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 0.6rem !important;
   }
 
   .prob-item-card {
-    padding: 0.45rem 0.65rem !important;
-    margin-bottom: 0.4rem !important;
+    padding: 0.4rem 0.6rem !important;
+    margin-bottom: 0.35rem !important;
     border-radius: 8px !important;
   }
 
   .prob-row-header {
-    font-size: 0.78rem !important;
-    margin-bottom: 0.25rem !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.2rem !important;
   }
 
   .prob-fill-track {
-    height: 6px !important;
+    height: 5px !important;
   }
 
   .key-stats-container {
-    padding: 0.75rem !important;
+    padding: 0.65rem !important;
     border-radius: 12px !important;
-    margin-top: 0.5rem !important;
+    margin-top: 0.4rem !important;
   }
 
   .key-stats-title {
-    font-size: 0.78rem !important;
-    margin-bottom: 0.5rem !important;
-    letter-spacing: 0.5px !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.45rem !important;
+    letter-spacing: 0.4px !important;
   }
 
   .key-stat-list {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 0.45rem !important;
+    gap: 0.4rem !important;
   }
 
   .key-stat-item-row {
     flex-direction: column !important;
     align-items: flex-start !important;
     justify-content: center !important;
-    padding: 0.45rem 0.6rem !important;
+    padding: 0.4rem 0.55rem !important;
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
     border-radius: 8px !important;
-    font-size: 0.72rem !important;
-    gap: 0.15rem !important;
+    font-size: 0.68rem !important;
+    gap: 0.1rem !important;
   }
 
   .key-stat-item-row strong {
-    font-size: 0.78rem !important;
+    font-size: 0.75rem !important;
   }
 
-  /* 3. HISTORIC STORIES & CLASSIC CLASHES — Sleek Horizontal Swipe Slider */
+  /* 3. HISTORIC STORIES & CLASSIC CLASHES — Ultra-Compact Mobile Horizontal Slider */
   .historic-stories-section {
-    padding: 1.5rem 0 !important;
+    padding: 1.25rem 0 !important;
   }
 
   .historic-stories-section .section-header {
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.85rem !important;
   }
 
   .historic-stories-section .section-header h2 {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
     line-height: 1.2 !important;
   }
 
   .historic-stories-section .section-header p {
-    font-size: 0.75rem !important;
-    margin-top: 0.15rem !important;
+    font-size: 0.7rem !important;
+    margin-top: 0.1rem !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
@@ -9562,8 +9585,8 @@ body.fdl-page .league-tab-btn.active {
     flex-direction: row !important;
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
-    gap: 0.75rem !important;
-    padding: 0.25rem 0.25rem 0.85rem 0.25rem !important;
+    gap: 0.65rem !important;
+    padding: 0.2rem 0.2rem 0.75rem 0.2rem !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: thin !important;
   }
@@ -9578,46 +9601,50 @@ body.fdl-page .league-tab-btn.active {
   }
 
   .clash-card-tile {
-    flex: 0 0 260px !important;
-    min-width: 260px !important;
-    max-width: 270px !important;
+    flex: 0 0 210px !important;
+    min-width: 210px !important;
+    max-width: 215px !important;
     scroll-snap-align: start !important;
-    border-radius: 14px !important;
+    border-radius: 12px !important;
     margin: 0 !important;
   }
 
   .clash-img-box {
-    height: 120px !important;
+    height: 90px !important;
   }
 
   .clash-tag-pill {
-    font-size: 0.6rem !important;
-    padding: 2px 7px !important;
+    font-size: 0.58rem !important;
+    padding: 2px 6px !important;
   }
 
   .clash-card-content {
-    padding: 0.75rem !important;
+    padding: 0.6rem !important;
   }
 
   .clash-scorebar {
-    margin-bottom: 0.4rem !important;
-    font-size: 0.78rem !important;
+    margin-bottom: 0.3rem !important;
+    font-size: 0.72rem !important;
   }
 
   .clash-score-badge {
-    padding: 2px 7px !important;
-    font-size: 0.75rem !important;
+    padding: 1px 6px !important;
+    font-size: 0.7rem !important;
+  }
+
+  .clash-team-lbl {
+    font-size: 0.7rem !important;
   }
 
   .clash-title-text {
-    font-size: 0.92rem !important;
-    margin-bottom: 0.25rem !important;
+    font-size: 0.82rem !important;
+    margin-bottom: 0.2rem !important;
   }
 
   .clash-desc-text {
-    font-size: 0.72rem !important;
-    line-height: 1.35 !important;
-    margin-bottom: 0.5rem !important;
+    font-size: 0.68rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.4rem !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
@@ -9625,12 +9652,12 @@ body.fdl-page .league-tab-btn.active {
   }
 
   .clash-sub-tag {
-    font-size: 0.68rem !important;
+    font-size: 0.62rem !important;
   }
 
   .clash-read-btn {
-    padding: 0.3rem 0.6rem !important;
-    font-size: 0.7rem !important;
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.65rem !important;
   }
 
   /* 4. COMPACT & SLEEK FOOTER FOR MOBILE */
