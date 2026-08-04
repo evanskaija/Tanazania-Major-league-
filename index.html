@@ -832,46 +832,48 @@
   <section class="honors-history-section" id="honors-spotlights">
     <div class="container">
       <div class="honors-spotlight-wrapper">
-        <div class="section-header" style="margin-bottom:1.75rem; display:flex; justify-content:space-between; align-items:center;">
+        <div class="section-header" style="margin-bottom:1.75rem;">
           <div style="border-left:3px solid #dc2626; padding-left:0.75rem;">
             <h2 style="font-family:var(--font-heading); font-size:1.5rem; font-weight:900; letter-spacing:0.5px; text-transform:uppercase;" data-en="HONORS & SPOTLIGHTS" data-sw="TUZO NA KUMULIKA">HONORS & SPOTLIGHTS</h2>
           </div>
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <button class="slider-arrow-btn spotlight-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="slider-arrow-btn spotlight-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
-          </div>
         </div>
 
-        <div class="spotlight-cards-grid">
-          <!-- Card 1: Stephane Aziz Ki -->
-          <div class="spotlight-card reveal-fade-left">
-            <img src="images/stephane-ki-azizi.png" alt="Stephane Aziz Ki" class="spotlight-full-bg">
-            <div class="spotlight-overlay">
-              <span class="spotlight-gold-badge" data-en="PLAYER OF THE MONTH" data-sw="MCHEZAJI BORA WA MWEZI">PLAYER OF THE MONTH</span>
-              <h3 class="spotlight-name">Stephane Aziz Ki</h3>
-              <div class="spotlight-time-text" data-en="5 hours ago" data-sw="Masaa 5 yaliyopita">5 hours ago</div>
+        <div class="slider-container-wrapper">
+          <button class="slider-side-arrow arrow-left spotlight-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
+
+          <div class="spotlight-cards-grid">
+            <!-- Card 1: Stephane Aziz Ki -->
+            <div class="spotlight-card reveal-fade-left">
+              <img src="images/stephane-ki-azizi.png" alt="Stephane Aziz Ki" class="spotlight-full-bg">
+              <div class="spotlight-overlay">
+                <span class="spotlight-gold-badge" data-en="PLAYER OF THE MONTH" data-sw="MCHEZAJI BORA WA MWEZI">PLAYER OF THE MONTH</span>
+                <h3 class="spotlight-name">Stephane Aziz Ki</h3>
+                <div class="spotlight-time-text" data-en="5 hours ago" data-sw="Masaa 5 yaliyopita">5 hours ago</div>
+              </div>
+            </div>
+
+            <!-- Card 2: Coach Beker -->
+            <div class="spotlight-card spotlight-gold-frame reveal-fade-up">
+              <img src="images/beker.jpg" alt="Coach Beker" class="spotlight-full-bg">
+              <div class="spotlight-overlay">
+                <span class="spotlight-gold-badge" data-en="COACH OF THE MONTH" data-sw="KOCHA BORA WA MWEZI">COACH OF THE MONTH</span>
+                <h3 class="spotlight-name">Coach Beker</h3>
+                <div class="spotlight-time-text" data-en="3 hours ago" data-sw="Masaa 3 yaliyopita">3 hours ago</div>
+              </div>
+            </div>
+
+            <!-- Card 3: Feisal Salum -->
+            <div class="spotlight-card reveal-fade-right">
+              <img src="images/feisal-salum.png" alt="Feisal Salum" class="spotlight-full-bg">
+              <div class="spotlight-overlay">
+                <span class="spotlight-gold-badge" data-en="BEST GOAL" data-sw="BAO BORA">BEST GOAL</span>
+                <h3 class="spotlight-name">Feisal Salum</h3>
+                <div class="spotlight-time-text" data-en="5 hours ago" data-sw="Masaa 5 yaliyopita">5 hours ago</div>
+              </div>
             </div>
           </div>
 
-          <!-- Card 2: Coach Beker -->
-          <div class="spotlight-card spotlight-gold-frame reveal-fade-up">
-            <img src="images/beker.jpg" alt="Coach Beker" class="spotlight-full-bg">
-            <div class="spotlight-overlay">
-              <span class="spotlight-gold-badge" data-en="COACH OF THE MONTH" data-sw="KOCHA BORA WA MWEZI">COACH OF THE MONTH</span>
-              <h3 class="spotlight-name">Coach Beker</h3>
-              <div class="spotlight-time-text" data-en="3 hours ago" data-sw="Masaa 3 yaliyopita">3 hours ago</div>
-            </div>
-          </div>
-
-          <!-- Card 3: Feisal Salum -->
-          <div class="spotlight-card reveal-fade-right">
-            <img src="images/feisal-salum.png" alt="Feisal Salum" class="spotlight-full-bg">
-            <div class="spotlight-overlay">
-              <span class="spotlight-gold-badge" data-en="BEST GOAL" data-sw="BAO BORA">BEST GOAL</span>
-              <h3 class="spotlight-name">Feisal Salum</h3>
-              <div class="spotlight-time-text" data-en="5 hours ago" data-sw="Masaa 5 yaliyopita">5 hours ago</div>
-            </div>
-          </div>
+          <button class="slider-side-arrow arrow-right spotlight-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
 
       </div>
@@ -895,123 +897,129 @@
       </div>
 
       <!-- 2. Top 3 Contender Battle Cards (Mobile Swipe / Desktop Grid) -->
-      <div class="contender-cards-grid">
-        <!-- Contender 1: YANGA SC -->
-        <div class="contender-card card-yanga-gold reveal-fade-left">
-          <div class="contender-top-badge badge-gold">
-            <i class="fa-solid fa-trophy"></i>
-            <span data-en="LEAGUE LEADER" data-sw="VIONGOZI WA LIGI">LEAGUE LEADER</span>
-          </div>
-          <div class="contender-header">
-            <img src="images/yanga.jpg" alt="Young Africans SC" class="contender-logo">
-            <div>
-              <h3 class="contender-name">YOUNG AFRICANS</h3>
-              <span class="contender-tagline" data-en="Wananchi • Defending Champions" data-sw="Wananchi • Mabingwa Wanaotetea">Wananchi • Defending Champions</span>
+      <div class="slider-container-wrapper">
+        <button class="slider-side-arrow arrow-left contender-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
+
+        <div class="contender-cards-grid">
+          <!-- Contender 1: YANGA SC -->
+          <div class="contender-card card-yanga-gold reveal-fade-left">
+            <div class="contender-top-badge badge-gold">
+              <i class="fa-solid fa-trophy"></i>
+              <span data-en="LEAGUE LEADER" data-sw="VIONGOZI WA LIGI">LEAGUE LEADER</span>
+            </div>
+            <div class="contender-header">
+              <img src="images/yanga.jpg" alt="Young Africans SC" class="contender-logo">
+              <div>
+                <h3 class="contender-name">YOUNG AFRICANS</h3>
+                <span class="contender-tagline" data-en="Wananchi • Defending Champions" data-sw="Wananchi • Mabingwa Wanaotetea">Wananchi • Defending Champions</span>
+              </div>
+            </div>
+            <div class="contender-stats-row">
+              <div class="contender-stat-box">
+                <span class="stat-val gold-glow">75</span>
+                <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
+              </div>
+              <div class="contender-stat-box">
+                <span class="stat-val">+57</span>
+                <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
+              </div>
+              <div class="contender-stat-box">
+                <span class="stat-val gold-txt">65%</span>
+                <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
+              </div>
+            </div>
+            <div class="contender-momentum">
+              <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
+              <div class="momentum-flames-row">
+                <span class="form-fire win" title="Win">🔥</span>
+                <span class="form-fire win" title="Win">🔥</span>
+                <span class="form-fire win" title="Win">🔥</span>
+                <span class="form-fire draw" title="Draw">➖</span>
+                <span class="form-fire win" title="Win">🔥</span>
+              </div>
             </div>
           </div>
-          <div class="contender-stats-row">
-            <div class="contender-stat-box">
-              <span class="stat-val gold-glow">75</span>
-              <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
+
+          <!-- Contender 2: SIMBA SC -->
+          <div class="contender-card card-simba-red reveal-fade-up">
+            <div class="contender-top-badge badge-red">
+              <i class="fa-solid fa-fire"></i>
+              <span data-en="TITLE CHASER" data-sw="WAFUATILIAJI WA UBINGWA">TITLE CHASER</span>
             </div>
-            <div class="contender-stat-box">
-              <span class="stat-val">+57</span>
-              <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
+            <div class="contender-header">
+              <img src="images/simba.jpg" alt="Simba SC" class="contender-logo">
+              <div>
+                <h3 class="contender-name">SIMBA SC</h3>
+                <span class="contender-tagline" data-en="Wanyama • 2 Pts Behind" data-sw="Wanyama • Pointi 2 Nyuma">Wanyama • 2 Pts Behind</span>
+              </div>
             </div>
-            <div class="contender-stat-box">
-              <span class="stat-val gold-txt">65%</span>
-              <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
+            <div class="contender-stats-row">
+              <div class="contender-stat-box">
+                <span class="stat-val red-glow">73</span>
+                <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
+              </div>
+              <div class="contender-stat-box">
+                <span class="stat-val">+46</span>
+                <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
+              </div>
+              <div class="contender-stat-box">
+                <span class="stat-val red-txt">30%</span>
+                <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
+              </div>
+            </div>
+            <div class="contender-momentum">
+              <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
+              <div class="momentum-flames-row">
+                <span class="form-fire win" title="Win">🔥</span>
+                <span class="form-fire win" title="Win">🔥</span>
+                <span class="form-fire draw" title="Draw">➖</span>
+                <span class="form-fire loss" title="Loss">❌</span>
+                <span class="form-fire win" title="Win">🔥</span>
+              </div>
             </div>
           </div>
-          <div class="contender-momentum">
-            <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
-            <div class="momentum-flames-row">
-              <span class="form-fire win" title="Win">🔥</span>
-              <span class="form-fire win" title="Win">🔥</span>
-              <span class="form-fire win" title="Win">🔥</span>
-              <span class="form-fire draw" title="Draw">➖</span>
-              <span class="form-fire win" title="Win">🔥</span>
+
+          <!-- Contender 3: AZAM FC -->
+          <div class="contender-card card-azam-blue reveal-fade-right">
+            <div class="contender-top-badge badge-blue">
+              <i class="fa-solid fa-bolt"></i>
+              <span data-en="OUTSIDE CHANCE" data-sw="CHANCE YA MBALI">OUTSIDE CHANCE</span>
+            </div>
+            <div class="contender-header">
+              <img src="images/azam.jpg" alt="Azam FC" class="contender-logo">
+              <div>
+                <h3 class="contender-name">AZAM FC</h3>
+                <span class="contender-tagline" data-en="Wanalambalamba • 11 Pts Behind" data-sw="Wanalambalamba • Pointi 11 Nyuma">Wanalambalamba • 11 Pts Behind</span>
+              </div>
+            </div>
+            <div class="contender-stats-row">
+              <div class="contender-stat-box">
+                <span class="stat-val blue-glow">64</span>
+                <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
+              </div>
+              <div class="contender-stat-box">
+                <span class="stat-val">+34</span>
+                <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
+              </div>
+              <div class="contender-stat-box">
+                <span class="stat-val blue-txt">5%</span>
+                <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
+              </div>
+            </div>
+            <div class="contender-momentum">
+              <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
+              <div class="momentum-flames-row">
+                <span class="form-fire draw" title="Draw">➖</span>
+                <span class="form-fire win" title="Win">🔥</span>
+                <span class="form-fire loss" title="Loss">❌</span>
+                <span class="form-fire win" title="Win">🔥</span>
+                <span class="form-fire draw" title="Draw">➖</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Contender 2: SIMBA SC -->
-        <div class="contender-card card-simba-red reveal-fade-up">
-          <div class="contender-top-badge badge-red">
-            <i class="fa-solid fa-fire"></i>
-            <span data-en="TITLE CHASER" data-sw="WAFUATILIAJI WA UBINGWA">TITLE CHASER</span>
-          </div>
-          <div class="contender-header">
-            <img src="images/simba.jpg" alt="Simba SC" class="contender-logo">
-            <div>
-              <h3 class="contender-name">SIMBA SC</h3>
-              <span class="contender-tagline" data-en="Wanyama • 2 Pts Behind" data-sw="Wanyama • Pointi 2 Nyuma">Wanyama • 2 Pts Behind</span>
-            </div>
-          </div>
-          <div class="contender-stats-row">
-            <div class="contender-stat-box">
-              <span class="stat-val red-glow">73</span>
-              <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
-            </div>
-            <div class="contender-stat-box">
-              <span class="stat-val">+46</span>
-              <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
-            </div>
-            <div class="contender-stat-box">
-              <span class="stat-val red-txt">30%</span>
-              <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
-            </div>
-          </div>
-          <div class="contender-momentum">
-            <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
-            <div class="momentum-flames-row">
-              <span class="form-fire win" title="Win">🔥</span>
-              <span class="form-fire win" title="Win">🔥</span>
-              <span class="form-fire draw" title="Draw">➖</span>
-              <span class="form-fire loss" title="Loss">❌</span>
-              <span class="form-fire win" title="Win">🔥</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Contender 3: AZAM FC -->
-        <div class="contender-card card-azam-blue reveal-fade-right">
-          <div class="contender-top-badge badge-blue">
-            <i class="fa-solid fa-bolt"></i>
-            <span data-en="OUTSIDE CHANCE" data-sw="CHANCE YA MBALI">OUTSIDE CHANCE</span>
-          </div>
-          <div class="contender-header">
-            <img src="images/azam.jpg" alt="Azam FC" class="contender-logo">
-            <div>
-              <h3 class="contender-name">AZAM FC</h3>
-              <span class="contender-tagline" data-en="Wanalambalamba • 11 Pts Behind" data-sw="Wanalambalamba • Pointi 11 Nyuma">Wanalambalamba • 11 Pts Behind</span>
-            </div>
-          </div>
-          <div class="contender-stats-row">
-            <div class="contender-stat-box">
-              <span class="stat-val blue-glow">64</span>
-              <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
-            </div>
-            <div class="contender-stat-box">
-              <span class="stat-val">+34</span>
-              <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
-            </div>
-            <div class="contender-stat-box">
-              <span class="stat-val blue-txt">5%</span>
-              <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
-            </div>
-          </div>
-          <div class="contender-momentum">
-            <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
-            <div class="momentum-flames-row">
-              <span class="form-fire draw" title="Draw">➖</span>
-              <span class="form-fire win" title="Win">🔥</span>
-              <span class="form-fire loss" title="Loss">❌</span>
-              <span class="form-fire win" title="Win">🔥</span>
-              <span class="form-fire draw" title="Draw">➖</span>
-            </div>
-          </div>
-        </div>
+        <button class="slider-side-arrow arrow-right contender-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
 
       <!-- 3. Bottom Grid: Probability & Head-to-Head Comparison & Upcoming Deciders & AI Insights & Metrics -->
@@ -1157,81 +1165,83 @@
   <!-- 6. HISTORIC STORIES & CLASSIC CLASHES SECTION -->
   <section class="historic-stories-section" id="historic-stories">
     <div class="container">
-      <div class="section-header" style="margin-bottom:1.25rem; display:flex; justify-content:space-between; align-items:center;">
+      <div class="section-header" style="margin-bottom:1.25rem;">
         <div style="border-left:3px solid #dc2626; padding-left:0.75rem;">
           <h2 style="font-family:var(--font-heading); font-size:1.5rem; font-weight:900; letter-spacing:0.5px; text-transform:uppercase;" data-en="HISTORIC STORIES & CLASSIC CLASHES" data-sw="HISTORIA NA MECHI ZA VUTANIKUVUTE">HISTORIC STORIES & CLASSIC CLASHES</h2>
           <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.2rem;" data-en="Relive the legendary matches, historic rivalries, and golden moments of Tanzanian Football" data-sw="Kumbuka mechi za kishujaa na matukio ya dhahabu ya Soka la Tanzania">Relive the legendary matches, historic rivalries, and golden moments of Tanzanian Football</p>
         </div>
-        <div style="display:flex; align-items:center; gap:0.5rem;">
-          <button class="slider-arrow-btn historic-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
-          <button class="slider-arrow-btn historic-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
       </div>
 
       <!-- 3 Historic Clash Tiles -->
-      <div class="historic-clashes-grid">
-        <!-- Clash 1 -->
-        <div class="clash-card-tile">
-          <div class="clash-img-box">
-            <img src="images/mashabiki-wa-yanga.jfif" alt="1989 Classic">
-            <div class="clash-tag-pill" data-en="📜 1989 CLASSIC" data-sw="📜 MSIMU WA 1989">📜 1989 CLASSIC</div>
-          </div>
-          <div class="clash-card-content">
-            <div class="clash-scorebar">
-              <span class="clash-team-lbl">Yanga SC</span>
-              <span class="clash-score-badge">2 - 1</span>
-              <span class="clash-team-lbl">Simba SC</span>
+      <div class="slider-container-wrapper">
+        <button class="slider-side-arrow arrow-left historic-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
+
+        <div class="historic-clashes-grid">
+          <!-- Clash 1 -->
+          <div class="clash-card-tile">
+            <div class="clash-img-box">
+              <img src="images/mashabiki-wa-yanga.jfif" alt="1989 Classic">
+              <div class="clash-tag-pill" data-en="📜 1989 CLASSIC" data-sw="📜 MSIMU WA 1989">📜 1989 CLASSIC</div>
             </div>
-            <h4 class="clash-title-text" data-en="The 1989 Kariakoo Showdown" data-sw="Pambano la Kariakoo 1989">The 1989 Kariakoo Showdown</h4>
-            <p class="clash-desc-text" data-en="An October evening in 1989 when 60,000 fans packed the stadium for a legendary title decider settled in the 88th minute." data-sw="Jioni ya Oktoba 1989 ambapo mashabiki 60,000 walijaza uwanja kuona ubingwa ukiamuliwa dakika ya 88.">An October evening in 1989 when 60,000 fans packed the stadium for a legendary title decider settled in the 88th minute.</p>
-            <div class="clash-footer-row">
-              <span class="clash-sub-tag" data-en="🏆 Title Decider" data-sw="🏆 Mechi ya Ubingwa">🏆 Title Decider</span>
-              <button class="clash-read-btn" data-en="Read Story →" data-sw="Soma Hadithi →">Read Story →</button>
+            <div class="clash-card-content">
+              <div class="clash-scorebar">
+                <span class="clash-team-lbl">Yanga SC</span>
+                <span class="clash-score-badge">2 - 1</span>
+                <span class="clash-team-lbl">Simba SC</span>
+              </div>
+              <h4 class="clash-title-text" data-en="The 1989 Kariakoo Showdown" data-sw="Pambano la Kariakoo 1989">The 1989 Kariakoo Showdown</h4>
+              <p class="clash-desc-text" data-en="An October evening in 1989 when 60,000 fans packed the stadium for a legendary title decider settled in the 88th minute." data-sw="Jioni ya Oktoba 1989 ambapo mashabiki 60,000 walijaza uwanja kuona ubingwa ukiamuliwa dakika ya 88.">An October evening in 1989 when 60,000 fans packed the stadium for a legendary title decider settled in the 88th minute.</p>
+              <div class="clash-footer-row">
+                <span class="clash-sub-tag" data-en="🏆 Title Decider" data-sw="🏆 Mechi ya Ubingwa">🏆 Title Decider</span>
+                <button class="clash-read-btn" data-en="Read Story →" data-sw="Soma Hadithi →">Read Story →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clash 2 -->
+          <div class="clash-card-tile">
+            <div class="clash-img-box">
+              <img src="images/mkapa.jpg" alt="1998 Continental">
+              <div class="clash-tag-pill" data-en="🌍 1998 CONTINENTAL" data-sw="🌍 KIMATAIFA 1998">🌍 1998 CONTINENTAL</div>
+            </div>
+            <div class="clash-card-content">
+              <div class="clash-scorebar">
+                <span class="clash-team-lbl">Simba SC</span>
+                <span class="clash-score-badge">1 - 0</span>
+                <span class="clash-team-lbl">Zamalek</span>
+              </div>
+              <h4 class="clash-title-text" data-en="1998 Giant-Slaying Night" data-sw="Usiku wa Kishujaa 1998">1998 Giant-Slaying Night</h4>
+              <p class="clash-desc-text" data-en="The historic CAF Champions League clash where Tanzanian football stunned African powerhouses with a heroic masterclass." data-sw="Mechi ya kihistoria ya CAF Champions League ambapo soka la Tanzania lilishangaza miamba ya Afrika.">The historic CAF Champions League clash where Tanzanian football stunned African powerhouses with a heroic masterclass.</p>
+              <div class="clash-footer-row">
+                <span class="clash-sub-tag" data-en="⭐ CAF History" data-sw="⭐ Historia ya CAF">⭐ CAF History</span>
+                <button class="clash-read-btn" data-en="Read Story →" data-sw="Soma Hadithi →">Read Story →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clash 3 -->
+          <div class="clash-card-tile">
+            <div class="clash-img-box">
+              <img src="images/mashabiki-wa-simba.jpg" alt="2012 Spectacular">
+              <div class="clash-tag-pill" data-en="🔥 2012 SPECTACULAR" data-sw="🔥 DERBY YA 2012">🔥 2012 SPECTACULAR</div>
+            </div>
+            <div class="clash-card-content">
+              <div class="clash-scorebar">
+                <span class="clash-team-lbl">Simba SC</span>
+                <span class="clash-score-badge">5 - 0</span>
+                <span class="clash-team-lbl">Yanga SC</span>
+              </div>
+              <h4 class="clash-title-text" data-en="The 5-Goal Derby Miracle" data-sw="Muujiza wa Mabao 5 Kwenye Derby">The 5-Goal Derby Miracle</h4>
+              <p class="clash-desc-text" data-en="May 2012 recorded the most talked-about scoreline in modern derby history, sealing the league title in breathtaking fashion." data-sw="Mei 2012 iliweka kumbukumbu kubwa zaidi ya mabao katika historia ya hivi karibuni ya derby.">May 2012 recorded the most talked-about scoreline in modern derby history, sealing the league title in breathtaking fashion.</p>
+              <div class="clash-footer-row">
+                <span class="clash-sub-tag" data-en="⚽ Record Derby" data-sw="⚽ Rekodi ya Derby">⚽ Record Derby</span>
+                <button class="clash-read-btn" data-en="Read Story →" data-sw="Soma Hadithi →">Read Story →</button>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Clash 2 -->
-        <div class="clash-card-tile">
-          <div class="clash-img-box">
-            <img src="images/mkapa.jpg" alt="1998 Continental">
-            <div class="clash-tag-pill" data-en="🌍 1998 CONTINENTAL" data-sw="🌍 KIMATAIFA 1998">🌍 1998 CONTINENTAL</div>
-          </div>
-          <div class="clash-card-content">
-            <div class="clash-scorebar">
-              <span class="clash-team-lbl">Simba SC</span>
-              <span class="clash-score-badge">1 - 0</span>
-              <span class="clash-team-lbl">Zamalek</span>
-            </div>
-            <h4 class="clash-title-text" data-en="1998 Giant-Slaying Night" data-sw="Usiku wa Kishujaa 1998">1998 Giant-Slaying Night</h4>
-            <p class="clash-desc-text" data-en="The historic CAF Champions League clash where Tanzanian football stunned African powerhouses with a heroic masterclass." data-sw="Mechi ya kihistoria ya CAF Champions League ambapo soka la Tanzania lilishangaza miamba ya Afrika.">The historic CAF Champions League clash where Tanzanian football stunned African powerhouses with a heroic masterclass.</p>
-            <div class="clash-footer-row">
-              <span class="clash-sub-tag" data-en="⭐ CAF History" data-sw="⭐ Historia ya CAF">⭐ CAF History</span>
-              <button class="clash-read-btn" data-en="Read Story →" data-sw="Soma Hadithi →">Read Story →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Clash 3 -->
-        <div class="clash-card-tile">
-          <div class="clash-img-box">
-            <img src="images/mashabiki-wa-simba.jpg" alt="2012 Spectacular">
-            <div class="clash-tag-pill" data-en="🔥 2012 SPECTACULAR" data-sw="🔥 DERBY YA 2012">🔥 2012 SPECTACULAR</div>
-          </div>
-          <div class="clash-card-content">
-            <div class="clash-scorebar">
-              <span class="clash-team-lbl">Simba SC</span>
-              <span class="clash-score-badge">5 - 0</span>
-              <span class="clash-team-lbl">Yanga SC</span>
-            </div>
-            <h4 class="clash-title-text" data-en="The 5-Goal Derby Miracle" data-sw="Muujiza wa Mabao 5 Kwenye Derby">The 5-Goal Derby Miracle</h4>
-            <p class="clash-desc-text" data-en="May 2012 recorded the most talked-about scoreline in modern derby history, sealing the league title in breathtaking fashion." data-sw="Mei 2012 iliweka kumbukumbu kubwa zaidi ya mabao katika historia ya hivi karibuni ya derby.">May 2012 recorded the most talked-about scoreline in modern derby history, sealing the league title in breathtaking fashion.</p>
-            <div class="clash-footer-row">
-              <span class="clash-sub-tag" data-en="⚽ Record Derby" data-sw="⚽ Rekodi ya Derby">⚽ Record Derby</span>
-              <button class="clash-read-btn" data-en="Read Story →" data-sw="Soma Hadithi →">Read Story →</button>
-            </div>
-          </div>
-        </div>
+        <button class="slider-side-arrow arrow-right historic-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
