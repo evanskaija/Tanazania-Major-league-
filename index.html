@@ -875,248 +875,322 @@
     </div>
   </section>
 
-  <!-- 5. TITLE RACE COMMAND CENTER -->
+  <!-- 5. TITLE RACE COMMAND CENTER (WORLD-CLASS REDESIGN) -->
   <section class="title-race-section" id="title-race">
     <div class="container">
-      <div class="title-race-header">
-        <span class="badge-pill title-race-badge" data-en="🏆 TITLE RACE COMMAND CENTER" data-sw="🏆 KITUO CHA MBIO ZA UBINGWA">🏆 TITLE RACE COMMAND CENTER</span>
-        <h2 class="title-race-title" data-en="The Battle For Tanzanian Football Supremacy" data-sw="Vita ya Kuwania Ubingwa wa Soka Tanzania">The Battle For Tanzanian Football Supremacy</h2>
-        <p class="title-race-subtitle" data-en="Real-time standings, form metrics, and championship probability analysis" data-sw="Msimamo wa sasa, takwimu za fomu na uchambuzi wa ubingwa">Real-time standings, form metrics, and championship probability analysis</p>
+      <!-- 1. Header Banner -->
+      <div class="title-race-command-header">
+        <div class="title-race-header-top">
+          <span class="command-badge" data-en="🏆 TITLE RACE COMMAND CENTER" data-sw="🏆 KITUO CHA MBIO ZA UBINGWA">🏆 TITLE RACE COMMAND CENTER</span>
+          <span class="matchday-pill" data-en="Season 2026/27 • Matchday 28 of 30" data-sw="Msimu 2026/27 • Mzunguko 28 kati ya 30">Season 2026/27 • Matchday 28 of 30</span>
+        </div>
+        <h2 class="command-title" data-en="The Battle For Tanzanian Football Supremacy" data-sw="Vita ya Kuwania Ubingwa wa Soka Tanzania">The Battle For Tanzanian Football Supremacy</h2>
+        <div class="command-alert-banner">
+          <span class="fire-pulse-icon">🔥</span>
+          <span data-en="Only 2 Points Separate Yanga &amp; Simba!" data-sw="Pointi 2 Tu Zinamfanya Yanga na Simba Kutofautiana!">Only <strong class="pulse-pts">2 Points</strong> Separate Yanga &amp; Simba!</span>
+        </div>
       </div>
 
-      <div class="title-race-container">
-        <!-- Standings Panel -->
-        <div class="standings-panel">
-          <div class="standings-header-row">
+      <!-- 2. Top 3 Contender Battle Cards (Mobile Swipe / Desktop Grid) -->
+      <div class="contender-cards-grid">
+        <!-- Contender 1: YANGA SC -->
+        <div class="contender-card card-yanga-gold reveal-fade-left">
+          <div class="contender-top-badge badge-gold">
+            <i class="fa-solid fa-trophy"></i>
+            <span data-en="LEAGUE LEADER" data-sw="VIONGOZI WA LIGI">LEAGUE LEADER</span>
+          </div>
+          <div class="contender-header">
+            <img src="images/yanga.jpg" alt="Young Africans SC" class="contender-logo">
             <div>
-              <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:var(--primary-gold);" data-en="Live Title Race Standings" data-sw="Msimamo wa Mbio za Ubingwa">Live Title Race Standings</h3>
-              <span style="font-size:0.78rem; color:var(--text-muted);" data-en="Matchday 28 of 30 • Season 2026/27" data-sw="Mzunguko wa 28 kati ya 30 • Msimu 2026/27">Matchday 28 of 30 • Season 2026/27</span>
+              <h3 class="contender-name">YOUNG AFRICANS</h3>
+              <span class="contender-tagline" data-en="Wananchi • Defending Champions" data-sw="Wananchi • Mabingwa Wanaotetea">Wananchi • Defending Champions</span>
             </div>
-            <a href="nbc-premier-league.html#tab-overview" style="font-size:0.8rem; font-weight:800; color:var(--accent-cyan);" data-en="Full Standings →" data-sw="Msimamo Wote →">Full Standings →</a>
           </div>
-
-          <!-- DESKTOP TABLE WRAPPER -->
-          <div class="title-table-desktop-wrap" style="overflow-x:auto;">
-            <table class="title-table">
-              <thead>
-                <tr>
-                  <th data-en="Rank" data-sw="Nafasi">Rank</th>
-                  <th data-en="Club" data-sw="Klabu">Club</th>
-                  <th data-en="Points" data-sw="Pointi">Points</th>
-                  <th data-en="Gap" data-sw="Tofauti">Gap</th>
-                  <th data-en="Goal Diff" data-sw="Mabao">Goal Diff</th>
-                  <th data-en="Form" data-sw="Fomu">Form</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Rank 1: Yanga SC -->
-                <tr class="table-row-item">
-                  <td>
-                    <div class="rank-badge-medal medal-gold">1</div>
-                  </td>
-                  <td>
-                    <div class="club-cell-box">
-                      <img src="images/yanga.jpg" alt="Yanga SC" class="club-logo-circle">
-                      <span>Young Africans SC</span>
-                    </div>
-                  </td>
-                  <td><span class="pts-highlight">75</span></td>
-                  <td style="color:#4ade80; font-weight:800;">—</td>
-                  <td style="color:#4ade80; font-weight:800;">+57</td>
-                  <td>
-                    <div class="form-badges-flex">
-                      <span class="form-w">W</span><span class="form-w">W</span><span class="form-w">W</span><span class="form-d">D</span><span class="form-w">W</span>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- Rank 2: Simba SC -->
-                <tr class="table-row-item">
-                  <td>
-                    <div class="rank-badge-medal medal-silver">2</div>
-                  </td>
-                  <td>
-                    <div class="club-cell-box">
-                      <img src="images/simba.jpg" alt="Simba SC" class="club-logo-circle">
-                      <span>Simba SC</span>
-                    </div>
-                  </td>
-                  <td><span style="font-family:var(--font-heading); font-size:1.15rem; font-weight:900; color:#fff;">73</span></td>
-                  <td style="color:#f87171; font-weight:800;">-2</td>
-                  <td style="color:#fff; font-weight:800;">+46</td>
-                  <td>
-                    <div class="form-badges-flex">
-                      <span class="form-w">W</span><span class="form-w">W</span><span class="form-d">D</span><span class="form-l">L</span><span class="form-w">W</span>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- Rank 3: Azam FC -->
-                <tr class="table-row-item">
-                  <td>
-                    <div class="rank-badge-medal medal-bronze">3</div>
-                  </td>
-                  <td>
-                    <div class="club-cell-box">
-                      <img src="images/azam.jpg" alt="Azam FC" class="club-logo-circle">
-                      <span>Azam FC</span>
-                    </div>
-                  </td>
-                  <td><span style="font-family:var(--font-heading); font-size:1.15rem; font-weight:900; color:#fff;">64</span></td>
-                  <td style="color:#f87171; font-weight:800;">-11</td>
-                  <td style="color:#fff; font-weight:800;">+34</td>
-                  <td>
-                    <div class="form-badges-flex">
-                      <span class="form-d">D</span><span class="form-w">W</span><span class="form-l">L</span><span class="form-w">W</span><span class="form-d">D</span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="contender-stats-row">
+            <div class="contender-stat-box">
+              <span class="stat-val gold-glow">75</span>
+              <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
+            </div>
+            <div class="contender-stat-box">
+              <span class="stat-val">+57</span>
+              <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
+            </div>
+            <div class="contender-stat-box">
+              <span class="stat-val gold-txt">65%</span>
+              <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
+            </div>
           </div>
-
-          <!-- MOBILE RANKING CARDS (COMPACT HORIZONTAL ROW BOXES) -->
-          <div class="title-ranking-cards-mobile">
-            <!-- Rank #1 Yanga -->
-            <div class="mobile-rank-card rank-gold-border">
-              <div class="mobile-rank-row">
-                <div class="mobile-rank-badge medal-gold">1</div>
-                <img src="images/yanga.jpg" alt="Young Africans SC" class="mobile-club-logo">
-                <div class="mobile-club-info">
-                  <div class="mobile-club-top">
-                    <h4>Young Africans</h4>
-                    <span class="mobile-rank-subtitle" data-en="Defending Champions" data-sw="Mabingwa Wanaotetea">Defending Champions</span>
-                  </div>
-                  <div class="mobile-club-meta">
-                    <span class="gd-tag">GD: +57</span>
-                    <div class="form-badges-flex">
-                      <span class="form-w">W</span><span class="form-w">W</span><span class="form-w">W</span><span class="form-d">D</span><span class="form-w">W</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="mobile-rank-pts">
-                  <span class="pts-big">75</span>
-                  <span class="pts-txt">PTS</span>
-                </div>
-              </div>
+          <div class="contender-momentum">
+            <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
+            <div class="momentum-flames-row">
+              <span class="form-fire win" title="Win">🔥</span>
+              <span class="form-fire win" title="Win">🔥</span>
+              <span class="form-fire win" title="Win">🔥</span>
+              <span class="form-fire draw" title="Draw">➖</span>
+              <span class="form-fire win" title="Win">🔥</span>
             </div>
-
-            <!-- Rank #2 Simba -->
-            <div class="mobile-rank-card rank-silver-border">
-              <div class="mobile-rank-row">
-                <div class="mobile-rank-badge medal-silver">2</div>
-                <img src="images/simba.jpg" alt="Simba SC" class="mobile-club-logo">
-                <div class="mobile-club-info">
-                  <div class="mobile-club-top">
-                    <h4>Simba SC</h4>
-                    <span class="mobile-rank-subtitle" data-en="2 Pts Behind" data-sw="Pointi 2 Nyuma">2 Pts Behind</span>
-                  </div>
-                  <div class="mobile-club-meta">
-                    <span class="gd-tag">GD: +46</span>
-                    <div class="form-badges-flex">
-                      <span class="form-w">W</span><span class="form-w">W</span><span class="form-d">D</span><span class="form-l">L</span><span class="form-w">W</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="mobile-rank-pts">
-                  <span class="pts-big">73</span>
-                  <span class="pts-txt">PTS</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Rank #3 Azam -->
-            <div class="mobile-rank-card rank-bronze-border">
-              <div class="mobile-rank-row">
-                <div class="mobile-rank-badge medal-bronze">3</div>
-                <img src="images/azam.jpg" alt="Azam FC" class="mobile-club-logo">
-                <div class="mobile-club-info">
-                  <div class="mobile-club-top">
-                    <h4>Azam FC</h4>
-                    <span class="mobile-rank-subtitle" data-en="11 Pts Behind" data-sw="Pointi 11 Nyuma">11 Pts Behind</span>
-                  </div>
-                  <div class="mobile-club-meta">
-                    <span class="gd-tag">GD: +34</span>
-                    <div class="form-badges-flex">
-                      <span class="form-d">D</span><span class="form-w">W</span><span class="form-l">L</span><span class="form-w">W</span><span class="form-d">D</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="mobile-rank-pts">
-                  <span class="pts-big">64</span>
-                  <span class="pts-txt">PTS</span>
-                </div>
-              </div>
-            </div>
-
-            <a href="nbc-premier-league.html#tab-overview" class="btn-primary mobile-full-standings-btn" data-en="View Full Standings →" data-sw="Tazama Msimamo Wote →">View Full Standings →</a>
           </div>
-
         </div>
 
-        <!-- Right Side Analytics Panel -->
-        <div class="analytics-panel">
-          <div>
-            <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:900; color:#fff; margin-bottom:1.25rem;" data-en="Championship Probability" data-sw="Nafasi ya Kutwaa Ubingwa">Championship Probability</h3>
-
-            <!-- Yanga Probability -->
-            <div class="prob-item-card">
-              <div class="prob-row-header">
-                <span>🥇 Young Africans</span>
-                <span style="color:var(--primary-gold);">65%</span>
-              </div>
-              <div class="prob-fill-track">
-                <div class="prob-fill-bar" style="width:65%; background:linear-gradient(90deg, #FFD700, #FFA500); color:#FFD700;"></div>
-              </div>
-            </div>
-
-            <!-- Simba Probability -->
-            <div class="prob-item-card">
-              <div class="prob-row-header">
-                <span>🥈 Simba SC</span>
-                <span style="color:#f87171;">30%</span>
-              </div>
-              <div class="prob-fill-track">
-                <div class="prob-fill-bar" style="width:30%; background:linear-gradient(90deg, #ef4444, #b91c1c); color:#ef4444;"></div>
-              </div>
-            </div>
-
-            <!-- Azam Probability -->
-            <div class="prob-item-card">
-              <div class="prob-row-header">
-                <span>🥉 Azam FC</span>
-                <span style="color:#38bdf8;">5%</span>
-              </div>
-              <div class="prob-fill-track">
-                <div class="prob-fill-bar" style="width:5%; background:linear-gradient(90deg, #38bdf8, #0284c7); color:#38bdf8;"></div>
-              </div>
+        <!-- Contender 2: SIMBA SC -->
+        <div class="contender-card card-simba-red reveal-fade-up">
+          <div class="contender-top-badge badge-red">
+            <i class="fa-solid fa-fire"></i>
+            <span data-en="TITLE CHASER" data-sw="WAFUATILIAJI WA UBINGWA">TITLE CHASER</span>
+          </div>
+          <div class="contender-header">
+            <img src="images/simba.jpg" alt="Simba SC" class="contender-logo">
+            <div>
+              <h3 class="contender-name">SIMBA SC</h3>
+              <span class="contender-tagline" data-en="Wanyama • 2 Pts Behind" data-sw="Wanyama • Pointi 2 Nyuma">Wanyama • 2 Pts Behind</span>
             </div>
           </div>
+          <div class="contender-stats-row">
+            <div class="contender-stat-box">
+              <span class="stat-val red-glow">73</span>
+              <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
+            </div>
+            <div class="contender-stat-box">
+              <span class="stat-val">+46</span>
+              <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
+            </div>
+            <div class="contender-stat-box">
+              <span class="stat-val red-txt">30%</span>
+              <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
+            </div>
+          </div>
+          <div class="contender-momentum">
+            <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
+            <div class="momentum-flames-row">
+              <span class="form-fire win" title="Win">🔥</span>
+              <span class="form-fire win" title="Win">🔥</span>
+              <span class="form-fire draw" title="Draw">➖</span>
+              <span class="form-fire loss" title="Loss">❌</span>
+              <span class="form-fire win" title="Win">🔥</span>
+            </div>
+          </div>
+        </div>
 
-          <!-- Key Statistics Card -->
-          <div class="key-stats-container">
-            <div class="key-stats-title" data-en="🔑 KEY LEAGUE METRICS" data-sw="🔑 TAKWIMU MUHIMU ZA LIGI">🔑 KEY LEAGUE METRICS</div>
-            <div class="key-stat-list">
-              <div class="key-stat-item-row">
-                <span style="color:var(--text-muted);" data-en="⚽ Highest Scoring:" data-sw="⚽ Magoli Mengi:">⚽ Highest Scoring:</span>
-                <strong style="color:#fff;" data-en="Yanga — 71 Goals" data-sw="Yanga — Mabao 71">Yanga — 71 Goals</strong>
-              </div>
-              <div class="key-stat-item-row">
-                <span style="color:var(--text-muted);" data-en="🛡️ Best Defence:" data-sw="🛡️ Ulinzi Bora:">🛡️ Best Defence:</span>
-                <strong style="color:#fff;" data-en="Yanga — 14 GA" data-sw="Yanga — Magoli 14">Yanga — 14 GA</strong>
-              </div>
-              <div class="key-stat-item-row">
-                <span style="color:var(--text-muted);" data-en="🏆 Most Wins:" data-sw="🏆 Ushindi Mwingi:">🏆 Most Wins:</span>
-                <strong style="color:var(--primary-gold);" data-en="Yanga — 23 Wins" data-sw="Yanga — Ushindi 23">Yanga — 23 Wins</strong>
-              </div>
-              <div class="key-stat-item-row">
-                <span style="color:var(--text-muted);" data-en="🔥 Title Margin:" data-sw="🔥 Tofauti ya Ubingwa:">🔥 Title Margin:</span>
-                <strong style="color:#f87171;" data-en="Simba — -2 Pts Gap" data-sw="Simba — Pointi -2">Simba — -2 Pts Gap</strong>
-              </div>
+        <!-- Contender 3: AZAM FC -->
+        <div class="contender-card card-azam-blue reveal-fade-right">
+          <div class="contender-top-badge badge-blue">
+            <i class="fa-solid fa-bolt"></i>
+            <span data-en="OUTSIDE CHANCE" data-sw="CHANCE YA MBALI">OUTSIDE CHANCE</span>
+          </div>
+          <div class="contender-header">
+            <img src="images/azam.jpg" alt="Azam FC" class="contender-logo">
+            <div>
+              <h3 class="contender-name">AZAM FC</h3>
+              <span class="contender-tagline" data-en="Wanalambalamba • 11 Pts Behind" data-sw="Wanalambalamba • Pointi 11 Nyuma">Wanalambalamba • 11 Pts Behind</span>
+            </div>
+          </div>
+          <div class="contender-stats-row">
+            <div class="contender-stat-box">
+              <span class="stat-val blue-glow">64</span>
+              <span class="stat-lbl" data-en="PTS" data-sw="POINTI">PTS</span>
+            </div>
+            <div class="contender-stat-box">
+              <span class="stat-val">+34</span>
+              <span class="stat-lbl" data-en="GD" data-sw="MABAO">GD</span>
+            </div>
+            <div class="contender-stat-box">
+              <span class="stat-val blue-txt">5%</span>
+              <span class="stat-lbl" data-en="TITLE CHANCE" data-sw="NAFASI YA UBINGWA">TITLE CHANCE</span>
+            </div>
+          </div>
+          <div class="contender-momentum">
+            <span class="momentum-lbl" data-en="🔥 Momentum:" data-sw="🔥 Fomu:">🔥 Momentum:</span>
+            <div class="momentum-flames-row">
+              <span class="form-fire draw" title="Draw">➖</span>
+              <span class="form-fire win" title="Win">🔥</span>
+              <span class="form-fire loss" title="Loss">❌</span>
+              <span class="form-fire win" title="Win">🔥</span>
+              <span class="form-fire draw" title="Draw">➖</span>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- 3. Bottom Grid: Probability & Head-to-Head Comparison & Upcoming Deciders & AI Insights & Metrics -->
+      <div class="command-dashboard-grid">
+
+        <!-- Left Column: Championship Probability & Head to Head Comparison -->
+        <div class="command-dash-col">
+          <!-- Probability Card -->
+          <div class="command-glass-box">
+            <div class="glass-box-header">
+              <h3 data-en="📊 Championship Probability" data-sw="📊 Nafasi ya Kutwaa Ubingwa">📊 Championship Probability</h3>
+              <span class="live-pulse-tag">LIVE AI DATA</span>
+            </div>
+            <div class="prob-animated-list">
+              <!-- Yanga -->
+              <div class="prob-bar-item">
+                <div class="prob-lbl-row">
+                  <span>🥇 Young Africans SC</span>
+                  <span class="prob-num gold-txt">65%</span>
+                </div>
+                <div class="prob-track">
+                  <div class="prob-fill fill-gold" style="width:65%;"></div>
+                </div>
+              </div>
+              <!-- Simba -->
+              <div class="prob-bar-item">
+                <div class="prob-lbl-row">
+                  <span>🥈 Simba SC</span>
+                  <span class="prob-num red-txt">30%</span>
+                </div>
+                <div class="prob-track">
+                  <div class="prob-fill fill-red" style="width:30%;"></div>
+                </div>
+              </div>
+              <!-- Azam -->
+              <div class="prob-bar-item">
+                <div class="prob-lbl-row">
+                  <span>🥉 Azam FC</span>
+                  <span class="prob-num blue-txt">5%</span>
+                </div>
+                <div class="prob-track">
+                  <div class="prob-fill fill-blue" style="width:5%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Head to Head Battle Card -->
+          <div class="command-glass-box">
+            <div class="glass-box-header">
+              <h3 data-en="⚔️ Title Race Head-to-Head" data-sw="⚔️ Uchambuzi wa Ana kwa Ana">⚔️ Title Race Head-to-Head</h3>
+              <span class="h2h-teams-tag">YANGA vs SIMBA</span>
+            </div>
+            <div class="h2h-comparison-list">
+              <!-- Metric 1: Goals Scored -->
+              <div class="h2h-metric-row">
+                <div class="h2h-side side-left">
+                  <span class="h2h-val gold-txt">71</span>
+                  <div class="h2h-bar-left"><div class="fill" style="width:100%;"></div></div>
+                </div>
+                <span class="h2h-label" data-en="Goals Scored" data-sw="Magoli Yaliyofungwa">Goals Scored</span>
+                <div class="h2h-side side-right">
+                  <div class="h2h-bar-right"><div class="fill" style="width:76%;"></div></div>
+                  <span class="h2h-val red-txt">54</span>
+                </div>
+              </div>
+              <!-- Metric 2: Best Defence -->
+              <div class="h2h-metric-row">
+                <div class="h2h-side side-left">
+                  <span class="h2h-val gold-txt">14 GA</span>
+                  <div class="h2h-bar-left"><div class="fill" style="width:100%;"></div></div>
+                </div>
+                <span class="h2h-label" data-en="Best Defence" data-sw="Ulinzi Bora">Best Defence</span>
+                <div class="h2h-side side-right">
+                  <div class="h2h-bar-right"><div class="fill" style="width:67%;"></div></div>
+                  <span class="h2h-val red-txt">21 GA</span>
+                </div>
+              </div>
+              <!-- Metric 3: Wins -->
+              <div class="h2h-metric-row">
+                <div class="h2h-side side-left">
+                  <span class="h2h-val gold-txt">23</span>
+                  <div class="h2h-bar-left"><div class="fill" style="width:100%;"></div></div>
+                </div>
+                <span class="h2h-label" data-en="Total Wins" data-sw="Ushindi Wote">Total Wins</span>
+                <div class="h2h-side side-right">
+                  <div class="h2h-bar-right"><div class="fill" style="width:95%;"></div></div>
+                  <span class="h2h-val red-txt">22</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Title Deciding Fixtures & AI Insight & 4 Metric Cards -->
+        <div class="command-dash-col">
+
+          <!-- Upcoming Title Deciders -->
+          <div class="command-glass-box">
+            <div class="glass-box-header">
+              <h3 data-en="🎯 Upcoming Title Deciders" data-sw="🎯 Mechi Zatakazotangaza Ubingwa">🎯 Upcoming Title Deciders</h3>
+              <span class="countdown-badge"><i class="fa-solid fa-clock"></i> 30d 6h Left</span>
+            </div>
+            <div class="deciders-list">
+              <div class="decider-match-item">
+                <div class="match-teams">
+                  <img src="images/yanga.jpg" alt="Yanga" class="tiny-logo">
+                  <span>Yanga SC vs Azam FC</span>
+                  <img src="images/azam.jpg" alt="Azam" class="tiny-logo">
+                </div>
+                <span class="match-date-badge">Matchday 29</span>
+              </div>
+              <div class="decider-match-item">
+                <div class="match-teams">
+                  <img src="images/simba.jpg" alt="Simba" class="tiny-logo">
+                  <span>Simba SC vs Coastal Union</span>
+                </div>
+                <span class="match-date-badge">Matchday 29</span>
+              </div>
+              <div class="decider-match-item derby-highlight">
+                <div class="match-teams">
+                  <img src="images/yanga.jpg" alt="Yanga" class="tiny-logo">
+                  <strong>Yanga SC vs Simba SC</strong>
+                  <img src="images/simba.jpg" alt="Simba" class="tiny-logo">
+                </div>
+                <span class="derby-pill" data-en="🔥 Kariakoo Derby Decider" data-sw="🔥 Derby ya Kariakoo">🔥 Kariakoo Derby</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Title Race Insight Box -->
+          <div class="command-ai-insight-box">
+            <div class="ai-insight-header">
+              <i class="fa-solid fa-robot ai-spark-icon"></i>
+              <span data-en="🏆 TITLE RACE INSIGHT" data-sw="🏆 UCHAMBUZI WA UBINGWA">🏆 TITLE RACE INSIGHT</span>
+            </div>
+            <p class="ai-insight-text" data-en="Yanga hold a narrow 2-point advantage with the best attack (71 goals) and defence (14 GA) in the league. Simba remain within striking distance (73 PTS) and cannot afford another slip-up before the Kariakoo Derby!" data-sw="Yanga wanaongoza kwa pointi 2 tu wakiwa na safu bora ya ushambuliaji (mabao 71) na ulinzi (mabao 14). Simba bado wapo karibu sana (pointi 73) na hawatakiwi kukosea kabla ya Derby ya Kariakoo!">
+              Yanga hold a narrow 2-point advantage with the best attack (71 goals) and defence (14 GA) in the league. Simba remain within striking distance (73 PTS) and cannot afford another slip-up before the Kariakoo Derby!
+            </p>
+          </div>
+
+          <!-- 4 Metric Cards Grid -->
+          <div class="four-metrics-grid">
+            <div class="metric-card shadow-gold">
+              <div class="metric-icon">⚽</div>
+              <div class="metric-info">
+                <span class="metric-title" data-en="Highest Scoring" data-sw="Magoli Mengi">Highest Scoring</span>
+                <strong class="metric-value">Yanga — 71 Goals</strong>
+              </div>
+            </div>
+            <div class="metric-card shadow-cyan">
+              <div class="metric-icon">🛡️</div>
+              <div class="metric-info">
+                <span class="metric-title" data-en="Best Defence" data-sw="Ulinzi Bora">Best Defence</span>
+                <strong class="metric-value">Yanga — 14 GA</strong>
+              </div>
+            </div>
+            <div class="metric-card shadow-gold">
+              <div class="metric-icon">🏆</div>
+              <div class="metric-info">
+                <span class="metric-title" data-en="Most Wins" data-sw="Ushindi Mwingi">Most Wins</span>
+                <strong class="metric-value">Yanga — 23 Wins</strong>
+              </div>
+            </div>
+            <div class="metric-card shadow-red">
+              <div class="metric-icon">🔥</div>
+              <div class="metric-info">
+                <span class="metric-title" data-en="Closest Gap" data-sw="Tofauti ya Pointi">Closest Gap</span>
+                <strong class="metric-value">2 Points Margin</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- View Full Standings Action Link -->
+      <div style="text-align:center; margin-top:2rem;">
+        <a href="nbc-premier-league.html#tab-overview" class="btn-primary" style="padding:0.8rem 2.2rem; font-weight:800; border-radius:30px; box-shadow:0 8px 30px rgba(255,180,0,0.35);" data-en="View Full League Table &amp; Standings →" data-sw="Tazama Msimamo Wote wa Ligi →">View Full League Table &amp; Standings →</a>
+      </div>
+
     </div>
   </section>
 
