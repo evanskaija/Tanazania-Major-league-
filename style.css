@@ -9344,6 +9344,366 @@ body.fdl-page .league-tab-btn.active {
   transform: translateY(0) translateX(0) scale(1) !important;
 }
 
+/* ==========================================================================
+   📱 MOBILE-OPTIMIZED COMPACT & ATTRACTIVE UI LAYOUTS (HOMEPAGE)
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* 1. HONORS & SPOTLIGHTS — Sleek Horizontal Swipe Slider */
+  .honors-history-section {
+    padding: 1.5rem 0 !important;
+  }
+
+  .honors-spotlight-wrapper .section-header h2 {
+    font-size: 1.15rem !important;
+  }
+
+  .honors-spotlight-wrapper .spotlight-cards-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 0.75rem !important;
+    padding: 0.25rem 0.25rem 0.85rem 0.25rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+
+  .honors-spotlight-wrapper .spotlight-cards-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .honors-spotlight-wrapper .spotlight-cards-grid::-webkit-scrollbar-thumb {
+    background: #ffb400;
+    border-radius: 4px;
+  }
+
+  .honors-spotlight-wrapper .spotlight-card {
+    flex: 0 0 240px !important;
+    min-width: 240px !important;
+    max-width: 250px !important;
+    height: 200px !important;
+    min-height: 200px !important;
+    scroll-snap-align: start !important;
+    border-radius: 14px !important;
+    margin: 0 !important;
+  }
+
+  .honors-spotlight-wrapper .spotlight-overlay {
+    padding: 0.75rem !important;
+  }
+
+  .honors-spotlight-wrapper .spotlight-gold-badge {
+    font-size: 0.62rem !important;
+    padding: 2px 7px !important;
+    letter-spacing: 0.3px !important;
+  }
+
+  .honors-spotlight-wrapper .spotlight-name {
+    font-size: 1.05rem !important;
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.1rem !important;
+  }
+
+  .honors-spotlight-wrapper .spotlight-time-text {
+    font-size: 0.7rem !important;
+  }
+
+  /* 2. TITLE RACE COMMAND CENTER & LEAGUE METRICS */
+  .title-race-section {
+    padding: 1.75rem 0 !important;
+  }
+
+  .title-race-badge {
+    font-size: 0.68rem !important;
+    padding: 0.25rem 0.65rem !important;
+  }
+
+  .title-race-title {
+    font-size: 1.2rem !important;
+    line-height: 1.25 !important;
+    margin-top: 0.4rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .title-race-subtitle {
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .standings-panel {
+    padding: 0.85rem !important;
+    border-radius: 14px !important;
+  }
+
+  .title-ranking-cards-mobile {
+    gap: 0.45rem !important;
+  }
+
+  .mobile-rank-card {
+    padding: 0.55rem 0.75rem !important;
+    border-radius: 12px !important;
+  }
+
+  .mobile-rank-badge {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.75rem !important;
+  }
+
+  .mobile-club-logo {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .mobile-club-info h4 {
+    font-size: 0.88rem !important;
+  }
+
+  .mobile-rank-subtitle {
+    font-size: 0.68rem !important;
+  }
+
+  .mobile-rank-pts .pts-big {
+    font-size: 1.15rem !important;
+  }
+
+  .mobile-full-standings-btn {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.8rem !important;
+    margin-top: 0.35rem !important;
+  }
+
+  /* Championship Probability & Key Metrics on Mobile */
+  .analytics-panel {
+    padding: 0.85rem !important;
+    border-radius: 14px !important;
+    gap: 0.85rem !important;
+  }
+
+  .analytics-panel h3 {
+    font-size: 0.95rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .prob-item-card {
+    padding: 0.45rem 0.65rem !important;
+    margin-bottom: 0.4rem !important;
+    border-radius: 8px !important;
+  }
+
+  .prob-row-header {
+    font-size: 0.78rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .prob-fill-track {
+    height: 6px !important;
+  }
+
+  .key-stats-container {
+    padding: 0.75rem !important;
+    border-radius: 12px !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .key-stats-title {
+    font-size: 0.78rem !important;
+    margin-bottom: 0.5rem !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .key-stat-list {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.45rem !important;
+  }
+
+  .key-stat-item-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 0.45rem 0.6rem !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 8px !important;
+    font-size: 0.72rem !important;
+    gap: 0.15rem !important;
+  }
+
+  .key-stat-item-row strong {
+    font-size: 0.78rem !important;
+  }
+
+  /* 3. HISTORIC STORIES & CLASSIC CLASHES — Sleek Horizontal Swipe Slider */
+  .historic-stories-section {
+    padding: 1.5rem 0 !important;
+  }
+
+  .historic-stories-section .section-header {
+    margin-bottom: 1rem !important;
+  }
+
+  .historic-stories-section .section-header h2 {
+    font-size: 1.15rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .historic-stories-section .section-header p {
+    font-size: 0.75rem !important;
+    margin-top: 0.15rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .historic-clashes-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 0.75rem !important;
+    padding: 0.25rem 0.25rem 0.85rem 0.25rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+  }
+
+  .historic-clashes-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .historic-clashes-grid::-webkit-scrollbar-thumb {
+    background: #ffb400;
+    border-radius: 4px;
+  }
+
+  .clash-card-tile {
+    flex: 0 0 260px !important;
+    min-width: 260px !important;
+    max-width: 270px !important;
+    scroll-snap-align: start !important;
+    border-radius: 14px !important;
+    margin: 0 !important;
+  }
+
+  .clash-img-box {
+    height: 120px !important;
+  }
+
+  .clash-tag-pill {
+    font-size: 0.6rem !important;
+    padding: 2px 7px !important;
+  }
+
+  .clash-card-content {
+    padding: 0.75rem !important;
+  }
+
+  .clash-scorebar {
+    margin-bottom: 0.4rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .clash-score-badge {
+    padding: 2px 7px !important;
+    font-size: 0.75rem !important;
+  }
+
+  .clash-title-text {
+    font-size: 0.92rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .clash-desc-text {
+    font-size: 0.72rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0.5rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .clash-sub-tag {
+    font-size: 0.68rem !important;
+  }
+
+  .clash-read-btn {
+    padding: 0.3rem 0.6rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  /* 4. COMPACT & SLEEK FOOTER FOR MOBILE */
+  .site-footer {
+    padding: 1.5rem 0 1rem !important;
+  }
+
+  .footer-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem 0.75rem !important;
+  }
+
+  .footer-brand-col {
+    grid-column: 1 / -1 !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .footer-brand-col p {
+    font-size: 0.75rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0.5rem !important;
+    max-width: 320px !important;
+  }
+
+  .footer-col h4,
+  .footer-accordion-toggle {
+    font-size: 0.85rem !important;
+    padding: 0.35rem 0 !important;
+    font-weight: 800 !important;
+  }
+
+  .footer-links {
+    gap: 0.3rem !important;
+    margin-top: 0.25rem !important;
+  }
+
+  .footer-links li a {
+    font-size: 0.75rem !important;
+  }
+
+  .competitions-badges-section {
+    padding: 0.85rem 0 !important;
+    margin: 0.85rem 0 !important;
+  }
+
+  .comp-badges-flex {
+    gap: 0.45rem !important;
+  }
+
+  .comp-badge-item {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .comp-badge-item img {
+    height: 18px !important;
+  }
+
+  .footer-bottom {
+    margin-top: 1rem !important;
+    padding-top: 0.75rem !important;
+    flex-direction: column !important;
+    gap: 0.35rem !important;
+    font-size: 0.68rem !important;
+    text-align: center !important;
+  }
+}
+
 
 
 
