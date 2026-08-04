@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBC Premier League | Official League Dashboard 2025/26</title>
+  <meta name="description"
+    content="Official dashboard of the NBC Premier League (Ligi Kuu Tanzania). Standings, live title race analytics, player stats, fixtures, and news.">
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP Animations CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Favicon Icon -->
+  <link rel="icon" type="image/png" href="images/ligikuu.png">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Scroll Animation Init CSS -->
+  <style>
+    /* GPU layer compositing for smooth GSAP animations */
+    .league-hero-title, .league-hero-sub,
+    .league-stat-card, .league-stat-num,
+    .widget-glass-card, .fixture-card-item,
+    .clubs-grid .club-card, .leader-hero-card,
+    .stat-player-row-card, .season-card-item,
+    .wpl-season-card, .wpl-club-card,
+    .derby-banner-card, .rounds-selector-track,
+    .league-news-card, .league-table tbody tr {
+      will-change: transform, opacity;
+    }
+    /* Reduced motion accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .league-hero-title, .league-hero-sub,
+      .league-stat-card, .widget-glass-card,
+      .fixture-card-item, .leader-hero-card,
+      .stat-player-row-card, .wpl-season-card,
+      .wpl-club-card, .derby-banner-card,
+      .rounds-selector-track, .league-news-card,
+      .league-table tbody tr {
+        opacity: 1 !important;
+        transform: none !important;
+        will-change: auto;
+      }
+    }
+
+    /* Subpage Mobile Header Clearance & Squeezed Season Badge */
+    @media (max-width: 991px) {
+      section.league-hero, .league-hero {
+        padding-top: 145px !important;
+        padding-bottom: 35px !important;
+      }
+      .league-season-badge {
+        margin-top: 0.8rem !important;
+        margin-bottom: 1rem !important;
+        font-size: 0.68rem !important;
+        padding: 0.28rem 0.75rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.35rem !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="nbc-page">
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+  </div>
+
+  <!-- FIXED STICKY NAVBAR (HEADER) -->
+  <header class="navbar">
+    <div class="nav-container">
+      <!-- Logo Branding -->
+      <a href="index.html" class="brand-logo-group">
+        <img src="images/nbc-pl-logo.png" alt="NBC Premier League Logo">
+        <div class="brand-text">
+          <span class="brand-title" data-en="NBC Premier League" data-sw="Ligi Kuu ya NBC">NBC Premier League</span>
+          <span class="brand-subtitle">Ligi Kuu Tanzania</span>
+        </div>
+      </a>
+
+      <!-- Horizontal Menu - Mega Dropdowns -->
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link" data-en="Home" data-sw="Nyumbani">Home</a></li>
+
+        <!-- Competitions Mega Dropdown -->
+        <li class="nav-item active">
+          <a href="javascript:void(0);" class="nav-link" data-en="Competitions" data-sw="Mashindano">Competitions <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-dropdown">
+            <div class="mega-grid-2col">
+              <a href="nbc-premier-league.html" class="mega-card-item active">
+                <div class="mega-icon-badge badge-gold">NBC</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="NBC Premier League" data-sw="Ligi Kuu ya NBC">NBC Premier League</span>
+                  <span class="mega-card-desc" data-en="Tanzania's top-tier football division" data-sw="Ligi Kuu ya Soka Tanzania">Tanzania's top-tier football division</span>
+                </div>
+              </a>
+
+              <a href="womens-premier-league.html" class="mega-card-item">
+                <div class="mega-icon-badge badge-pink">WPL</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Women's Premier League" data-sw="Ligi Kuu ya Wanawake">Women's Premier League</span>
+                  <span class="mega-card-desc" data-en="Elite national women's football" data-sw="Soka la Wanawake la Kitaifa">Elite national women's football</span>
+                </div>
+              </a>
+
+              <a href="championship-league.html" class="mega-card-item">
+                <div class="mega-icon-badge badge-red">TCL</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Championship League" data-sw="Ligi ya Championship">Championship League</span>
+                  <span class="mega-card-desc" data-en="Second-tier professional competition" data-sw="Mbio za Kupanda Daraja">Second-tier professional competition</span>
+                </div>
+              </a>
+
+              <a href="efootball-league.html" class="mega-card-item">
+                <div class="mega-icon-badge badge-cyan">EFL</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="E-Football Mobile League" data-sw="Ligi ya E-Football Simu">E-Football Mobile League</span>
+                  <span class="mega-card-desc" data-en="Virtual electronic sports league" data-sw="Ligi ya michezo ya kielektroniki mtandaoni">Virtual electronic sports league</span>
+                </div>
+              </a>
+
+              <a href="first-division-league.html" class="mega-card-item">
+                <div class="mega-icon-badge badge-green">FDL</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="First Division League" data-sw="Ligi Daraja la Kwanza">First Division League</span>
+                  <span class="mega-card-desc" data-en="Development pathways & academies" data-sw="Ligi ya Maendeleo na Vyuo">Development pathways & academies</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Match Center Dropdown -->
+        <li class="nav-item">
+          <a href="javascript:void(0);" class="nav-link" data-en="Match Center" data-sw="Kituo cha Mechi">Match Center <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-dropdown" style="width: 320px;">
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <a href="live-matches.html" class="mega-card-item">
+                <div class="mega-icon-badge badge-red" data-en="LIVE" data-sw="MOJA KWA MOJA">LIVE</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Live Matches" data-sw="Mechi za Moja kwa Moja">Live Matches</span>
+                  <span class="mega-card-desc" data-en="Real-time scores & commentaries" data-sw="Matokeo na Taarifa za Moja kwa Moja">Real-time scores & commentaries</span>
+                </div>
+              </a>
+
+            </div>
+          </div>
+        </li>
+
+        <!-- Players & Awards Dropdown -->
+        <li class="nav-item">
+          <a href="javascript:void(0);" class="nav-link" data-en="Players & Awards" data-sw="Wachezaji na Tuzo">Players & Awards <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-dropdown" style="width: 320px;">
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <a href="clubs.html#awards" class="mega-card-item">
+                <div class="mega-icon-badge badge-gold" data-en="AWD" data-sw="TUZO">AWD</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Golden Boot Leaders" data-sw="Wafungaji Bora">Golden Boot Leaders</span>
+                  <span class="mega-card-desc" data-en="Golden Boot &amp; Glove leaders" data-sw="Wafungaji &amp; Makipa Bora">Golden Boot &amp; Glove leaders</span>
+                </div>
+              </a>
+              <a href="clubs.html#history" class="mega-card-item">
+                <div class="mega-icon-badge badge-purple" style="background:linear-gradient(135deg, #7c4dff, #651fff); color:#fff;" data-en="HIS" data-sw="HISTORIA">HIS</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Season History" data-sw="Historia ya Msimu">Season History</span>
+                  <span class="mega-card-desc" data-en="Historical roll of honor &amp; stats" data-sw="Kumbukumbu na Mabingwa">Historical roll of honor &amp; stats</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Fan Zone Dropdown -->
+        <li class="nav-item">
+          <a href="javascript:void(0);" class="nav-link" data-en="Fan Zone" data-sw="Eneo la Mashabiki">Fan Zone <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-dropdown" style="width: 320px;">
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <a href="index.html#fanzone" class="mega-card-item">
+                <div class="mega-icon-badge badge-gold">FAN</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Weekly Champion" data-sw="Bingwa wa Wiki">Weekly Champion</span>
+                  <span class="mega-card-desc" data-en="Weekly manager leaderboards" data-sw="Msimamo wa Mameneja">Weekly manager leaderboards</span>
+                </div>
+              </a>
+              <a href="index.html#games" class="mega-card-item">
+                <div class="mega-icon-badge badge-cyan">QUIZ</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Quizzes &amp; Polls" data-sw="Maswali na Kura">Quizzes &amp; Polls</span>
+                  <span class="mega-card-desc" data-en="Test your Tanzanian football knowledge" data-sw="Pima Elimu Yako ya Soka">Test your Tanzanian football knowledge</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- News & Media Dropdown -->
+        <li class="nav-item">
+          <a href="javascript:void(0);" class="nav-link" data-en="News & Media" data-sw="Habari na Vyombo vya Habari">News & Media <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-dropdown" style="width: 320px;">
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <a href="#news" class="mega-card-item">
+                <div class="mega-icon-badge badge-red">NEW</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Latest News" data-sw="Habari za Karibuni">Latest News</span>
+                  <span class="mega-card-desc" data-en="Breaking headlines &amp; updates" data-sw="Taarifa mpya na habari zote">Breaking headlines &amp; updates</span>
+                </div>
+              </a>
+              <a href="#news" class="mega-card-item">
+                <div class="mega-icon-badge badge-cyan">VID</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Videos" data-sw="Video">Videos</span>
+                  <span class="mega-card-desc" data-en="Highlights &amp; press interviews" data-sw="Video za mechi na mahojiano">Highlights &amp; press interviews</span>
+                </div>
+              </a>
+              <a href="#news" class="mega-card-item">
+                <div class="mega-icon-badge badge-gold">PIC</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="Photos" data-sw="Picha">Photos</span>
+                  <span class="mega-card-desc" data-en="Matchday gallery &amp; fan moments" data-sw="Picha za mechi na mashabiki">Matchday gallery &amp; fan moments</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a href="javascript:void(0);" class="nav-link" data-en="About Us" data-sw="Kuhusu Sisi">About Us <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="mega-dropdown" style="width: 320px;">
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <a href="index.html#tff" class="mega-card-item">
+                <div class="mega-icon-badge badge-blue">TPLB</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="TPLB Overview" data-sw="Maelezo ya TPLB">TPLB Overview</span>
+                  <span class="mega-card-desc" data-en="Structure, mission, and governance" data-sw="Muundo na Malengo">Structure, mission, and governance</span>
+                </div>
+              </a>
+              <a href="#history" class="mega-card-item">
+                <div class="mega-icon-badge badge-gold">HIS</div>
+                <div class="mega-text-box">
+                  <span class="mega-card-title" data-en="History of TPLB" data-sw="Historia ya TPLB">History of TPLB</span>
+                  <span class="mega-card-desc" data-en="League milestones &amp; regional growth" data-sw="Historia na Maendeleo">History na Maendeleo</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item"><a href="index.html#footer" class="nav-link" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</a></li>
+      </ul>
+
+      <!-- Nav Action Group (Language Switcher & Mobile Toggle) -->
+      <div class="nav-actions">
+        <div class="lang-switcher-capsule">
+          <button class="lang-btn active" id="lang-eng">ENG</button>
+          <button class="lang-btn" id="lang-swa">SWA</button>
+        </div>
+        <!-- Hamburger Menu Button -->
+        <button class="mobile-toggle-btn" id="mobile-menu-toggle" aria-label="Toggle Mobile Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE SLIDE-OUT MENU DRAWER -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <!-- Floating Background Decorative Football Elements -->
+    <div class="mobile-drawer-decor">
+      <i class="fa-solid fa-futbol decor-icon decor-icon-1"></i>
+      <i class="fa-solid fa-trophy decor-icon decor-icon-2"></i>
+      <i class="fa-solid fa-whistle decor-icon decor-icon-3"></i>
+      <i class="fa-solid fa-star decor-icon decor-icon-4"></i>
+    </div>
+
+    <!-- Animated Premium Drawer Header -->
+    <div class="mobile-drawer-header">
+      <div class="mobile-brand-box">
+        <div class="mobile-logo-wrapper">
+          <img src="images/nbc-pl-logo.png" alt="Tanzania Football Logo" class="mobile-brand-logo">
+          <div class="logo-pulse-ring"></div>
+        </div>
+        <div class="mobile-brand-text">
+          <div class="mobile-brand-title-wrap">
+            <span class="mobile-brand-title">⚽ Tanzania Football</span>
+            <div class="title-light-beam"></div>
+          </div>
+          <span class="mobile-brand-subtitle" data-en="Official Football Platform" data-sw="Jukwaa Rasmi la Soka">Official Football Platform</span>
+        </div>
+      </div>
+      <button class="mobile-drawer-close" id="mobile-menu-close" aria-label="Close Mobile Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <!-- 1. HOME -->
+        <li class="mobile-nav-item">
+          <a href="index.html" class="mobile-nav-link">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-house mobile-link-icon text-gold"></i>
+              <span data-en="Home" data-sw="Nyumbani">Home</span>
+            </span>
+            <i class="fa-solid fa-chevron-right mobile-link-arrow"></i>
+          </a>
+        </li>
+
+        <!-- 2. COMPETITIONS ACCORDION (ACTIVE PAGE) -->
+        <li class="mobile-nav-item mobile-has-submenu active">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-trophy mobile-link-icon text-gold"></i>
+              <span data-en="Competitions" data-sw="Mashindano">Competitions</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="nbc-premier-league.html" class="mobile-sub-link"><span class="mobile-badge badge-gold">NBC</span><span>NBC Premier League</span></a></li>
+            <li><a href="womens-premier-league.html" class="mobile-sub-link"><span class="mobile-badge badge-pink">WPL</span><span>Women's Premier League</span></a></li>
+            <li><a href="championship-league.html" class="mobile-sub-link"><span class="mobile-badge badge-red">TCL</span><span>Championship League</span></a></li>
+            <li><a href="first-division-league.html" class="mobile-sub-link"><span class="mobile-badge badge-green">FDL</span><span>First League</span></a></li>
+            <li><a href="efootball-league.html" class="mobile-sub-link"><span class="mobile-badge badge-purple">EFL</span><span>E-Football League</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 3. MATCH CENTRE ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-calendar-days mobile-link-icon text-gold"></i>
+              <span data-en="Match Centre" data-sw="Kituo cha Mechi">Match Centre</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="live-matches.html" class="mobile-sub-link"><span class="mobile-badge badge-red">LIVE</span><span>Live Matches</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 4. CLUBS ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-shield-halved mobile-link-icon text-gold"></i>
+              <span data-en="Clubs" data-sw="Klabu">Clubs</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="clubs.html" class="mobile-sub-link"><span class="mobile-badge badge-green">PLY</span><span>Clubs &amp; Squad Rosters</span></a></li>
+            <li><a href="clubs.html#stadiums" class="mobile-sub-link"><span class="mobile-badge badge-purple">STD</span><span>Stadiums &amp; Venues</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 5. AWARDS (DIRECT LINK - NO SUBLINKS) -->
+        <li class="mobile-nav-item">
+          <a href="awards.html" class="mobile-nav-link">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-crown mobile-link-icon text-gold"></i>
+              <span data-en="Awards" data-sw="Tuzo">Awards</span>
+            </span>
+            <i class="fa-solid fa-chevron-right mobile-link-arrow"></i>
+          </a>
+        </li>
+
+        <!-- 6. NEWS & MEDIA ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-newspaper mobile-link-icon text-gold"></i>
+              <span data-en="News &amp; Media" data-sw="Habari">News &amp; Media</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="nbc-premier-league.html#news" class="mobile-sub-link"><span class="mobile-badge badge-red">NEW</span><span>Latest News &amp; Transfers</span></a></li>
+            <li><a href="index.html#news" class="mobile-sub-link"><span class="mobile-badge badge-cyan">VID</span><span>Videos &amp; Highlights</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 7. FAN ZONE ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-fire mobile-link-icon text-gold"></i>
+              <span data-en="Fan Zone" data-sw="Mashabiki">Fan Zone</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="index.html#fanzone" class="mobile-sub-link"><span class="mobile-badge badge-gold">FAN</span><span>Match Predictions</span></a></li>
+            <li><a href="awards.html#votingOptions" class="mobile-sub-link"><span class="mobile-badge badge-cyan">VOTE</span><span>Fan Voting &amp; Polls</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 8. ABOUT ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-circle-info mobile-link-icon text-gold"></i>
+              <span data-en="About" data-sw="Kuhusu">About</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="index.html#tff" class="mobile-sub-link"><span class="mobile-badge badge-blue">TFF</span><span>About TFF &amp; TPLB</span></a></li>
+            <li><a href="#footer" class="mobile-sub-link"><span class="mobile-badge badge-green">CNT</span><span>Contact &amp; Media</span></a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Language Switcher Redesign in Mobile Drawer -->
+      <div class="mobile-lang-box">
+        <div class="lang-switcher-capsule">
+          <button class="lang-btn active" id="mobile-lang-eng">
+            <i class="fa-solid fa-globe"></i>
+            <span>ENG</span>
+          </button>
+          <button class="lang-btn" id="mobile-lang-swa">
+            <i class="fa-solid fa-globe"></i>
+            <span>SWA</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Footer with Socials & Quick Action Pills -->
+    <div class="mobile-drawer-footer">
+      <div class="mobile-footer-divider"></div>
+      <div class="mobile-social-title">
+        <i class="fa-solid fa-futbol text-gold"></i>
+        <span data-en="Follow Tanzanian Football" data-sw="Tufuatilie Soka la Tanzania">Follow Tanzanian Football</span>
+      </div>
+      <div class="mobile-social-links">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+
+      <!-- Quick Action Pills -->
+      <div class="mobile-quick-actions">
+        <a href="index.html#app" class="quick-action-pill">
+          <i class="fa-solid fa-mobile-screen-button text-gold"></i>
+          <span data-en="📱 Download Mobile App" data-sw="📱 Pakua App ya Simu">📱 Download Mobile App</span>
+        </a>
+        <a href="index.html#news" class="quick-action-pill">
+          <i class="fa-solid fa-circle-play text-cyan"></i>
+          <span data-en="📺 Watch Highlights" data-sw="📺 Tazama Highlights">📺 Watch Highlights</span>
+        </a>
+        <a href="nbc-premier-league.html#news" class="quick-action-pill">
+          <i class="fa-solid fa-newspaper text-green"></i>
+          <span data-en="📰 Latest News" data-sw="📰 Habari Mpya">📰 Latest News</span>
+        </a>
+      </div>
+
+      <div class="mobile-copyright">© 2026 Tanzania Football • Official Platform</div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       1. HERO SECTION (NBC Premier League • Season 2025/26)
+       ========================================================================== -->
+  <section class="league-hero">
+    <div class="container">
+      <div class="league-hero-grid">
+        <div>
+          <div class="league-season-badge">
+            <i class="fa-solid fa-trophy"></i>
+            <span data-en="NBC Premier League • Season 2025/26" data-sw="NBC Premier League • Msimu wa 2025/26">NBC Premier League • Season 2025/26</span>
+          </div>
+          <h1 class="league-hero-title" data-en="THE HOME OF TANZANIAN FOOTBALL" data-sw="NYUMBANI KWETU SOKA LA TANZANIA">
+            THE HOME OF TANZANIAN FOOTBALL
+          </h1>
+          <p class="league-hero-sub" data-en="16 elite clubs. 30 rounds of pure ambition. The flagship competition of Tanzanian football." data-sw="Klabu 16 za juu. Rundi 30 za ushindani wa kweli. Mashindano makuu ya soka la Tanzania.">
+            16 elite clubs. 30 rounds of pure ambition. The flagship competition of Tanzanian football.
+          </p>
+
+          <!-- 4 Stat Cards Grid -->
+          <div class="league-stats-grid">
+            <div class="league-stat-card">
+              <span class="league-stat-icon">⚽</span>
+              <div>
+                <div class="league-stat-num">523</div>
+                <div class="league-stat-lbl" data-en="Goals Scored" data-sw="Mabao Yaliyofungwa">Goals Scored</div>
+              </div>
+            </div>
+
+            <div class="league-stat-card">
+              <span class="league-stat-icon">🏃</span>
+              <div>
+                <div class="league-stat-num">240</div>
+                <div class="league-stat-lbl" data-en="Matches Played" data-sw="Mechi Zilizochezwa">Matches Played</div>
+              </div>
+            </div>
+
+            <div class="league-stat-card">
+              <span class="league-stat-icon">🧤</span>
+              <div>
+                <div class="league-stat-num">112</div>
+                <div class="league-stat-lbl" data-en="Clean Sheets" data-sw="Mechi Bila Kuruhusu">Clean Sheets</div>
+              </div>
+            </div>
+
+            <div class="league-stat-card">
+              <span class="league-stat-icon">👥</span>
+              <div>
+                <div class="league-stat-num">22,400</div>
+                <div class="league-stat-lbl" data-en="Avg Attendance" data-sw="Wastani wa Mashabiki">Avg Attendance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: DEFENDING CHAMPIONS SPOTLIGHT HERO BOX -->
+        <div class="hero-defending-spotlight">
+          <div class="widget-glass-card defending-champions-hero-card" style="background: linear-gradient(145deg, rgba(16, 36, 20, 0.95), rgba(6, 20, 12, 0.98)); border: 1.5px solid rgba(34, 197, 94, 0.5); border-radius: 28px; padding: 1.8rem; box-shadow: 0 20px 50px rgba(34, 197, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12); position:relative; overflow:hidden;">
+            
+            <!-- Glow Background Effect -->
+            <div style="position:absolute; top:-30px; right:-30px; width:130px; height:130px; background:radial-gradient(circle, rgba(255, 193, 7, 0.35), transparent 70%); pointer-events:none;"></div>
+
+            <!-- Top Header Badge -->
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:0.9rem; margin-bottom:1.4rem;">
+              <span class="badge-pill" style="background:rgba(255,193,7,0.2); color:var(--primary-gold); border:1px solid rgba(255,193,7,0.4); font-size:0.75rem; font-weight:900; text-transform:uppercase; letter-spacing:1px;" data-en="🏆 DEFENDING CHAMPIONS" data-sw="🏆 MABINGWA WANAOTETEA">
+                🏆 DEFENDING CHAMPIONS
+              </span>
+              <i class="fa-solid fa-crown" style="color:var(--primary-gold); font-size:1.25rem;"></i>
+            </div>
+
+            <!-- Club Info Row -->
+            <div style="display:flex; align-items:center; gap:1.1rem; margin-bottom:1.4rem;">
+              <img src="images/yanga.jpg" alt="Young Africans SC" style="width:64px; height:64px; border-radius:50%; border:3px solid var(--primary-gold); box-shadow:0 0 20px rgba(255,193,7,0.5); object-fit:cover; flex-shrink:0;">
+              <div>
+                <h3 style="font-family:var(--font-heading); font-size:1.35rem; font-weight:900; color:#fff; line-height:1.2; margin:0;">Young Africans SC</h3>
+                <span style="font-size:0.82rem; color:var(--primary-gold); font-weight:800; display:block; margin-top:0.25rem;" data-en="Wananchi • 30x Record Winners" data-sw="Wananchi • Mabingwa mara 30">Wananchi • 30x Record Winners</span>
+              </div>
+            </div>
+
+            <!-- 3 Stat Counter Grid -->
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.6rem; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.08); padding:0.85rem 0.6rem; border-radius:18px; text-align:center; margin-bottom:1.2rem;">
+              <div>
+                <div style="font-family:var(--font-heading); font-size:1.35rem; font-weight:900; color:#ffd700; line-height:1;">30</div>
+                <div style="font-size:0.68rem; color:var(--text-muted); text-transform:uppercase; font-weight:800; margin-top:0.3rem;" data-en="Titles Won" data-sw="Mataji">Titles Won</div>
+              </div>
+              <div style="border-left:1px solid rgba(255,255,255,0.08); border-right:1px solid rgba(255,255,255,0.08);">
+                <div style="font-family:var(--font-heading); font-size:1.35rem; font-weight:900; color:#22c55e; line-height:1;">75</div>
+                <div style="font-size:0.68rem; color:var(--text-muted); text-transform:uppercase; font-weight:800; margin-top:0.3rem;" data-en="Points" data-sw="Punti">Points</div>
+              </div>
+              <div>
+                <div style="font-family:var(--font-heading); font-size:1.35rem; font-weight:900; color:#38bdf8; line-height:1;">3x</div>
+                <div style="font-size:0.68rem; color:var(--text-muted); text-transform:uppercase; font-weight:800; margin-top:0.3rem;" data-en="In a Row" data-sw="Mfululizo">In a Row</div>
+              </div>
+            </div>
+
+            <!-- Champions Quote & Action Link -->
+            <div style="font-size:0.78rem; color:rgba(255,255,255,0.85); font-style:italic; border-left:2px solid var(--primary-gold); padding-left:0.7rem; margin-bottom:1.25rem;" data-en="“Current 2024/25 NBC Premier League Champions holding the record for the most league titles in Tanzanian history.”" data-sw="“Mabingwa waliopo wa 2024/25 wa NBC Premier League wenye rekodi ya mataji mengi zaidi katika historia ya Tanzania.”">
+              “Current 2024/25 NBC Premier League Champions holding the record for the most league titles in Tanzanian history.”
+            </div>
+
+            <a href="#teams" class="section-link" style="font-size:0.85rem; font-weight:800; color:var(--primary-gold); display:flex; align-items:center; gap:0.4rem;" data-en="Explore Champions Squad →" data-sw="Tazama Kikosi cha Mabingwa →">Explore Champions Squad →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       2. LEAGUE NAVIGATION TABS BAR
+       ========================================================================== -->
+  <nav class="league-tabs-nav">
+    <div class="container">
+      <ul class="league-tabs-list">
+        <li><button class="league-tab-btn active" data-tab="overview"><i class="fa-solid fa-chart-pie"></i> <span data-en="Overview" data-sw="Jumla">Overview</span></button></li>
+        <li><button class="league-tab-btn" data-tab="fixtures"><i class="fa-solid fa-calendar-days"></i> <span data-en="Fixtures & Results" data-sw="Ratiba na Matokeo">Fixtures & Results</span></button></li>
+        <li><button class="league-tab-btn" data-tab="teams"><i class="fa-solid fa-shield-halved"></i> <span data-en="Teams" data-sw="Timu">Teams</span></button></li>
+        <li><button class="league-tab-btn" data-tab="transfers"><i class="fa-solid fa-right-left"></i> <span data-en="Transfers" data-sw="Usajili">Transfers</span></button></li>
+        <li><button class="league-tab-btn" data-tab="history"><i class="fa-solid fa-trophy"></i> <span data-en="Season History" data-sw="Historia ya Msimu">Season History</span></button></li>
+        <li><button class="league-tab-btn" data-tab="news"><i class="fa-solid fa-newspaper"></i> <span data-en="News & Media" data-sw="Habari na Vyombo">News & Media</span></button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       MAIN LEAGUE DASHBOARD CONTENT CONTAINER
+       ========================================================================== -->
+  <main class="league-dashboard-sec">
+    <div class="container">
+
+      <!-- ================================================================
+           TAB PANEL: OVERVIEW
+           ================================================================ -->
+      <div class="tab-panel active" id="tab-overview">
+        <!-- Race & Widgets Split Grid -->
+        <div class="race-dashboard-grid">
+          
+          <!-- LEFT COLUMN: TITLE RACE TABLE -->
+          <div class="table-card-container">
+            <div class="table-header-flex" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <h2 style="font-family:var(--font-heading); font-size:1.4rem; font-weight:900; color:#fff; display:flex; align-items:center; gap:0.5rem; margin:0;">
+                  🏆 <span data-en="Title Race Standings" data-sw="Msimamo wa Mbio za Ubingwa">Title Race Standings</span>
+                </h2>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.3rem; margin-bottom:0;" data-en="Only 2 points separate Yanga and Simba at the top" data-sw="Pointi 2 pekee zinatenganisha Yanga na Simba kileleni">
+                  Only 2 points separate Yanga and Simba at the top
+                </p>
+              </div>
+              
+              <div style="display:flex; align-items:center; gap:0.75rem;">
+                <span class="live-pulse">LIVE SEASON</span>
+                <input type="text" class="table-search-input" placeholder="Search team..." data-en-placeholder="Search team..." data-sw-placeholder="Tafuta timu..." id="tableSearchInput" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#fff; padding:0.45rem 0.85rem; border-radius:18px; font-size:0.82rem; outline:none;">
+              </div>
+            </div>
+
+            <!-- Standings Table -->
+            <div class="league-table-wrap" style="overflow-x:auto;">
+              <table class="league-table" id="standingsTable" style="width:100%; border-collapse:collapse; font-size:0.88rem; text-align:left;">
+                <thead>
+                  <tr style="background:rgba(255,255,255,0.04); color:var(--primary-gold); border-bottom:1px solid rgba(255,255,255,0.1);">
+                    <th style="padding:0.75rem 0.6rem;" data-en="Pos" data-sw="Naf">Pos</th>
+                    <th style="padding:0.75rem 0.6rem;" data-en="Club" data-sw="Klabu">Club</th>
+                    <th style="padding:0.75rem 0.6rem;">P</th>
+                    <th style="padding:0.75rem 0.6rem;">W</th>
+                    <th style="padding:0.75rem 0.6rem;">D</th>
+                    <th style="padding:0.75rem 0.6rem;">L</th>
+                    <th style="padding:0.75rem 0.6rem;">GF</th>
+                    <th style="padding:0.75rem 0.6rem;">GA</th>
+                    <th style="padding:0.75rem 0.6rem;">GD</th>
+                    <th style="padding:0.75rem 0.6rem;" data-en="Pts" data-sw="Punti">Pts</th>
+                    <th style="padding:0.75rem 0.6rem;">Form</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background:rgba(34,197,94,0.1); border-left:3px solid #22c55e; border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;"><strong>1</strong></td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;"><img src="images/yanga.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px; border:1px solid var(--primary-gold);"> Young Africans SC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td>
+                    <td style="padding:0.75rem 0.6rem;">23</td>
+                    <td style="padding:0.75rem 0.6rem;">6</td>
+                    <td style="padding:0.75rem 0.6rem;">1</td>
+                    <td style="padding:0.75rem 0.6rem;">71</td>
+                    <td style="padding:0.75rem 0.6rem;">9</td>
+                    <td style="padding:0.75rem 0.6rem; color:#4ade80;">+62</td>
+                    <td style="padding:0.75rem 0.6rem;"><strong style="color:var(--primary-gold); font-size:1.05rem;">75</strong></td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge win">W</span><span class="form-badge win">W</span><span class="form-badge draw">D</span><span class="form-badge win">W</span><span class="form-badge win">W</span></td>
+                  </tr>
+                  <tr style="background:rgba(239,68,68,0.1); border-left:3px solid #ef4444; border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;"><strong>2</strong></td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;"><img src="images/simba.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px; border:1px solid #ef4444;"> Simba SC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td>
+                    <td style="padding:0.75rem 0.6rem;">23</td>
+                    <td style="padding:0.75rem 0.6rem;">4</td>
+                    <td style="padding:0.75rem 0.6rem;">3</td>
+                    <td style="padding:0.75rem 0.6rem;">66</td>
+                    <td style="padding:0.75rem 0.6rem;">14</td>
+                    <td style="padding:0.75rem 0.6rem; color:#4ade80;">+52</td>
+                    <td style="padding:0.75rem 0.6rem;"><strong style="color:#f87171; font-size:1.05rem;">73</strong></td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge win">W</span><span class="form-badge win">W</span><span class="form-badge win">W</span><span class="form-badge loss">L</span><span class="form-badge win">W</span></td>
+                  </tr>
+                  <tr style="background:rgba(56,189,248,0.08); border-left:3px solid #38bdf8; border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;"><strong>3</strong></td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;"><img src="images/azam.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px; border:1px solid #38bdf8;"> Azam FC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td>
+                    <td style="padding:0.75rem 0.6rem;">19</td>
+                    <td style="padding:0.75rem 0.6rem;">7</td>
+                    <td style="padding:0.75rem 0.6rem;">4</td>
+                    <td style="padding:0.75rem 0.6rem;">55</td>
+                    <td style="padding:0.75rem 0.6rem;">21</td>
+                    <td style="padding:0.75rem 0.6rem; color:#38bdf8;">+34</td>
+                    <td style="padding:0.75rem 0.6rem;"><strong style="color:#38bdf8; font-size:1.05rem;">64</strong></td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge draw">D</span><span class="form-badge win">W</span><span class="form-badge win">W</span><span class="form-badge draw">D</span><span class="form-badge win">W</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">4</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/singida.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Singida Black Stars</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">15</td><td style="padding:0.75rem 0.6rem;">7</td><td style="padding:0.75rem 0.6rem;">8</td><td style="padding:0.75rem 0.6rem;">42</td><td style="padding:0.75rem 0.6rem;">29</td>
+                    <td style="padding:0.75rem 0.6rem;">+13</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">52</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge win">W</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge win">W</span><span class="form-badge draw">D</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">5</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/costal-union.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Coastal Union</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">11</td><td style="padding:0.75rem 0.6rem;">10</td><td style="padding:0.75rem 0.6rem;">9</td><td style="padding:0.75rem 0.6rem;">32</td><td style="padding:0.75rem 0.6rem;">28</td>
+                    <td style="padding:0.75rem 0.6rem;">+4</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">43</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge win">W</span><span class="form-badge draw">D</span><span class="form-badge win">W</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">6</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/kmc.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> KMC FC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">10</td><td style="padding:0.75rem 0.6rem;">9</td><td style="padding:0.75rem 0.6rem;">11</td><td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">34</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-4</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">39</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge win">W</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">7</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/dodoma-jiji.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Dodoma Jiji FC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">9</td><td style="padding:0.75rem 0.6rem;">8</td><td style="padding:0.75rem 0.6rem;">13</td><td style="padding:0.75rem 0.6rem;">28</td><td style="padding:0.75rem 0.6rem;">37</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-9</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">35</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge win">W</span><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge win">W</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">8</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/jkt-tanzania.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> JKT Tanzania</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">7</td><td style="padding:0.75rem 0.6rem;">11</td><td style="padding:0.75rem 0.6rem;">12</td><td style="padding:0.75rem 0.6rem;">25</td><td style="padding:0.75rem 0.6rem;">33</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-8</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">32</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge draw">D</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">9</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/mashujaa-fc.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Mashujaa FC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">7</td><td style="padding:0.75rem 0.6rem;">9</td><td style="padding:0.75rem 0.6rem;">14</td><td style="padding:0.75rem 0.6rem;">26</td><td style="padding:0.75rem 0.6rem;">38</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-12</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">30</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge win">W</span><span class="form-badge loss">L</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">10</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/tanzania-prison.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Tanzania Prisons</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">6</td><td style="padding:0.75rem 0.6rem;">11</td><td style="padding:0.75rem 0.6rem;">13</td><td style="padding:0.75rem 0.6rem;">24</td><td style="padding:0.75rem 0.6rem;">36</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-12</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">29</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">11</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/namungo-fc.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Namungo FC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">7</td><td style="padding:0.75rem 0.6rem;">7</td><td style="padding:0.75rem 0.6rem;">16</td><td style="padding:0.75rem 0.6rem;">22</td><td style="padding:0.75rem 0.6rem;">39</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-17</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">28</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge loss">L</span><span class="form-badge win">W</span><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">12</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/fauntaingate.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Fountain Gate FC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">6</td><td style="padding:0.75rem 0.6rem;">8</td><td style="padding:0.75rem 0.6rem;">16</td><td style="padding:0.75rem 0.6rem;">23</td><td style="padding:0.75rem 0.6rem;">42</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-19</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">26</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge win">W</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">13</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/pamba-jiji.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Pamba Jiji FC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">5</td><td style="padding:0.75rem 0.6rem;">9</td><td style="padding:0.75rem 0.6rem;">16</td><td style="padding:0.75rem 0.6rem;">19</td><td style="padding:0.75rem 0.6rem;">41</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-22</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">24</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">14</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/kagoma.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Kagera Sugar</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">4</td><td style="padding:0.75rem 0.6rem;">10</td><td style="padding:0.75rem 0.6rem;">16</td><td style="padding:0.75rem 0.6rem;">18</td><td style="padding:0.75rem 0.6rem;">43</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-25</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#fff;">22</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge loss">L</span></td>
+                  </tr>
+                  <tr style="background:rgba(239,68,68,0.1); border-left:3px solid #ef4444; border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td style="padding:0.75rem 0.6rem;">15</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/tra-united.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Tabora United</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">4</td><td style="padding:0.75rem 0.6rem;">8</td><td style="padding:0.75rem 0.6rem;">18</td><td style="padding:0.75rem 0.6rem;">17</td><td style="padding:0.75rem 0.6rem;">48</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-31</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#f87171;">20</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span></td>
+                  </tr>
+                  <tr style="background:rgba(239,68,68,0.1); border-left:3px solid #ef4444;">
+                    <td style="padding:0.75rem 0.6rem;">16</td>
+                    <td class="team-name-cell" style="padding:0.75rem 0.6rem; color:#fff;"><img src="images/mbeya-city.jpg" width="24" height="24" style="border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px;"> Ken Gold FC</td>
+                    <td style="padding:0.75rem 0.6rem;">30</td><td style="padding:0.75rem 0.6rem;">3</td><td style="padding:0.75rem 0.6rem;">8</td><td style="padding:0.75rem 0.6rem;">19</td><td style="padding:0.75rem 0.6rem;">15</td><td style="padding:0.75rem 0.6rem;">52</td>
+                    <td style="padding:0.75rem 0.6rem; color:#f87171;">-37</td>
+                    <td style="padding:0.75rem 0.6rem; font-weight:800; color:#f87171;">17</td>
+                    <td style="padding:0.75rem 0.6rem;"><span class="form-badge loss">L</span><span class="form-badge loss">L</span><span class="form-badge draw">D</span><span class="form-badge loss">L</span><span class="form-badge loss">L</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- RELEGATION BATTLE TRACKER -->
+            <div class="relegation-card" style="margin-top:1.5rem;">
+              <div class="enriched-section-header">
+                <h3>⚠️ Relegation Danger Zone</h3>
+                <span style="margin-left:auto; font-size:0.72rem; color:#ef4444; font-weight:800;">BOTTOM 3 AT RISK</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:0.75rem 1rem; border-radius:14px;">
+                  <div style="display:flex; align-items:center; gap:0.6rem;">
+                    <span style="color:#f87171; font-weight:900; font-size:0.85rem;">14th</span>
+                    <img src="images/kagoma.jpg" width="28" height="28" style="border-radius:50%; object-fit:cover;">
+                    <strong style="color:#fff; font-size:0.88rem;">Kagera Sugar</strong>
+                  </div>
+                  <div style="text-align:right;">
+                    <strong style="color:#f87171;">22 pts</strong>
+                    <div style="font-size:0.68rem; color:var(--text-muted);">5 pts above drop</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(239,68,68,0.1); padding:0.75rem 1rem; border-radius:14px; border:1px solid rgba(239,68,68,0.3);">
+                  <div style="display:flex; align-items:center; gap:0.6rem;">
+                    <span style="color:#ef4444; font-weight:900; font-size:0.85rem;">15th</span>
+                    <img src="images/tra-united.jpg" width="28" height="28" style="border-radius:50%; object-fit:cover;">
+                    <strong style="color:#fff; font-size:0.88rem;">Tabora United</strong>
+                  </div>
+                  <div style="text-align:right;">
+                    <strong style="color:#ef4444;">20 pts</strong>
+                    <div style="font-size:0.68rem; color:#ef4444; font-weight:700;">⬇️ RELEGATED</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(239,68,68,0.15); padding:0.75rem 1rem; border-radius:14px; border:1px solid rgba(239,68,68,0.4);">
+                  <div style="display:flex; align-items:center; gap:0.6rem;">
+                    <span style="color:#ef4444; font-weight:900; font-size:0.85rem;">16th</span>
+                    <img src="images/mbeya-city.jpg" width="28" height="28" style="border-radius:50%; object-fit:cover;">
+                    <strong style="color:#fff; font-size:0.88rem;">Ken Gold FC</strong>
+                  </div>
+                  <div style="text-align:right;">
+                    <strong style="color:#ef4444;">17 pts</strong>
+                    <div style="font-size:0.68rem; color:#ef4444; font-weight:700;">⬇️ RELEGATED</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN SIDEBAR WIDGETS -->
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            
+            <!-- Featured Kariakoo Derby Match Widget -->
+            <div class="widget-glass-card" style="background:linear-gradient(145deg, rgba(30,10,15,0.95), rgba(12,5,15,0.98)); border:1.5px solid rgba(239, 68, 68, 0.5); border-radius:24px; padding:1.4rem; box-shadow:0 12px 35px rgba(239,68,68,0.15);">
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:0.6rem; margin-bottom:1rem;">
+                <span class="badge-pill" style="background:rgba(239,68,68,0.25); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-size:0.72rem; font-weight:900;" data-en="🔥 KARIAKOO DERBY" data-sw="🔥 DERBY YA KARIAKOO">🔥 KARIAKOO DERBY</span>
+                <span style="font-size:0.78rem; color:var(--primary-gold); font-weight:800;">Round 17</span>
+              </div>
+              <div style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:0.75rem; text-align:center;">
+                <div>
+                  <img src="images/yanga.jpg" style="width:44px; height:44px; border-radius:50%; border:2px solid var(--primary-gold); object-fit:cover;">
+                  <div style="font-size:0.85rem; font-weight:800; color:#fff; margin-top:0.3rem;">Yanga SC</div>
+                  <div style="font-size:0.68rem; color:var(--primary-gold);">1st • 75pts</div>
+                </div>
+                <div style="background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.4); padding:0.4rem 0.85rem; border-radius:14px; color:#f87171; font-family:var(--font-heading); font-size:1.1rem; font-weight:900;">VS</div>
+                <div>
+                  <img src="images/simba.jpg" style="width:44px; height:44px; border-radius:50%; border:2px solid #ef4444; object-fit:cover;">
+                  <div style="font-size:0.85rem; font-weight:800; color:#fff; margin-top:0.3rem;">Simba SC</div>
+                  <div style="font-size:0.68rem; color:#f87171;">2nd • 73pts</div>
+                </div>
+              </div>
+              <div style="margin-top:0.8rem; text-align:center; font-size:0.75rem; color:var(--text-muted);">
+                <div><i class="fa-solid fa-location-dot" style="color:var(--primary-gold);"></i> Benjamin Mkapa Stadium</div>
+                <div style="margin-top:0.3rem;"><i class="fa-solid fa-whistle" style="color:var(--accent-cyan);"></i> Referee: Bashir Ahmed</div>
+              </div>
+              <!-- H2H Mini -->
+              <div style="margin-top:0.8rem; background:rgba(0,0,0,0.3); border-radius:12px; padding:0.7rem; display:grid; grid-template-columns:1fr 1fr 1fr; text-align:center; font-size:0.72rem;">
+                <div><div style="font-weight:900; color:var(--primary-gold); font-size:1rem;">47</div><div style="color:var(--text-muted);">Yanga Wins</div></div>
+                <div style="border-left:1px solid rgba(255,255,255,0.08); border-right:1px solid rgba(255,255,255,0.08);"><div style="font-weight:900; color:#fff; font-size:1rem;">28</div><div style="color:var(--text-muted);">Draws</div></div>
+                <div><div style="font-weight:900; color:#ef4444; font-size:1rem;">41</div><div style="color:var(--text-muted);">Simba Wins</div></div>
+              </div>
+            </div>
+
+            <!-- Top Scorers Leaderboard Widget -->
+            <div class="widget-glass-card" style="background:linear-gradient(145deg, rgba(10,24,52,0.95), rgba(5,12,30,0.98)); border:1px solid rgba(255,193,7,0.25); border-radius:24px; padding:1.4rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:900; color:#fff; margin:0;">⚽ Top Goalscorers</h3>
+                <span style="font-size:0.72rem; color:var(--primary-gold); font-weight:800;">2025/26</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--primary-gold); font-weight:900; font-size:0.85rem;">1</span><strong style="color:#fff; font-size:0.82rem;">Stephane Aziz Ki</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Yanga)</span></div>
+                  <strong style="color:var(--primary-gold); font-size:0.9rem;">21 ⚽</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#cbd5e1; font-weight:900; font-size:0.85rem;">2</span><strong style="color:#fff; font-size:0.82rem;">Feisal Salum</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Azam)</span></div>
+                  <strong style="color:#38bdf8; font-size:0.9rem;">19 ⚽</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#cbd5e1; font-weight:900; font-size:0.85rem;">3</span><strong style="color:#fff; font-size:0.82rem;">Jean Charles Ahoua</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Simba)</span></div>
+                  <strong style="color:#f87171; font-size:0.9rem;">16 ⚽</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#cbd5e1; font-weight:900; font-size:0.85rem;">4</span><strong style="color:#fff; font-size:0.82rem;">Clement Mzize</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Yanga)</span></div>
+                  <strong style="color:#4ade80; font-size:0.9rem;">14 ⚽</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#cbd5e1; font-weight:900; font-size:0.85rem;">5</span><strong style="color:#fff; font-size:0.82rem;">John Bocco</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Simba)</span></div>
+                  <strong style="color:#f87171; font-size:0.9rem;">12 ⚽</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Assists Leaderboard -->
+            <div class="widget-glass-card" style="background:linear-gradient(145deg, rgba(10,24,52,0.95), rgba(5,12,30,0.98)); border:1px solid rgba(0,212,255,0.2); border-radius:24px; padding:1.4rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:900; color:#fff; margin:0;">🎯 Top Assists</h3>
+                <span style="font-size:0.72rem; color:var(--accent-cyan); font-weight:800;">PLAYMAKERS</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:var(--accent-cyan); font-weight:900;">1</span><strong style="color:#fff; font-size:0.82rem;">Stephane Aziz Ki</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Yanga)</span></div>
+                  <strong style="color:var(--accent-cyan);">14 🎯</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#cbd5e1; font-weight:900;">2</span><strong style="color:#fff; font-size:0.82rem;">Clatous Chama</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Simba)</span></div>
+                  <strong style="color:#f87171;">11 🎯</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#cbd5e1; font-weight:900;">3</span><strong style="color:#fff; font-size:0.82rem;">Feisal Salum</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Azam)</span></div>
+                  <strong style="color:#38bdf8;">9 🎯</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Clean Sheet Leaders -->
+            <div class="widget-glass-card" style="background:linear-gradient(145deg, rgba(10,24,52,0.95), rgba(5,12,30,0.98)); border:1px solid rgba(34,197,94,0.2); border-radius:24px; padding:1.4rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:900; color:#fff; margin:0;">🧤 Clean Sheet Leaders</h3>
+                <span style="font-size:0.72rem; color:#4ade80; font-weight:800;">GOALKEEPERS</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:0.6rem;">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#4ade80; font-weight:900;">1</span><strong style="color:#fff; font-size:0.82rem;">Djigui Diarra</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Yanga)</span></div>
+                  <strong style="color:#4ade80;">18 🧤</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#cbd5e1; font-weight:900;">2</span><strong style="color:#fff; font-size:0.82rem;">Aishi Manula</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Simba)</span></div>
+                  <strong style="color:#f87171;">15 🧤</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.04); padding:0.55rem 0.75rem; border-radius:12px;">
+                  <div style="display:flex; align-items:center; gap:0.5rem;"><span style="color:#cbd5e1; font-weight:900;">3</span><strong style="color:#fff; font-size:0.82rem;">Razark Abalora</strong><span style="font-size:0.68rem; color:var(--text-muted);">(Azam)</span></div>
+                  <strong style="color:#38bdf8;">12 🧤</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================================================================
+             SECTION 2: SEASON PULSE & HONORS & SPOTLIGHTS DASHBOARD (2-COL EQUAL)
+             ================================================================ -->
+        <div style="margin-top:2.5rem; display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;" class="pulse-honors-row">
+          
+          <!-- 📊 SEASON PULSE CARD -->
+          <div class="widget-glass-card" style="background:linear-gradient(145deg, rgba(10,24,52,0.95), rgba(5,12,30,0.98)); border:1.5px solid rgba(255,193,7,0.25); border-radius:24px; padding:1.6rem; display:flex; flex-direction:column; justify-content:space-between;">
+            <div class="enriched-section-header" style="margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+              <h3 style="font-family:var(--font-heading); font-size:1.2rem; font-weight:900; color:#fff; margin:0;" data-en="📊 Season Pulse" data-sw="📊 Hali ya Msimu">📊 Season Pulse</h3>
+              <span class="badge-pill" style="background:rgba(255,193,7,0.15); color:var(--primary-gold); font-size:0.72rem; font-weight:800;">2025/26 METRICS</span>
+            </div>
+            
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.85rem; text-align:center;">
+              <div style="background:rgba(255,193,7,0.1); border:1px solid rgba(255,193,7,0.25); padding:1rem 0.75rem; border-radius:16px;">
+                <div style="font-size:1.4rem; margin-bottom:0.2rem;">⚽</div>
+                <div style="font-family:var(--font-heading); font-size:1.6rem; font-weight:900; color:var(--primary-gold); line-height:1;">523</div>
+                <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:0.3rem;" data-en="Goals Scored" data-sw="Mabao Yaliyofungwa">Goals Scored</div>
+              </div>
+
+              <div style="background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25); padding:1rem 0.75rem; border-radius:16px;">
+                <div style="font-size:1.4rem; margin-bottom:0.2rem;">📈</div>
+                <div style="font-family:var(--font-heading); font-size:1.6rem; font-weight:900; color:#4ade80; line-height:1;">2.18</div>
+                <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:0.3rem;" data-en="Goals / Match" data-sw="Mabao / Mechi">Goals / Match</div>
+              </div>
+
+              <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25); padding:1rem 0.75rem; border-radius:16px;">
+                <div style="font-size:1.4rem; margin-bottom:0.2rem;">🟨</div>
+                <div style="font-family:var(--font-heading); font-size:1.6rem; font-weight:900; color:#f87171; line-height:1;">847</div>
+                <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:0.3rem;" data-en="Yellow Cards" data-sw="Kadi za Dilano">Yellow Cards</div>
+              </div>
+
+              <div style="background:rgba(0,212,255,0.1); border:1px solid rgba(0,212,255,0.25); padding:1rem 0.75rem; border-radius:16px;">
+                <div style="font-size:1.4rem; margin-bottom:0.2rem;">👥</div>
+                <div style="font-family:var(--font-heading); font-size:1.6rem; font-weight:900; color:var(--accent-cyan); line-height:1;">22.4K</div>
+                <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:0.3rem;" data-en="Avg Attendance" data-sw="Wastani wa Mashabiki">Avg Attendance</div>
+              </div>
+
+              <div style="background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.25); padding:1rem 0.75rem; border-radius:16px;">
+                <div style="font-size:1.4rem; margin-bottom:0.2rem;">🎯</div>
+                <div style="font-family:var(--font-heading); font-size:1.6rem; font-weight:900; color:#a855f7; line-height:1;">42</div>
+                <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:0.3rem;" data-en="Penalties" data-sw="Penati">Penalties</div>
+              </div>
+
+              <div style="background:rgba(244,63,94,0.1); border:1px solid rgba(244,63,94,0.25); padding:1rem 0.75rem; border-radius:16px;">
+                <div style="font-size:1.4rem; margin-bottom:0.2rem;">🟥</div>
+                <div style="font-family:var(--font-heading); font-size:1.6rem; font-weight:900; color:#f43f5e; line-height:1;">38</div>
+                <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; margin-top:0.3rem;" data-en="Red Cards" data-sw="Kadi Nyekundu">Red Cards</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 🌟 HONORS & SPOTLIGHTS CARD -->
+          <div class="widget-glass-card" style="background:linear-gradient(145deg, rgba(12,24,52,0.95), rgba(6,16,38,0.98)); border:1.5px solid rgba(255,193,7,0.3); border-radius:24px; padding:1.6rem; display:flex; flex-direction:column; justify-content:space-between;">
+            <div class="enriched-section-header" style="margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+              <h3 style="font-family:var(--font-heading); font-size:1.2rem; font-weight:900; color:#fff; margin:0;" data-en="🌟 Honors & Spotlights" data-sw="🌟 Tuzo na Nuru za Mwezi">🌟 Honors & Spotlights</h3>
+              <span class="badge-pill" style="background:rgba(255,193,7,0.15); color:var(--primary-gold); font-size:0.72rem; font-weight:800;">MONTHLY AWARDS</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.9rem;">
+              <!-- Player of Month -->
+              <div style="background:rgba(0,0,0,0.35); padding:0.95rem 1.1rem; border-radius:16px; border-left:4px solid var(--primary-gold); display:flex; align-items:center; gap:1rem;">
+                <img src="images/feisal_saluum-22.png" style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:2px solid var(--primary-gold); flex-shrink:0;">
+                <div>
+                  <div style="font-size:0.7rem; color:var(--primary-gold); font-weight:900; text-transform:uppercase; letter-spacing:1px;" data-en="⭐ Player of the Month" data-sw="⭐ Mchezaji Bora wa Mwezi">⭐ Player of the Month</div>
+                  <div style="font-size:1rem; font-weight:900; color:#fff; margin-top:0.15rem;">Stephane Aziz Ki</div>
+                  <div style="font-size:0.78rem; color:var(--text-muted);">Young Africans SC • 5 Goals, 3 Assists</div>
+                </div>
+              </div>
+
+              <!-- Manager of Month -->
+              <div style="background:rgba(0,0,0,0.35); padding:0.95rem 1.1rem; border-radius:16px; border-left:4px solid var(--accent-cyan); display:flex; align-items:center; gap:1rem;">
+                <img src="images/gamondi.jpg" style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:2px solid var(--accent-cyan); flex-shrink:0;">
+                <div>
+                  <div style="font-size:0.7rem; color:var(--accent-cyan); font-weight:900; text-transform:uppercase; letter-spacing:1px;" data-en="🏅 Manager of the Month" data-sw="🏅 Kocha Bora wa Mwezi">🏅 Manager of the Month</div>
+                  <div style="font-size:1rem; font-weight:900; color:#fff; margin-top:0.15rem;">Miguel Angel Gamondi</div>
+                  <div style="font-size:0.78rem; color:var(--text-muted);">Young Africans SC • 5W 1D 0L (Unbeaten)</div>
+                </div>
+              </div>
+
+              <!-- Goal of Month -->
+              <div style="background:rgba(0,0,0,0.35); padding:0.95rem 1.1rem; border-radius:16px; border-left:4px solid #a855f7; display:flex; align-items:center; gap:1rem;">
+                <img src="images/azam.jpg" style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:2px solid #a855f7; flex-shrink:0;">
+                <div>
+                  <div style="font-size:0.7rem; color:#a855f7; font-weight:900; text-transform:uppercase; letter-spacing:1px;" data-en="🎯 Goal of the Month" data-sw="🎯 Bao Bora la Mwezi">🎯 Goal of the Month</div>
+                  <div style="font-size:1rem; font-weight:900; color:#fff; margin-top:0.15rem;">Feisal Salum — 35-yard volley</div>
+                  <div style="font-size:0.78rem; color:var(--text-muted);">Azam FC vs Coastal Union • Round 14</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================================================================
+             SECTION 3: MEDIA & HIGHLIGHTS HUB (SPLIT GRID)
+             ================================================================ -->
+        <div style="margin-top:2.5rem; display:grid; grid-template-columns: 2fr 1fr; gap:1.5rem;" class="video-news-row">
+          
+          <!-- 🎬 VIDEO HIGHLIGHTS -->
+          <div>
+            <div class="enriched-section-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+              <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin:0;" data-en="🎬 Matchweek 16 Video Highlights" data-sw="🎬 Marudio ya Video za Mechi Rundi 16">🎬 Matchweek 16 Video Highlights</h3>
+              <a href="#news" class="badge-pill" style="background:rgba(255,193,7,0.15); color:var(--primary-gold); border:1px solid rgba(255,193,7,0.3); padding:0.35rem 0.85rem; font-size:0.72rem; font-weight:800;" data-en="VIEW ALL →" data-sw="TAZAMA ZOTE →">VIEW ALL →</a>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem;">
+              <div class="video-card">
+                <div class="video-thumb">
+                  <img src="images/simba-vs-yanga.png" alt="Match Highlights">
+                  <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                  <span style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.85); color:#fff; padding:0.2rem 0.5rem; border-radius:6px; font-size:0.7rem; font-weight:800;">6:24</span>
+                </div>
+                <div class="video-info">
+                  <h4 style="font-size:0.88rem; font-weight:800; color:#fff; margin-bottom:0.3rem;">Yanga SC 3 – 0 Coastal Union</h4>
+                  <p style="font-size:0.72rem; color:var(--text-muted);">Round 15 • Extended Highlights</p>
+                </div>
+              </div>
+
+              <div class="video-card">
+                <div class="video-thumb">
+                  <img src="images/azam.jpg" alt="Match Highlights" style="object-fit:cover;">
+                  <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                  <span style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.85); color:#fff; padding:0.2rem 0.5rem; border-radius:6px; font-size:0.7rem; font-weight:800;">8:12</span>
+                </div>
+                <div class="video-info">
+                  <h4 style="font-size:0.88rem; font-weight:800; color:#fff; margin-bottom:0.3rem;">Azam FC 2 – 2 Singida</h4>
+                  <p style="font-size:0.72rem; color:var(--text-muted);">Round 16 • Late Equalizer</p>
+                </div>
+              </div>
+
+              <div class="video-card">
+                <div class="video-thumb">
+                  <img src="images/simba.jpg" alt="Match Highlights" style="object-fit:cover;">
+                  <div class="video-play-btn"><i class="fa-solid fa-play"></i></div>
+                  <span style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.85); color:#fff; padding:0.2rem 0.5rem; border-radius:6px; font-size:0.7rem; font-weight:800;">5:48</span>
+                </div>
+                <div class="video-info">
+                  <h4 style="font-size:0.88rem; font-weight:800; color:#fff; margin-bottom:0.3rem;">Simba SC 1 – 0 JKT Tanzania</h4>
+                  <p style="font-size:0.72rem; color:var(--text-muted);">Round 14 • Tight Victory</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 📰 LATEST HEADLINES -->
+          <div>
+            <div class="enriched-section-header" style="margin-bottom:1.25rem;">
+              <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin:0;" data-en="📰 Latest Headlines" data-sw="📰 Habari za Karibuni">📰 Latest Headlines</h3>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.85rem;">
+              <div class="social-feed-card" style="display:flex; gap:0.8rem; align-items:start; padding:1rem; border-radius:16px;">
+                <div style="min-width:10px; height:10px; border-radius:50%; background:var(--primary-gold); margin-top:0.4rem; box-shadow:0 0 8px var(--primary-gold);"></div>
+                <div>
+                  <h4 style="font-size:0.88rem; font-weight:800; color:#fff; line-height:1.35; margin-bottom:0.25rem;">Yanga SC extend unbeaten run to 18 matches</h4>
+                  <span style="font-size:0.72rem; color:var(--text-muted); font-weight:600;"><i class="fa-regular fa-clock"></i> 2 hours ago</span>
+                </div>
+              </div>
+
+              <div class="social-feed-card" style="display:flex; gap:0.8rem; align-items:start; padding:1rem; border-radius:16px;">
+                <div style="min-width:10px; height:10px; border-radius:50%; background:#ef4444; margin-top:0.4rem; box-shadow:0 0 8px #ef4444;"></div>
+                <div>
+                  <h4 style="font-size:0.88rem; font-weight:800; color:#fff; line-height:1.35; margin-bottom:0.25rem;">Simba SC announce new stadium upgrade plan</h4>
+                  <span style="font-size:0.72rem; color:var(--text-muted); font-weight:600;"><i class="fa-regular fa-clock"></i> 5 hours ago</span>
+                </div>
+              </div>
+
+              <div class="social-feed-card" style="display:flex; gap:0.8rem; align-items:start; padding:1rem; border-radius:16px;">
+                <div style="min-width:10px; height:10px; border-radius:50%; background:var(--accent-cyan); margin-top:0.4rem; box-shadow:0 0 8px var(--accent-cyan);"></div>
+                <div>
+                  <h4 style="font-size:0.88rem; font-weight:800; color:#fff; line-height:1.35; margin-bottom:0.25rem;">Azam FC's Feisal Salum called up for national team</h4>
+                  <span style="font-size:0.72rem; color:var(--text-muted); font-weight:600;"><i class="fa-regular fa-clock"></i> Yesterday</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- /tab-panel overview -->
+      <!-- ================================================================
+           TAB PANEL: FIXTURES & RESULTS
+           ================================================================ -->
+      <div class="tab-panel" id="tab-fixtures">
+        
+        <!-- Header & Search Controls Bar -->
+        <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.25rem; background:linear-gradient(145deg, rgba(12,24,52,0.9), rgba(6,14,32,0.95)); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:1.5rem 1.75rem; box-shadow:0 12px 35px rgba(0,0,0,0.5);">
+          <div>
+            <div style="display:inline-flex; align-items:center; gap:0.4rem; background:rgba(255,193,7,0.15); border:1px solid rgba(255,193,7,0.3); padding:0.25rem 0.75rem; border-radius:20px; color:var(--primary-gold); font-size:0.72rem; font-weight:900; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem;">
+              📅 Official Match Center
+            </div>
+            <h2 style="font-family:var(--font-heading); font-size:1.9rem; font-weight:900; color:#fff; margin:0; line-height:1.2;">
+              <span data-en="Fixtures & Results" data-sw="Ratiba na Matokeo">Fixtures & Results</span>
+            </h2>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.3rem; margin-bottom:0;" data-en="Season 2025/26 — Official NBC Premier League Match Schedules" data-sw="Msimu wa 2025/26 — Ratiba Rasmi za Mechi za NBC Premier League">
+              Season 2025/26 — Official NBC Premier League Match Schedules
+            </p>
+          </div>
+
+          <div style="position:relative; min-width:260px;">
+            <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:0.85rem;"></i>
+            <input type="text" id="fixtureSearchInput" class="table-search-input" placeholder="Search team or venue..." data-en-placeholder="Search team or venue..." data-sw-placeholder="Tafuta timu au uwanja..." style="width:100%; padding-left:2.5rem; height:44px; border-radius:22px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:#fff; font-size:0.88rem; transition:all 0.3s ease;">
+          </div>
+        </div>
+
+        <!-- MATCH ROUNDS SELECTOR (ROUNDS 1 - 30) -->
+        <div style="background:linear-gradient(145deg, rgba(10,24,52,0.95), rgba(5,12,30,0.98)); border:1px solid rgba(255,193,7,0.3); border-radius:24px; padding:1.75rem; margin-bottom:2rem; box-shadow:0 16px 45px rgba(0,0,0,0.6);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:0.75rem;">
+            <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:900; color:#fff; display:flex; align-items:center; gap:0.5rem;" data-en="⚽ Match Rounds Selector" data-sw="⚽ Chagua Rundi ya Mechi">
+              ⚽ Match Rounds Selector
+            </h3>
+            <span style="font-size:0.88rem; color:var(--primary-gold); font-weight:800; background:rgba(255,193,7,0.15); border:1px solid rgba(255,193,7,0.4); padding:0.4rem 0.9rem; border-radius:20px;">
+              Selected: <strong id="selectedRoundVal" style="color:#fff;">ROUND 17</strong>
+            </span>
+          </div>
+
+          <div class="rounds-selector-track" id="roundsSelectorTrack" style="display:flex; gap:0.5rem; overflow-x:auto; padding-bottom:0.6rem; scrollbar-width:thin;">
+            <button class="round-pill-btn" data-round="1">Rd 1</button>
+            <button class="round-pill-btn" data-round="2">Rd 2</button>
+            <button class="round-pill-btn" data-round="3">Rd 3</button>
+            <button class="round-pill-btn" data-round="4">Rd 4</button>
+            <button class="round-pill-btn" data-round="5">Rd 5</button>
+            <button class="round-pill-btn" data-round="6">Rd 6</button>
+            <button class="round-pill-btn" data-round="7">Rd 7</button>
+            <button class="round-pill-btn" data-round="8">Rd 8</button>
+            <button class="round-pill-btn" data-round="9">Rd 9</button>
+            <button class="round-pill-btn" data-round="10">Rd 10</button>
+            <button class="round-pill-btn" data-round="11">Rd 11</button>
+            <button class="round-pill-btn" data-round="12">Rd 12</button>
+            <button class="round-pill-btn" data-round="13">Rd 13</button>
+            <button class="round-pill-btn" data-round="14">Rd 14</button>
+            <button class="round-pill-btn" data-round="15">Rd 15</button>
+            <button class="round-pill-btn" data-round="16">Rd 16</button>
+            <button class="round-pill-btn active" data-round="17" style="background:linear-gradient(135deg,#ffd700,#b8860b); color:#000; border:none; font-weight:900;">ROUND 17</button>
+            <button class="round-pill-btn" data-round="18">Rd 18</button>
+            <button class="round-pill-btn" data-round="19">Rd 19</button>
+            <button class="round-pill-btn" data-round="20">Rd 20</button>
+            <button class="round-pill-btn" data-round="21">Rd 21</button>
+            <button class="round-pill-btn" data-round="22">Rd 22</button>
+            <button class="round-pill-btn" data-round="23">Rd 23</button>
+            <button class="round-pill-btn" data-round="24">Rd 24</button>
+            <button class="round-pill-btn" data-round="25">Rd 25</button>
+            <button class="round-pill-btn" data-round="26">Rd 26</button>
+            <button class="round-pill-btn" data-round="27">Rd 27</button>
+            <button class="round-pill-btn" data-round="28">Rd 28</button>
+            <button class="round-pill-btn" data-round="29">Rd 29</button>
+            <button class="round-pill-btn" data-round="30">Rd 30</button>
+          </div>
+
+          <!-- Dynamic Matches Display Grid for Selected Round -->
+          <div id="roundMatchesDisplayContainer" style="margin-top:1.6rem;"></div>
+        </div>
+
+        <!-- Round Filter Pills bar -->
+        <div style="display:flex; gap:0.65rem; flex-wrap:wrap; margin-bottom:2rem; padding:0.4rem; background:rgba(10,20,44,0.7); border:1px solid rgba(255,255,255,0.06); border-radius:24px;" id="fixtureFilterContainer">
+          <button class="round-pill-btn active" data-filter="all" style="padding:0.5rem 1.25rem; border-radius:20px; font-weight:800; font-size:0.82rem;">All Rounds</button>
+          <button class="round-pill-btn" data-filter="upcoming" style="padding:0.5rem 1.25rem; border-radius:20px; font-weight:800; font-size:0.82rem;">Upcoming</button>
+          <button class="round-pill-btn" data-filter="completed" style="padding:0.5rem 1.25rem; border-radius:20px; font-weight:800; font-size:0.82rem;">Completed (FT)</button>
+          <button class="round-pill-btn" data-filter="rd1-5" style="padding:0.5rem 1.25rem; border-radius:20px; font-weight:800; font-size:0.82rem;">Rd 1–5</button>
+          <button class="round-pill-btn" data-filter="rd6-10" style="padding:0.5rem 1.25rem; border-radius:20px; font-weight:800; font-size:0.82rem;">Rd 6–10</button>
+          <button class="round-pill-btn" data-filter="rd11-15" style="padding:0.5rem 1.25rem; border-radius:20px; font-weight:800; font-size:0.82rem;">Rd 11–15</button>
+          <button class="round-pill-btn" data-filter="rd16-20" style="padding:0.5rem 1.25rem; border-radius:20px; font-weight:800; font-size:0.82rem;">Rd 16–20</button>
+        </div>
+
+        <!-- Fixtures Match Cards Grid Container -->
+        <!-- Fixtures Match Cards Grid Container (2-Column Small Horizontal Boxes) -->
+        <div class="round-matches-2col-grid" style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:0.65rem; width:100%; box-sizing:border-box;" id="fixturesContainer">
+          
+          <!-- Match 1: Yanga vs Simba (Kariakoo Derby) -->
+          <div class="fixture-card-item" data-status="upcoming" data-round="rd17" style="background:linear-gradient(145deg, rgba(14, 24, 52, 0.96), rgba(8, 16, 36, 0.98)); border:1.5px solid rgba(239, 68, 68, 0.5); border-radius:14px; padding:0.75rem 0.85rem; box-shadow:0 8px 24px rgba(239,68,68,0.15); width:100%; box-sizing:border-box; min-width:0; overflow:hidden;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; font-size:0.68rem; color:var(--text-muted); border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:0.35rem; min-width:0;">
+              <span style="font-weight:800; color:var(--primary-gold); letter-spacing:0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">🔥 KARIAKOO DERBY • Round 17</span>
+              <span style="padding:0.12rem 0.4rem; border-radius:10px; font-weight:800; font-size:0.63rem; background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.5); flex-shrink:0;">UPCOMING</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.5rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/yanga.jpg" width="22" height="22" style="border-radius:50%; border:1px solid var(--primary-gold); object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Young Africans SC</strong>
+                    <span style="font-size:0.65rem; color:var(--primary-gold);">Home • 1st (75 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.82rem; font-weight:900; color:#38bdf8; background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">VS</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/simba.jpg" width="22" height="22" style="border-radius:50%; border:1px solid #ef4444; object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Simba SC</strong>
+                    <span style="font-size:0.65rem; color:#f87171;">Away • 2nd (73 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.82rem; font-weight:900; color:#38bdf8; background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">VS</span>
+              </div>
+            </div>
+            <div style="font-size:0.65rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.06); padding-top:0.35rem; display:flex; align-items:center; gap:0.3rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              📍 Benjamin Mkapa Stadium • Dar es Salaam
+            </div>
+          </div>
+
+          <!-- Match 2: Azam FC vs Singida Black Stars -->
+          <div class="fixture-card-item" data-status="completed" data-round="rd16" style="background:linear-gradient(145deg, rgba(12, 24, 52, 0.92), rgba(6, 14, 32, 0.96)); border:1px solid rgba(0, 212, 255, 0.2); border-radius:14px; padding:0.75rem 0.85rem; box-shadow:0 8px 24px rgba(0,0,0,0.5); width:100%; box-sizing:border-box; min-width:0; overflow:hidden;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; font-size:0.68rem; color:var(--text-muted); border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:0.35rem; min-width:0;">
+              <span style="font-weight:800; color:var(--accent-cyan); letter-spacing:0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Round 16 • FT</span>
+              <span style="padding:0.12rem 0.4rem; border-radius:10px; font-weight:800; font-size:0.63rem; background:rgba(34,197,94,0.15); color:#4ade80; border:1px solid rgba(34,197,94,0.4); flex-shrink:0;">FT</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.5rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/azam.jpg" width="22" height="22" style="border-radius:50%; border:1px solid var(--accent-cyan); object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Azam FC</strong>
+                    <span style="font-size:0.65rem; color:var(--accent-cyan);">Home • 3rd (64 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.85rem; font-weight:900; color:#4ade80; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">2</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/singida.jpg" width="22" height="22" style="border-radius:50%; border:1px solid #38bdf8; object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Singida Black Stars</strong>
+                    <span style="font-size:0.65rem; color:var(--text-muted);" data-en="Away • 4th (52 pts)" data-sw="Ugenini • Wa 4 (Punti 52)">Away • 4th (52 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.85rem; font-weight:900; color:#4ade80; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">2</span>
+              </div>
+            </div>
+            <div style="font-size:0.65rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.06); padding-top:0.35rem; display:flex; align-items:center; gap:0.3rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              📍 Azam Complex Chamazi
+            </div>
+          </div>
+
+          <!-- Match 3: Young Africans vs Coastal Union -->
+          <div class="fixture-card-item" data-status="completed" data-round="rd15" style="background:linear-gradient(145deg, rgba(12, 24, 52, 0.92), rgba(6, 14, 32, 0.96)); border:1px solid rgba(255, 193, 7, 0.2); border-radius:14px; padding:0.75rem 0.85rem; box-shadow:0 8px 24px rgba(0,0,0,0.5); width:100%; box-sizing:border-box; min-width:0; overflow:hidden;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; font-size:0.68rem; color:var(--text-muted); border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:0.35rem; min-width:0;">
+              <span style="font-weight:800; color:var(--primary-gold); letter-spacing:0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Round 15 • FT</span>
+              <span style="padding:0.12rem 0.4rem; border-radius:10px; font-weight:800; font-size:0.63rem; background:rgba(34,197,94,0.15); color:#4ade80; border:1px solid rgba(34,197,94,0.4); flex-shrink:0;">FT</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.5rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/yanga.jpg" width="22" height="22" style="border-radius:50%; border:1px solid var(--primary-gold); object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Young Africans SC</strong>
+                    <span style="font-size:0.65rem; color:var(--primary-gold);">Home • 1st (75 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.85rem; font-weight:900; color:#4ade80; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">3</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/costal-union.jpg" width="22" height="22" style="border-radius:50%; border:1px solid rgba(255,255,255,0.2); object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Coastal Union</strong>
+                    <span style="font-size:0.65rem; color:var(--text-muted);" data-en="Away • 7th (38 pts)" data-sw="Ugenini • Wa 7 (Punti 38)">Away • 7th (38 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.85rem; font-weight:900; color:#4ade80; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">0</span>
+              </div>
+            </div>
+            <div style="font-size:0.65rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.06); padding-top:0.35rem; display:flex; align-items:center; gap:0.3rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              📍 Benjamin Mkapa Stadium
+            </div>
+          </div>
+
+          <!-- Match 4: Simba SC vs JKT Tanzania -->
+          <div class="fixture-card-item" data-status="completed" data-round="rd14" style="background:linear-gradient(145deg, rgba(12, 24, 52, 0.92), rgba(6, 14, 32, 0.96)); border:1px solid rgba(239, 68, 68, 0.2); border-radius:14px; padding:0.75rem 0.85rem; box-shadow:0 8px 24px rgba(0,0,0,0.5); width:100%; box-sizing:border-box; min-width:0; overflow:hidden;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; font-size:0.68rem; color:var(--text-muted); border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:0.35rem; min-width:0;">
+              <span style="font-weight:800; color:var(--primary-gold); letter-spacing:0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Round 14 • FT</span>
+              <span style="padding:0.12rem 0.4rem; border-radius:10px; font-weight:800; font-size:0.63rem; background:rgba(34,197,94,0.15); color:#4ade80; border:1px solid rgba(34,197,94,0.4); flex-shrink:0;">FT</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.5rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/simba.jpg" width="22" height="22" style="border-radius:50%; border:1px solid #ef4444; object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Simba SC</strong>
+                    <span style="font-size:0.65rem; color:#f87171;">Home • 2nd (73 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.85rem; font-weight:900; color:#4ade80; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">1</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/costal-union.jpg" width="22" height="22" style="border-radius:50%; border:1px solid rgba(255,255,255,0.2); object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">JKT Tanzania</strong>
+                    <span style="font-size:0.65rem; color:var(--text-muted);" data-en="Away • 9th (31 pts)" data-sw="Ugenini • Wa 9 (Punti 31)">Away • 9th (31 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.85rem; font-weight:900; color:#4ade80; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">0</span>
+              </div>
+            </div>
+            <div style="font-size:0.65rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.06); padding-top:0.35rem; display:flex; align-items:center; gap:0.3rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              📍 Uhuru Stadium • Dar es Salaam
+            </div>
+          </div>
+
+          <!-- Match 5: Singida Black Stars vs Azam FC -->
+          <div class="fixture-card-item" data-status="upcoming" data-round="rd18" style="background:linear-gradient(145deg, rgba(12, 24, 52, 0.92), rgba(6, 14, 32, 0.96)); border:1px solid rgba(34, 197, 94, 0.3); border-radius:14px; padding:0.75rem 0.85rem; box-shadow:0 8px 24px rgba(0,0,0,0.5); width:100%; box-sizing:border-box; min-width:0; overflow:hidden;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; font-size:0.68rem; color:var(--text-muted); border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:0.35rem; min-width:0;">
+              <span style="font-weight:800; color:#22c55e; letter-spacing:0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Round 18 • UPCOMING</span>
+              <span style="padding:0.12rem 0.4rem; border-radius:10px; font-weight:800; font-size:0.63rem; background:rgba(34,197,94,0.15); color:#22c55e; border:1px solid rgba(34,197,94,0.4); flex-shrink:0;">UPCOMING</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.5rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/singida.jpg" width="22" height="22" style="border-radius:50%; border:1px solid #38bdf8; object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Singida Black Stars</strong>
+                    <span style="font-size:0.65rem; color:var(--text-muted);">Home • 4th (52 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.82rem; font-weight:900; color:#38bdf8; background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">VS</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; min-width:0;">
+                <div style="display:flex; align-items:center; gap:0.45rem; min-width:0; flex:1;">
+                  <img src="images/azam.jpg" width="22" height="22" style="border-radius:50%; border:1px solid var(--accent-cyan); object-fit:cover; flex-shrink:0;">
+                  <div style="min-width:0;">
+                    <strong style="color:#fff; font-size:0.8rem; font-family:var(--font-heading); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Azam FC</strong>
+                    <span style="font-size:0.65rem; color:var(--accent-cyan);">Away • 3rd (64 pts)</span>
+                  </div>
+                </div>
+                <span style="font-family:var(--font-heading); font-size:0.82rem; font-weight:900; color:#38bdf8; background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3); padding:0.1rem 0.4rem; border-radius:6px; flex-shrink:0;">VS</span>
+              </div>
+            </div>
+            <div style="font-size:0.65rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.06); padding-top:0.35rem; display:flex; align-items:center; gap:0.3rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              📍 Liti Stadium • Singida
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /tab-panel fixtures -->
+
+      <!-- ================================================================
+           TAB PANEL: TEAMS (16 ELITE CLUBS)
+           ================================================================ -->
+      <div class="tab-panel" id="tab-teams">
+        <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-family:var(--font-heading);font-size:1.8rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:0.6rem;margin-bottom:0.4rem;">
+              🛡️ <span data-en="NBC Premier League Teams" data-sw="Timu za NBC Premier League">NBC Premier League Teams</span>
+            </h2>
+            <p style="color:var(--text-muted);font-size:0.9rem;" data-en="16 Elite Tanzanian Clubs competing for top honors in 2025/26" data-sw="Klabu 16 za Juu za Tanzania Zinazoshindania Ubingwa 2025/26">
+              16 Elite Tanzanian Clubs competing for top honors in 2025/26
+            </p>
+          </div>
+          <input type="text" id="teamSearchInput" class="table-search-input" placeholder="Search club name or city..." data-en-placeholder="Search club name or city..." data-sw-placeholder="Tafuta klabu au mji..." style="width:240px;">
+        </div>
+
+        <!-- 16 Teams Grid -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap:1.5rem;" id="teamsGridContainer">
+          
+          <!-- Club 1: Yanga -->
+          <div class="team-card-box" style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(255,193,7,.3); border-radius:20px; padding:1.5rem; text-align:center; position:relative; overflow:hidden;">
+            <span class="badge-pill" style="position:absolute; top:12px; right:12px; background:var(--primary-gold); color:#000; font-size:0.7rem; font-weight:800;">Rank #1</span>
+            <img src="images/yanga.jpg" width="80" height="80" style="border-radius:50%; border:3px solid var(--primary-gold); margin:0.5rem auto 1rem; display:block; object-fit:cover;">
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">Young Africans SC</h3>
+            <p style="font-size:0.8rem; color:var(--primary-gold); font-weight:700; margin-bottom:0.8rem;">"Wananchi" • Dar es Salaam</p>
+            <div style="display:flex; justify-content:space-around; background:rgba(0,0,0,0.3); padding:0.6rem; border-radius:12px; font-size:0.8rem; margin-bottom:1rem;">
+              <div><strong style="color:#fff; display:block;">75</strong><span style="color:var(--text-muted); font-size:0.7rem;">PTS</span></div>
+              <div><strong style="color:#22c55e; display:block;">23</strong><span style="color:var(--text-muted); font-size:0.7rem;">WON</span></div>
+              <div><strong style="color:var(--accent-cyan); display:block;">30</strong><span style="color:var(--text-muted); font-size:0.7rem;">TITLES</span></div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;"><i class="fa-solid fa-location-dot"></i> Benjamin Mkapa Stadium (60,000)</p>
+          </div>
+
+          <!-- Club 2: Simba -->
+          <div class="team-card-box" style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(239,68,68,.3); border-radius:20px; padding:1.5rem; text-align:center; position:relative; overflow:hidden;">
+            <span class="badge-pill" style="position:absolute; top:12px; right:12px; background:#ef4444; color:#fff; font-size:0.7rem; font-weight:800;">Rank #2</span>
+            <img src="images/simba.jpg" width="80" height="80" style="border-radius:50%; border:3px solid #ef4444; margin:0.5rem auto 1rem; display:block; object-fit:cover;">
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">Simba SC</h3>
+            <p style="font-size:0.8rem; color:#ef4444; font-weight:700; margin-bottom:0.8rem;">"Wanyama / Msimbazi" • Dar es Salaam</p>
+            <div style="display:flex; justify-content:space-around; background:rgba(0,0,0,0.3); padding:0.6rem; border-radius:12px; font-size:0.8rem; margin-bottom:1rem;">
+              <div><strong style="color:#fff; display:block;">73</strong><span style="color:var(--text-muted); font-size:0.7rem;">PTS</span></div>
+              <div><strong style="color:#22c55e; display:block;">22</strong><span style="color:var(--text-muted); font-size:0.7rem;">WON</span></div>
+              <div><strong style="color:var(--accent-cyan); display:block;">22</strong><span style="color:var(--text-muted); font-size:0.7rem;">TITLES</span></div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;"><i class="fa-solid fa-location-dot"></i> Benjamin Mkapa Stadium (60,000)</p>
+          </div>
+
+          <!-- Club 3: Azam FC -->
+          <div class="team-card-box" style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(0,212,255,.3); border-radius:20px; padding:1.5rem; text-align:center; position:relative; overflow:hidden;">
+            <span class="badge-pill" style="position:absolute; top:12px; right:12px; background:var(--accent-cyan); color:#000; font-size:0.7rem; font-weight:800;">Rank #3</span>
+            <img src="images/azam.jpg" width="80" height="80" style="border-radius:50%; border:3px solid var(--accent-cyan); margin:0.5rem auto 1rem; display:block; object-fit:cover;">
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">Azam FC</h3>
+            <p style="font-size:0.8rem; color:var(--accent-cyan); font-weight:700; margin-bottom:0.8rem;">"Wanalambalamba" • Chamazi</p>
+            <div style="display:flex; justify-content:space-around; background:rgba(0,0,0,0.3); padding:0.6rem; border-radius:12px; font-size:0.8rem; margin-bottom:1rem;">
+              <div><strong style="color:#fff; display:block;">64</strong><span style="color:var(--text-muted); font-size:0.7rem;">PTS</span></div>
+              <div><strong style="color:#22c55e; display:block;">18</strong><span style="color:var(--text-muted); font-size:0.7rem;">WON</span></div>
+              <div><strong style="color:var(--accent-cyan); display:block;">1</strong><span style="color:var(--text-muted); font-size:0.7rem;">TITLE</span></div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;"><i class="fa-solid fa-location-dot"></i> Azam Complex Chamazi (10,000)</p>
+          </div>
+
+          <!-- Club 4: Singida Black Stars -->
+          <div class="team-card-box" style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:1.5rem; text-align:center; position:relative;">
+            <span class="badge-pill" style="position:absolute; top:12px; right:12px; background:#0284c7; color:#fff; font-size:0.7rem; font-weight:800;">Rank #4</span>
+            <img src="images/singida.jpg" width="80" height="80" style="border-radius:50%; border:3px solid #0284c7; margin:0.5rem auto 1rem; display:block; object-fit:cover;">
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">Singida Black Stars</h3>
+            <p style="font-size:0.8rem; color:#0284c7; font-weight:700; margin-bottom:0.8rem;">Singida City</p>
+            <div style="display:flex; justify-content:space-around; background:rgba(0,0,0,0.3); padding:0.6rem; border-radius:12px; font-size:0.8rem; margin-bottom:1rem;">
+              <div><strong style="color:#fff; display:block;">50</strong><span style="color:var(--text-muted); font-size:0.7rem;">PTS</span></div>
+              <div><strong style="color:#22c55e; display:block;">15</strong><span style="color:var(--text-muted); font-size:0.7rem;">WON</span></div>
+              <div><strong style="color:var(--accent-cyan); display:block;">0</strong><span style="color:var(--text-muted); font-size:0.7rem;">TITLES</span></div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;"><i class="fa-solid fa-location-dot"></i> Liti Stadium Singida</p>
+          </div>
+
+          <!-- Club 5: Coastal Union -->
+          <div class="team-card-box" style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:1.5rem; text-align:center;">
+            <img src="images/costal-union.jpg" width="80" height="80" style="border-radius:50%; border:3px solid #22c55e; margin:0.5rem auto 1rem; display:block; object-fit:cover;">
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">Coastal Union</h3>
+            <p style="font-size:0.8rem; color:#22c55e; font-weight:700; margin-bottom:0.8rem;">"Wagosi wa Kaya" • Tanga</p>
+            <div style="display:flex; justify-content:space-around; background:rgba(0,0,0,0.3); padding:0.6rem; border-radius:12px; font-size:0.8rem; margin-bottom:1rem;">
+              <div><strong style="color:#fff; display:block;">43</strong><span style="color:var(--text-muted); font-size:0.7rem;">PTS</span></div>
+              <div><strong style="color:#22c55e; display:block;">11</strong><span style="color:var(--text-muted); font-size:0.7rem;">WON</span></div>
+              <div><strong style="color:var(--accent-cyan); display:block;">1</strong><span style="color:var(--text-muted); font-size:0.7rem;">TITLE</span></div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;"><i class="fa-solid fa-location-dot"></i> Mkwakwani Stadium Tanga</p>
+          </div>
+
+          <!-- Club 6: Kagera Sugar -->
+          <div class="team-card-box" style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:1.5rem; text-align:center;">
+            <img src="images/kagera-sugar.png" width="80" height="80" style="border-radius:50%; border:3px solid var(--primary-gold); margin:0.5rem auto 1rem; display:block; object-fit:cover;">
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">Kagera Sugar</h3>
+            <p style="font-size:0.8rem; color:var(--primary-gold); font-weight:700; margin-bottom:0.8rem;">Bukoba, Kagera</p>
+            <div style="display:flex; justify-content:space-around; background:rgba(0,0,0,0.3); padding:0.6rem; border-radius:12px; font-size:0.8rem; margin-bottom:1rem;">
+              <div><strong style="color:#fff; display:block;">34</strong><span style="color:var(--text-muted); font-size:0.7rem;">PTS</span></div>
+              <div><strong style="color:#22c55e; display:block;">8</strong><span style="color:var(--text-muted); font-size:0.7rem;">WON</span></div>
+              <div><strong style="color:var(--accent-cyan); display:block;">0</strong><span style="color:var(--text-muted); font-size:0.7rem;">TITLES</span></div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;"><i class="fa-solid fa-location-dot"></i> Kaitaba Stadium Bukoba</p>
+          </div>
+
+          <!-- Club 7: Tanzania Prisons -->
+          <div class="team-card-box" style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:1.5rem; text-align:center;">
+            <img src="images/tanzania-prisons.jpg" width="80" height="80" style="border-radius:50%; border:3px solid #ef4444; margin:0.5rem auto 1rem; display:block; object-fit:cover;">
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">Tanzania Prisons</h3>
+            <p style="font-size:0.8rem; color:#ef4444; font-weight:700; margin-bottom:0.8rem;">"Wajelajela" • Mbeya</p>
+            <div style="display:flex; justify-content:space-around; background:rgba(0,0,0,0.3); padding:0.6rem; border-radius:12px; font-size:0.8rem; margin-bottom:1rem;">
+              <div><strong style="color:#fff; display:block;">34</strong><span style="color:var(--text-muted); font-size:0.7rem;">PTS</span></div>
+              <div><strong style="color:#22c55e; display:block;">7</strong><span style="color:var(--text-muted); font-size:0.7rem;">WON</span></div>
+              <div><strong style="color:var(--accent-cyan); display:block;">0</strong><span style="color:var(--text-muted); font-size:0.7rem;">TITLES</span></div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;"><i class="fa-solid fa-location-dot"></i> Sokoine Stadium Mbeya</p>
+          </div>
+
+          <!-- Club 8: KMC FC -->
+          <div class="team-card-box" style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:1.5rem; text-align:center;">
+            <img src="images/kmc-fc.jpg" width="80" height="80" style="border-radius:50%; border:3px solid var(--accent-cyan); margin:0.5rem auto 1rem; display:block; object-fit:cover;">
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">KMC FC</h3>
+            <p style="font-size:0.8rem; color:var(--accent-cyan); font-weight:700; margin-bottom:0.8rem;">Kinondoni, Dar es Salaam</p>
+            <div style="display:flex; justify-content:space-around; background:rgba(0,0,0,0.3); padding:0.6rem; border-radius:12px; font-size:0.8rem; margin-bottom:1rem;">
+              <div><strong style="color:#fff; display:block;">33</strong><span style="color:var(--text-muted); font-size:0.7rem;">PTS</span></div>
+              <div><strong style="color:#22c55e; display:block;">8</strong><span style="color:var(--text-muted); font-size:0.7rem;">WON</span></div>
+              <div><strong style="color:var(--accent-cyan); display:block;">0</strong><span style="color:var(--text-muted); font-size:0.7rem;">TITLES</span></div>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.4;"><i class="fa-solid fa-location-dot"></i> KMC Complex Mwenge</p>
+          </div>
+
+        </div>
+      </div><!-- /tab-panel teams -->
+
+
+
+      <!-- ================================================================
+           TAB PANEL: TRANSFERS
+           ================================================================ -->
+      <div class="tab-panel" id="tab-transfers">
+        <div style="margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-family:var(--font-heading);font-size:1.8rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:0.6rem;margin-bottom:0.4rem;">
+              🔄 <span data-en="Transfers & Signings Center" data-sw="Kituo cha Usajili na Uhamisho">Transfers & Signings Center</span>
+            </h2>
+            <p style="color:var(--text-muted);font-size:0.9rem;" data-en="Official 2025/26 NBC Premier League Player Transfers & Contracts" data-sw="Uhamisho na Mikataba Rasmi ya Wachezaji NBC Premier League 2025/26">
+              Official 2025/26 NBC Premier League Player Transfers & Contracts
+            </p>
+          </div>
+        </div>
+
+        <!-- Transfer Grid -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:1.5rem;">
+          
+          <!-- Transfer 1 -->
+          <div style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(255,193,7,.3); border-radius:20px; padding:1.5rem; display:flex; flex-direction:column; justify:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <span class="badge-pill" style="background:#22c55e; color:#000; font-size:0.7rem; font-weight:800;">CONFIRMED</span>
+                <span style="font-size:0.75rem; color:var(--text-muted);">July 2025</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem;">
+                <img src="images/feisal_saluum-22.png" width="60" height="60" style="border-radius:50%; object-fit:cover; border:2px solid var(--primary-gold);">
+                <div>
+                  <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:900; color:#fff;">Stephane Aziz Ki</h3>
+                  <span style="font-size:0.8rem; color:var(--primary-gold); font-weight:700;">Playmaker / Midfielder</span>
+                </div>
+              </div>
+              <div style="background:rgba(0,0,0,0.3); padding:0.8rem; border-radius:12px; display:flex; align-items:center; justify-content:space-between; font-size:0.85rem; margin-bottom:1rem;">
+                <div><span style="color:var(--text-muted); font-size:0.72rem; display:block;">STATUS</span><strong style="color:#fff;">Contract Extended</strong></div>
+                <div><span style="color:var(--text-muted); font-size:0.72rem; display:block;">CLUB</span><strong style="color:var(--primary-gold);">Young Africans SC</strong></div>
+              </div>
+              <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                The 2024/25 Player of the Month signed a 2-year contract extension, rejecting European offers to lead Yanga's Champions League campaign.
+              </p>
+            </div>
+          </div>
+
+          <!-- Transfer 2 -->
+          <div style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(0,212,255,.3); border-radius:20px; padding:1.5rem; display:flex; flex-direction:column; justify:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <span class="badge-pill" style="background:var(--accent-cyan); color:#000; font-size:0.7rem; font-weight:800;">NEW SIGNING</span>
+                <span style="font-size:0.75rem; color:var(--text-muted);">June 2025</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem;">
+                <img src="images/azam.jpg" width="60" height="60" style="border-radius:50%; object-fit:cover; border:2px solid var(--accent-cyan);">
+                <div>
+                  <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:900; color:#fff;">Augustine Okejepha</h3>
+                  <span style="font-size:0.8rem; color:var(--accent-cyan); font-weight:700;">Central Midfielder</span>
+                </div>
+              </div>
+              <div style="background:rgba(0,0,0,0.3); padding:0.8rem; border-radius:12px; display:flex; align-items:center; justify-content:space-between; font-size:0.85rem; margin-bottom:1rem;">
+                <div><span style="color:var(--text-muted); font-size:0.72rem; display:block;">FROM</span><strong style="color:#fff;">Rivers United</strong></div>
+                <div><span style="color:var(--text-muted); font-size:0.72rem; display:block;">TO</span><strong style="color:#ef4444;">Simba SC</strong></div>
+              </div>
+              <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                Simba SC secured the coveted Nigerian midfielder to solidify their engine room ahead of the new season.
+              </p>
+            </div>
+          </div>
+
+          <!-- Transfer 3 -->
+          <div style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(239,68,68,.3); border-radius:20px; padding:1.5rem; display:flex; flex-direction:column; justify:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <span class="badge-pill" style="background:#ef4444; color:#fff; font-size:0.7rem; font-weight:800;">FREE TRANSFER</span>
+                <span style="font-size:0.75rem; color:var(--text-muted);">May 2025</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem;">
+                <img src="images/simba-vs-yanga.png" width="60" height="60" style="border-radius:50%; object-fit:cover; border:2px solid #ef4444;">
+                <div>
+                  <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:900; color:#fff;">Prince Dube</h3>
+                  <span style="font-size:0.8rem; color:#ef4444; font-weight:700;">Striker / Forward</span>
+                </div>
+              </div>
+              <div style="background:rgba(0,0,0,0.3); padding:0.8rem; border-radius:12px; display:flex; align-items:center; justify-content:space-between; font-size:0.85rem; margin-bottom:1rem;">
+                <div><span style="color:var(--text-muted); font-size:0.72rem; display:block;">FROM</span><strong style="color:#fff;">Azam FC</strong></div>
+                <div><span style="color:var(--text-muted); font-size:0.72rem; display:block;">TO</span><strong style="color:var(--primary-gold);">Young Africans SC</strong></div>
+              </div>
+              <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                The Zimbabwean goal machine completed his move to Yanga SC after parting ways with Azam FC.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /tab-panel transfers -->
+
+      <!-- ================================================================
+           TAB PANEL: SEASON HISTORY
+           ================================================================ -->
+      <div class="tab-panel" id="tab-history">
+        <div style="margin-bottom:2rem;">
+          <h2 style="font-family:var(--font-heading);font-size:1.8rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:0.6rem;margin-bottom:0.4rem;">
+            🏆 <span data-en="Season History & Records" data-sw="Historia ya Msimu na Kumbukumbu">Season History & Records</span>
+          </h2>
+          <p style="color:var(--text-muted);font-size:0.9rem;" data-en="Past Champions, Golden Boot Winners & All-Time League Records" data-sw="Mabingwa wa Zamani, Wafungaji Bora na Kumbukumbu za Ligi">
+            Past Champions, Golden Boot Winners & All-Time League Records
+          </p>
+        </div>
+
+        <!-- Champions Timeline & Records Grid -->
+        <div class="champions-records-grid">
+          
+          <!-- Champions Roll of Honor -->
+          <div style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(0,212,255,.18); border-radius:24px; padding:1.75rem;">
+            <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:900; color:#fff; margin-bottom:1.25rem;">
+              🥇 Recent Champions (2020 – 2025)
+            </h3>
+
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              
+              <!-- 2024/25 -->
+              <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:1rem 1.25rem; border-radius:16px; border-left:4px solid var(--primary-gold);">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <img src="images/yanga.jpg" width="36" height="36" style="border-radius:50%;">
+                  <div>
+                    <strong style="color:#fff; font-size:1rem; display:block;">Young Africans SC</strong>
+                    <span style="font-size:0.75rem; color:var(--primary-gold);">2024/26 Champions • 75 Points</span>
+                  </div>
+                </div>
+                <span class="badge-pill" style="background:rgba(255,193,7,0.2); color:var(--primary-gold); font-weight:800;">30th Title</span>
+              </div>
+
+              <!-- 2023/24 -->
+              <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:1rem 1.25rem; border-radius:16px; border-left:4px solid var(--primary-gold);">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <img src="images/yanga.jpg" width="36" height="36" style="border-radius:50%;">
+                  <div>
+                    <strong style="color:#fff; font-size:1rem; display:block;">Young Africans SC</strong>
+                    <span style="font-size:0.75rem; color:var(--primary-gold);">2023/24 Champions • 80 Points</span>
+                  </div>
+                </div>
+                <span class="badge-pill" style="background:rgba(255,193,7,0.2); color:var(--primary-gold); font-weight:800;">29th Title</span>
+              </div>
+
+              <!-- 2022/23 -->
+              <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:1rem 1.25rem; border-radius:16px; border-left:4px solid var(--primary-gold);">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <img src="images/yanga.jpg" width="36" height="36" style="border-radius:50%;">
+                  <div>
+                    <strong style="color:#fff; font-size:1rem; display:block;">Young Africans SC</strong>
+                    <span style="font-size:0.75rem; color:var(--primary-gold);">2022/23 Champions • 78 Points</span>
+                  </div>
+                </div>
+                <span class="badge-pill" style="background:rgba(255,193,7,0.2); color:var(--primary-gold); font-weight:800;">28th Title</span>
+              </div>
+
+              <!-- 2020/21 -->
+              <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:1rem 1.25rem; border-radius:16px; border-left:4px solid #ef4444;">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <img src="images/simba.jpg" width="36" height="36" style="border-radius:50%;">
+                  <div>
+                    <strong style="color:#fff; font-size:1rem; display:block;">Simba SC</strong>
+                    <span style="font-size:0.75rem; color:#ef4444;">2020/21 Champions • 83 Points</span>
+                  </div>
+                </div>
+                <span class="badge-pill" style="background:rgba(239,68,68,0.2); color:#ef4444; font-weight:800;">22nd Title</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- All Time Records Card -->
+          <div style="background:linear-gradient(145deg,rgba(8,18,40,.98),rgba(5,14,32,.98)); border:1px solid rgba(0,212,255,.18); border-radius:24px; padding:1.75rem;">
+            <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:900; color:#fff; margin-bottom:1.25rem;">
+              ⭐ All-Time Records
+            </h3>
+
+            <div style="display:flex; flex-direction:column; gap:1.2rem;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; font-weight:700;">MOST TITLES</span>
+                <div style="font-family:var(--font-heading); font-size:1.4rem; font-weight:900; color:var(--primary-gold);">Young Africans SC (30 Titles)</div>
+              </div>
+
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; font-weight:700;">SINGLE SEASON POINTS RECORD</span>
+                <div style="font-family:var(--font-heading); font-size:1.4rem; font-weight:900; color:var(--accent-cyan);">88 PTS — Simba SC (2019/20)</div>
+              </div>
+
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; font-weight:700;">TOP SCORER IN A SINGLE SEASON</span>
+                <div style="font-family:var(--font-heading); font-size:1.4rem; font-weight:900; color:#22c55e;">21 Goals — Stephane Aziz Ki (24/25)</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /tab-panel history -->
+
+      <!-- ================================================================
+           TAB PANEL: NEWS & MEDIA
+           ================================================================ -->
+      <div class="tab-panel" id="tab-news">
+        <div style="margin-bottom:2rem;">
+          <h2 style="font-family:var(--font-heading);font-size:1.8rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:0.6rem;margin-bottom:0.4rem;">
+            📰 <span data-en="News & Media Center" data-sw="Kituo cha Habari na Vyombo">News & Media Center</span>
+          </h2>
+          <p style="color:var(--text-muted);font-size:0.9rem;" data-en="Official News, Press Releases, Videos & Photo Galleries" data-sw="Habari Rasmi, Video na Picha za Mechi">
+            Official News, Press Releases, Videos & Photo Galleries
+          </p>
+        </div>
+
+        <div class="league-news-grid">
+          <!-- Card 1 -->
+          <article class="league-news-card">
+            <div class="news-card-thumb">
+              <img src="images/simba-vs-yanga.png" alt="Kariakoo Derby Preview">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:#ef4444; color:#fff;">matches</span>
+            </div>
+            <div class="news-card-body">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="Today" data-sw="Leo">Today</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Kariakoo Derby: Full Match Preview — Yanga SC vs Simba SC
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  Everything you need to know before the biggest match of the 2025/26 season at Benjamin Mkapa Stadium.
+                </p>
+              </div>
+              <a href="javascript:void(0);" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="league-news-card">
+            <div class="news-card-thumb">
+              <img src="images/azam.jpg" alt="Azam FC Transfers">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:var(--accent-cyan); color:#000;">transfers</span>
+            </div>
+            <div class="news-card-body">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="Today" data-sw="Leo">Today</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Azam FC Complete Signing of Midfield Star Ahead of New Season
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  Azam FC have bolstered their midfield options with the signing of a key international playmaker.
+                </p>
+              </div>
+              <a href="javascript:void(0);" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="league-news-card">
+            <div class="news-card-thumb">
+              <img src="images/feisal_saluum-22.png" alt="Aziz Ki Player of the Month">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:var(--primary-gold); color:#000;">awards</span>
+            </div>
+            <div class="news-card-body">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="Yesterday" data-sw="Jana">Yesterday</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Stephane Aziz Ki Wins NBC Premier League Player of the Month
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  The Yanga SC playmaker claims top honors following a sparkling month with 5 goals and 3 assists.
+                </p>
+              </div>
+              <a href="javascript:void(0);" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="league-news-card">
+            <div class="news-card-thumb">
+              <img src="images/simba.jpg" alt="Simba SC New Kit">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:#22c55e; color:#000;">clubs</span>
+            </div>
+            <div class="news-card-body">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="2 Days Ago" data-sw="Siku 2 Zilizopita">2 Days Ago</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Simba SC Unveil New Home Kit for the 2025/26 Campaign
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  Simba SC officially launch their striking new red-and-white jersey ahead of upcoming domestic fixtures.
+                </p>
+              </div>
+              <a href="javascript:void(0);" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+        </div>
+      </div><!-- /tab-panel news -->
+
+    </div><!-- /container -->
+  </main>
+
+  <!-- OFFICIAL SPONSORS & COMPETITIONS SHOWCASE SECTION -->
+  <section class="sponsors-showcase-section" id="partners">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 2rem;">
+        <span class="badge-pill" style="background:rgba(255,193,7,0.15); color:var(--primary-gold); border:1px solid rgba(255,193,7,0.3); padding:0.35rem 1rem; font-size:0.75rem; font-weight:900; letter-spacing:1.5px; text-transform:uppercase;" data-en="OFFICIAL SPONSORS & COMPETITIONS" data-sw="WADHAMINI NA MASHINDANO RASMI">
+          OFFICIAL SPONSORS & COMPETITIONS
+        </span>
+        <h2 style="font-family:var(--font-heading); font-size:2rem; font-weight:900; color:#fff; margin-top:0.6rem;" data-en="OUR OFFICIAL PARTNERS & LEAGUES" data-sw="WADHAMINI NA LIGI YETU">
+          OUR OFFICIAL PARTNERS & LEAGUES
+        </h2>
+      </div>
+
+      <!-- TOP ROW: CORPORATE SPONSORS (WHITE CARD BOXES MATCHING SCREENSHOT) -->
+      <div class="sponsors-corporate-grid">
+        <div class="sponsor-white-card" title="NBC Bank (National Bank of Commerce)">
+          <img src="images/NBC-1 bank.jpg" alt="NBC Bank Title Sponsor">
+        </div>
+        <div class="sponsor-white-card" title="CRDB Bank">
+          <img src="images/crdb bank.jpg" alt="CRDB Bank">
+        </div>
+        <div class="sponsor-white-card" title="Azam Media">
+          <img src="images/azam media.jpg" alt="Azam Media">
+        </div>
+        <div class="sponsor-white-card" title="TBC (Tanzania Broadcasting Corporation)">
+          <img src="images/tbc tanzania.png" alt="TBC Broadcast Partner">
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW: COMPETITIONS & LEAGUES (CLEAN BADGES MATCHING SCREENSHOT) -->
+      <div class="competitions-badge-row">
+        <a href="nbc-premier-league.html" class="comp-badge-item">
+          <img src="images/nbc-pl-logo.png" alt="NBC Premier League">
+          <span data-en="NBC Premier League" data-sw="NBC Premier League">NBC Premier League</span>
+        </a>
+        <div class="comp-badge-item">
+          <img src="images/crdb-cup.jpg" alt="CRDB Bank Federation Cup">
+          <span data-en="CRDB Federation Cup" data-sw="Kombe la Shirikisho la CRDB">CRDB Federation Cup</span>
+        </div>
+        <a href="womens-premier-league.html" class="comp-badge-item">
+          <img src="images/Tanzania Women premier league.png" alt="Women's Premier League">
+          <span data-en="Women's Premier League" data-sw="Ligi Kuu ya Wanawake">Women's Premier League</span>
+        </a>
+        <div class="comp-badge-item">
+          <img src="images/Tanzania beach soccer.png" alt="Beach Soccer League">
+          <span data-en="Beach Soccer League" data-sw="Ligi ya Soka la Ufukweni">Beach Soccer League</span>
+        </div>
+        <div class="comp-badge-item">
+          <img src="images/Tanzania Reaginal champions league.png" alt="Regional Champions League">
+          <span data-en="Regional Champions League" data-sw="Ligi ya Mabingwa wa Mikoa">Regional Champions League</span>
+        </div>
+        <a href="championship-league.html" class="comp-badge-item">
+          <img src="images/Tz Nbc championship.png" alt="NBC Championship League">
+          <span data-en="Championship League" data-sw="Ligi ya Championship">Championship League</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-logo-group" style="margin-bottom:1rem; display:inline-flex;">
+            <img src="images/nbc-pl-logo.png" alt="NBC Premier League" style="height:40px;">
+            <div class="brand-text">
+              <span class="brand-title">NBC Premier League</span>
+              <span class="brand-subtitle">Ligi Kuu Tanzania</span>
+            </div>
+          </a>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;" data-en="The official digital platform of the NBC Premier League, managed by Tanzania Football Federation (TFF)." data-sw="Mfumo rasmi wa kidijitali wa NBC Premier League, unaosimamiwa na Shirikisho la Mpira wa Miguu Tanzania (TFF).">
+            The official digital platform of the NBC Premier League, managed by Tanzania Football Federation (TFF).
+          </p>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <span data-en="Competitions" data-sw="Mashindano">Competitions</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="nbc-premier-league.html">NBC Premier League</a></li>
+              <li><a href="championship-league.html" data-en="Championship League" data-sw="Ligi ya Championship">Championship League</a></li>
+              <li><a href="first-division-league.html" data-en="First Division League" data-sw="Ligi ya Daraja la Kwanza">First Division League</a></li>
+              <li><a href="womens-premier-league.html" data-en="Women's Premier League" data-sw="Ligi Kuu ya Wanawake">Women's Premier League</a></li>
+              <li><a href="efootball-league.html" data-en="E-Football League" data-sw="Ligi ya E-Football">E-Football League</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <span data-en="Dashboard Sections" data-sw="Sehemu za Mfumo">Dashboard Sections</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="#overview" data-en="Overview" data-sw="Jumla">Overview</a></li>
+              <li><a href="#fixtures" data-en="Fixtures & Results" data-sw="Ratiba na Matokeo">Fixtures & Results</a></li>
+              <li><a href="#teams" data-en="Teams & Standings" data-sw="Timu na Msimamo">Teams & Standings</a></li>
+              <li><a href="#transfers" data-en="Transfers" data-sw="Usajili">Transfers</a></li>
+              <li><a href="#history" data-en="Season History" data-sw="Historia ya Msimu">Season History</a></li>
+              <li><a href="#news" data-en="News & Media" data-sw="Habari na Vyombo">News & Media</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <span data-en="Fan Zone" data-sw="Eneo la Mashabiki">Fan Zone</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="index.html#fanzone" data-en="Fan Zone Hub" data-sw="Kituo cha Mashabiki">Fan Zone Hub</a></li>
+              <li><a href="index.html#games" data-en="Quizzes & Games" data-sw="Maswali na Michezo">Quizzes & Games</a></li>
+              <li><a href="index.html#fanzone" data-en="Matchday Challenge" data-sw="Changamoto ya Mechi">Matchday Challenge</a></li>
+              <li><a href="index.html#app" data-en="Mobile App" data-sw="Programu ya Simu">Mobile App</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <span data-en="About Us" data-sw="Kuhusu Sisi">About Us</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="index.html#tff" data-en="About TPLB" data-sw="Kuhusu TPLB">About TPLB</a></li>
+              <li><a href="nbc-premier-league.html#history" data-en="History of TPLB" data-sw="Historia ya TPLB">History of TPLB</a></li>
+              <li><a href="#" data-open-modal="radiusBsss">FCMS Login</a></li>
+              <li><a href="#" data-open-modal="radiusBsss" data-en="Media Accreditation" data-sw="Uthibitisho wa Vyombo vya Habari">Media Accreditation</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-en="© 2026 Tanzania Football Federation (TFF). All Rights Reserved." data-sw="© 2026 Shirikisho la Mpira wa Miguu Tanzania (TFF). Haki Zote Zimehifadhiwa.">© 2026 Tanzania Football Federation (TFF). All Rights Reserved.</div>
+        <div>
+          <a href="#" data-open-modal="radiusBsss" style="color:var(--primary-gold);">Radius BSSS Certified Software</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- RADIUS BSSS MODAL -->
+  <div class="modal-backdrop" id="radiusModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+      <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:800; margin-bottom:0.5rem; color:var(--primary-gold);">
+        Radius BSSS
+      </h3>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1.5rem;">
+        Certified Business Management Software used by football organizations for club and league administration.
+      </p>
+      <div style="background:rgba(255,255,255,0.05); padding:1rem; border-radius:var(--radius-md); font-size:0.85rem;">
+        <div><strong>Status:</strong> Active & Verified</div>
+        <div><strong>System:</strong> TFF Central Management System (FCMS)</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

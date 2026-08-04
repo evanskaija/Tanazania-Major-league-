@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women's Premier League | Official League Dashboard 2025/26</title>
+  <meta name="description" content="Official dashboard of the Tanzania Women's Premier League (Ligi Kuu ya Wanawake). Standings, fixtures, teams, and news for season 2025/26.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Favicon Icon -->
+  <link rel="icon" type="image/png" href="images/ligikuu.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{--wpl-pink:#e91e8c;--wpl-rose:#f43f5e;--wpl-light:#fda4af;--wpl-mag:#c026d3;--wpl-pur:#9333ea;}
+    .wpl-page .league-tab-btn.active{color:#e91e8c!important;border-bottom-color:#e91e8c!important;}
+    .wpl-page .league-tab-btn:hover{color:#fda4af!important;}
+    .wpl-season-badge{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,rgba(233,30,140,.2),rgba(195,38,211,.15));border:1px solid rgba(233,30,140,.45);color:#fda4af;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:1.2px;padding:.35rem .85rem;border-radius:20px;}
+    .wpl-fixture-card{transition:all .35s ease;}
+    .wpl-fixture-card:hover{border-color:rgba(233,30,140,.6)!important;box-shadow:0 20px 45px rgba(233,30,140,.2)!important;transform:translateY(-3px);}
+    .wpl-season-card{transition:all .35s ease;}
+    .wpl-season-card:hover{border-color:rgba(233,30,140,.7)!important;box-shadow:0 20px 45px rgba(233,30,140,.25)!important;transform:translateY(-5px) scale(1.01);}
+    .wpl-club-card{transition:all .3s ease;}
+    .wpl-club-card:hover{border-color:rgba(233,30,140,.6)!important;box-shadow:0 16px 35px rgba(233,30,140,.2)!important;transform:translateY(-4px);}
+    @media(max-width:768px){.wpl-hero-2col{grid-template-columns:1fr!important;}.wpl-champion-hide{display:none!important;}.wpl-season-row{grid-template-columns:1fr 1fr!important;}}
+    @media(max-width:500px){.wpl-season-row{grid-template-columns:1fr!important;}}
+
+    /* GPU layer compositing for smooth GSAP scroll animations */
+    .league-hero-title, .league-hero-sub,
+    .league-stat-card, .widget-glass-card,
+    .fixture-card-item, .leader-hero-card,
+    .stat-player-row-card, .wpl-season-card,
+    .wpl-club-card, .derby-banner-card,
+    .rounds-selector-track, .league-table tbody tr {
+      will-change: transform, opacity;
+    }
+    /* Reduced motion accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .league-hero-title, .league-hero-sub,
+      .league-stat-card, .widget-glass-card,
+      .fixture-card-item, .leader-hero-card,
+      .stat-player-row-card, .wpl-season-card,
+      .wpl-club-card, .derby-banner-card,
+      .rounds-selector-track, .league-table tbody tr {
+        opacity: 1 !important;
+        transform: none !important;
+        will-change: auto;
+      }
+    }
+  </style>
+</head>
+<body class="wpl-page">
+<div class="scroll-progress-container"><div class="scroll-progress-bar" id="scroll-progress-bar" style="background:linear-gradient(90deg,#e91e8c,#c026d3,#9333ea);"></div></div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="brand-logo-group">
+      <img src="images/nbc-pl-logo.png" alt="Tanzania Football">
+      <div class="brand-text">
+        <span class="brand-title" data-en="Women's Premier League" data-sw="Ligi Kuu ya Wanawake">Women's Premier League</span>
+        <span class="brand-subtitle">Ligi Kuu ya Wanawake Tanzania</span>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html" class="nav-link" data-en="Home" data-sw="Nyumbani">Home</a></li>
+
+      <!-- Competitions Dropdown -->
+      <li class="nav-item active">
+        <a href="javascript:void(0);" class="nav-link" data-en="Competitions" data-sw="Mashindano">Competitions <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="mega-dropdown">
+          <div class="mega-grid-2col">
+            <a href="nbc-premier-league.html" class="mega-card-item">
+              <div class="mega-icon-badge badge-gold">NBC</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="NBC Premier League" data-sw="Ligi Kuu ya NBC">NBC Premier League</span>
+                <span class="mega-card-desc" data-en="Tanzania top-tier men's football" data-sw="Ligi Kuu ya Soka la Wanaume">Tanzania top-tier men's football</span>
+              </div>
+            </a>
+            <a href="womens-premier-league.html" class="mega-card-item active">
+              <div class="mega-icon-badge badge-pink">WPL</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Women's Premier League" data-sw="Ligi Kuu ya Wanawake">Women's Premier League</span>
+                <span class="mega-card-desc" data-en="Elite national women's football" data-sw="Soka la Wanawake la Kitaifa">Elite national women's football</span>
+              </div>
+            </a>
+            <a href="championship-league.html" class="mega-card-item">
+              <div class="mega-icon-badge badge-red">TCL</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Championship League" data-sw="Ligi ya Championship">Championship League</span>
+                <span class="mega-card-desc" data-en="Second-tier professional competition" data-sw="Mbio za Kupanda Daraja">Second-tier professional competition</span>
+              </div>
+            </a>
+            <a href="efootball-league.html" class="mega-card-item">
+              <div class="mega-icon-badge badge-cyan">EFL</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="E-Football Mobile League" data-sw="Ligi ya E-Football Simu">E-Football Mobile League</span>
+                <span class="mega-card-desc" data-en="Virtual electronic sports league" data-sw="Ligi ya michezo ya kielektroniki mtandaoni">Virtual electronic sports league</span>
+              </div>
+            </a>
+            <a href="first-division-league.html" class="mega-card-item">
+              <div class="mega-icon-badge badge-green">FDL</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="First Division League" data-sw="Ligi Daraja la Kwanza">First Division League</span>
+                <span class="mega-card-desc" data-en="Development pathways & academies" data-sw="Ligi ya Maendeleo na Vyuo">Development pathways & academies</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Match Center Dropdown -->
+      <li class="nav-item">
+        <a href="javascript:void(0);" class="nav-link" data-en="Match Center" data-sw="Kituo cha Mechi">Match Center <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="mega-dropdown" style="width: 320px;">
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <a href="live-matches.html" class="mega-card-item">
+              <div class="mega-icon-badge badge-red" data-en="LIVE" data-sw="MOJA KWA MOJA">LIVE</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Live Matches" data-sw="Mechi za Moja kwa Moja">Live Matches</span>
+                <span class="mega-card-desc" data-en="Real-time scores & commentaries" data-sw="Matokeo na Taarifa za Moja kwa Moja">Real-time scores & commentaries</span>
+              </div>
+            </a>
+
+            <a href="#teams" class="mega-card-item">
+              <div class="mega-icon-badge badge-gold" data-en="TEAMS" data-sw="TIMU">TEAMS</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Teams & Standings" data-sw="Timu na Msimamo">Teams & Standings</span>
+                <span class="mega-card-desc" data-en="12 WPL clubs & league table" data-sw="Klabu 12 za WPL na msimamo">12 WPL clubs & league table</span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </li>
+
+      <!-- Players & Awards Dropdown -->
+      <li class="nav-item">
+        <a href="javascript:void(0);" class="nav-link" data-en="Players & Awards" data-sw="Wachezaji na Tuzo">Players & Awards <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="mega-dropdown" style="width: 320px;">
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <a href="clubs.html#awards" class="mega-card-item">
+              <div class="mega-icon-badge badge-gold" data-en="AWD" data-sw="TUZO">AWD</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Golden Boot Leaders" data-sw="Wafungaji Bora">Golden Boot Leaders</span>
+                <span class="mega-card-desc" data-en="Golden Boot &amp; Glove leaders" data-sw="Wafungaji &amp; Makipa Bora">Golden Boot &amp; Glove leaders</span>
+              </div>
+            </a>
+            <a href="clubs.html#history" class="mega-card-item">
+              <div class="mega-icon-badge badge-purple" style="background:linear-gradient(135deg, #7c4dff, #651fff); color:#fff;" data-en="HIS" data-sw="HISTORIA">HIS</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Season History" data-sw="Historia ya Msimu">Season History</span>
+                <span class="mega-card-desc" data-en="Historical roll of honor &amp; stats" data-sw="Kumbukumbu na Mabingwa">Historical roll of honor &amp; stats</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Fan Zone Dropdown -->
+      <li class="nav-item">
+        <a href="javascript:void(0);" class="nav-link" data-en="Fan Zone" data-sw="Eneo la Mashabiki">Fan Zone <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="mega-dropdown" style="width: 320px;">
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <a href="index.html#fanzone" class="mega-card-item">
+              <div class="mega-icon-badge badge-gold">FAN</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Fan Zone Hub" data-sw="Kituo cha Mashabiki">Fan Zone Hub</span>
+                <span class="mega-card-desc" data-en="Fan interactive center & polls" data-sw="Kituo cha mashabiki na kura">Fan interactive center & polls</span>
+              </div>
+            </a>
+            <a href="index.html#games" class="mega-card-item">
+              <div class="mega-icon-badge badge-pink">GAME</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Quizzes & Games" data-sw="Maswali na Michezo">Quizzes & Games</span>
+                <span class="mega-card-desc" data-en="Test your football knowledge" data-sw="Pima elimu yako ya soka">Test your football knowledge</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!-- News & Media Dropdown -->
+      <li class="nav-item">
+        <a href="javascript:void(0);" class="nav-link" data-en="News & Media" data-sw="Habari na Vyombo vya Habari">News & Media <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="mega-dropdown" style="width:320px;">
+          <div style="display:flex;flex-direction:column;gap:.6rem;">
+            <a href="#news" class="mega-card-item">
+              <div class="mega-icon-badge badge-red">NEW</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Latest News" data-sw="Habari za Karibuni">Latest News</span>
+                <span class="mega-card-desc" data-en="Breaking headlines & updates" data-sw="Taarifa mpya na habari zote">Breaking headlines & updates</span>
+              </div>
+            </a>
+            <a href="#news" class="mega-card-item">
+              <div class="mega-icon-badge badge-pink">VID</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Videos" data-sw="Video">Videos</span>
+                <span class="mega-card-desc" data-en="Highlights & press interviews" data-sw="Video za mechi na mahojiano">Highlights & press interviews</span>
+              </div>
+            </a>
+            <a href="#news" class="mega-card-item">
+              <div class="mega-icon-badge badge-gold">PIC</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="Photos" data-sw="Picha">Photos</span>
+                <span class="mega-card-desc" data-en="Matchday gallery & fan moments" data-sw="Picha za mechi na mashabiki">Matchday gallery & fan moments</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!-- About Us Dropdown -->
+      <li class="nav-item">
+        <a href="javascript:void(0);" class="nav-link" data-en="About Us" data-sw="Kuhusu Sisi">About Us <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="mega-dropdown" style="width: 320px;">
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <a href="index.html#tff" class="mega-card-item">
+              <div class="mega-icon-badge badge-blue">TPLB</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="TPLB Overview" data-sw="Maelezo ya TPLB">TPLB Overview</span>
+                <span class="mega-card-desc" data-en="Structure, mission, and governance" data-sw="Muundo na Malengo">Structure, mission, and governance</span>
+              </div>
+            </a>
+            <a href="#history" class="mega-card-item">
+              <div class="mega-icon-badge badge-gold">HIS</div>
+              <div class="mega-text-box">
+                <span class="mega-card-title" data-en="League History" data-sw="Historia ya Ligi">League History</span>
+                <span class="mega-card-desc" data-en="WPL milestones & growth" data-sw="Maendeleo ya Ligi Kuu ya Wanawake">WPL milestones & growth</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item"><a href="index.html#footer" class="nav-link" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher-capsule">
+        <button class="lang-btn active" id="lang-eng">ENG</button>
+        <button class="lang-btn" id="lang-swa">SWA</button>
+      </div>
+      <button class="mobile-toggle-btn" id="mobile-menu-toggle" aria-label="Toggle Mobile Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE SLIDE-OUT MENU DRAWER -->
+<div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+<aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <!-- Floating Background Decorative Football Elements -->
+    <div class="mobile-drawer-decor">
+      <i class="fa-solid fa-futbol decor-icon decor-icon-1"></i>
+      <i class="fa-solid fa-trophy decor-icon decor-icon-2"></i>
+      <i class="fa-solid fa-whistle decor-icon decor-icon-3"></i>
+      <i class="fa-solid fa-star decor-icon decor-icon-4"></i>
+    </div>
+
+    <!-- Animated Premium Drawer Header -->
+    <div class="mobile-drawer-header">
+      <div class="mobile-brand-box">
+        <div class="mobile-logo-wrapper">
+          <img src="images/nbc-pl-logo.png" alt="Tanzania Football Logo" class="mobile-brand-logo">
+          <div class="logo-pulse-ring"></div>
+        </div>
+        <div class="mobile-brand-text">
+          <div class="mobile-brand-title-wrap">
+            <span class="mobile-brand-title">⚽ Tanzania Football</span>
+            <div class="title-light-beam"></div>
+          </div>
+          <span class="mobile-brand-subtitle" data-en="Official Football Platform" data-sw="Jukwaa Rasmi la Soka">Official Football Platform</span>
+        </div>
+      </div>
+      <button class="mobile-drawer-close" id="mobile-menu-close" aria-label="Close Mobile Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <!-- 1. HOME -->
+        <li class="mobile-nav-item">
+          <a href="index.html" class="mobile-nav-link">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-house mobile-link-icon text-gold"></i>
+              <span data-en="Home" data-sw="Nyumbani">Home</span>
+            </span>
+            <i class="fa-solid fa-chevron-right mobile-link-arrow"></i>
+          </a>
+        </li>
+
+        <!-- 2. COMPETITIONS ACCORDION (ACTIVE PAGE) -->
+        <li class="mobile-nav-item mobile-has-submenu active">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-trophy mobile-link-icon text-gold"></i>
+              <span data-en="Competitions" data-sw="Mashindano">Competitions</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="nbc-premier-league.html" class="mobile-sub-link"><span class="mobile-badge badge-gold">NBC</span><span>NBC Premier League</span></a></li>
+            <li><a href="womens-premier-league.html" class="mobile-sub-link"><span class="mobile-badge badge-pink">WPL</span><span>Women's Premier League</span></a></li>
+            <li><a href="championship-league.html" class="mobile-sub-link"><span class="mobile-badge badge-red">TCL</span><span>Championship League</span></a></li>
+            <li><a href="first-division-league.html" class="mobile-sub-link"><span class="mobile-badge badge-green">FDL</span><span>First League</span></a></li>
+            <li><a href="efootball-league.html" class="mobile-sub-link"><span class="mobile-badge badge-purple">EFL</span><span>E-Football League</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 3. MATCH CENTRE ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-calendar-days mobile-link-icon text-gold"></i>
+              <span data-en="Match Centre" data-sw="Kituo cha Mechi">Match Centre</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="live-matches.html" class="mobile-sub-link"><span class="mobile-badge badge-red">LIVE</span><span>Live Matches</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 4. CLUBS ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-shield-halved mobile-link-icon text-gold"></i>
+              <span data-en="Clubs" data-sw="Klabu">Clubs</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="clubs.html" class="mobile-sub-link"><span class="mobile-badge badge-green">PLY</span><span>Clubs &amp; Squad Rosters</span></a></li>
+            <li><a href="clubs.html#stadiums" class="mobile-sub-link"><span class="mobile-badge badge-purple">STD</span><span>Stadiums &amp; Venues</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 5. AWARDS (DIRECT LINK - NO SUBLINKS) -->
+        <li class="mobile-nav-item">
+          <a href="awards.html" class="mobile-nav-link">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-crown mobile-link-icon text-gold"></i>
+              <span data-en="Awards" data-sw="Tuzo">Awards</span>
+            </span>
+            <i class="fa-solid fa-chevron-right mobile-link-arrow"></i>
+          </a>
+        </li>
+
+        <!-- 6. NEWS & MEDIA ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-newspaper mobile-link-icon text-gold"></i>
+              <span data-en="News &amp; Media" data-sw="Habari">News &amp; Media</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="nbc-premier-league.html#news" class="mobile-sub-link"><span class="mobile-badge badge-red">NEW</span><span>Latest News &amp; Transfers</span></a></li>
+            <li><a href="index.html#news" class="mobile-sub-link"><span class="mobile-badge badge-cyan">VID</span><span>Videos &amp; Highlights</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 7. FAN ZONE ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-fire mobile-link-icon text-gold"></i>
+              <span data-en="Fan Zone" data-sw="Mashabiki">Fan Zone</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="index.html#fanzone" class="mobile-sub-link"><span class="mobile-badge badge-gold">FAN</span><span>Match Predictions</span></a></li>
+            <li><a href="awards.html#votingOptions" class="mobile-sub-link"><span class="mobile-badge badge-cyan">VOTE</span><span>Fan Voting &amp; Polls</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 8. ABOUT ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-circle-info mobile-link-icon text-gold"></i>
+              <span data-en="About" data-sw="Kuhusu">About</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="index.html#tff" class="mobile-sub-link"><span class="mobile-badge badge-blue">TFF</span><span>About TFF &amp; TPLB</span></a></li>
+            <li><a href="#footer" class="mobile-sub-link"><span class="mobile-badge badge-green">CNT</span><span>Contact &amp; Media</span></a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Language Switcher Redesign in Mobile Drawer -->
+      <div class="mobile-lang-box">
+        <div class="lang-switcher-capsule">
+          <button class="lang-btn active" id="mobile-lang-eng">
+            <i class="fa-solid fa-globe"></i>
+            <span>ENG</span>
+          </button>
+          <button class="lang-btn" id="mobile-lang-swa">
+            <i class="fa-solid fa-globe"></i>
+            <span>SWA</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Footer with Socials & Quick Action Pills -->
+    <div class="mobile-drawer-footer">
+      <div class="mobile-footer-divider"></div>
+      <div class="mobile-social-title">
+        <i class="fa-solid fa-futbol text-gold"></i>
+        <span data-en="Follow Tanzanian Football" data-sw="Tufuatilie Soka la Tanzania">Follow Tanzanian Football</span>
+      </div>
+      <div class="mobile-social-links">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+
+      <!-- Quick Action Pills -->
+      <div class="mobile-quick-actions">
+        <a href="index.html#app" class="quick-action-pill">
+          <i class="fa-solid fa-mobile-screen-button text-gold"></i>
+          <span data-en="📱 Download Mobile App" data-sw="📱 Pakua App ya Simu">📱 Download Mobile App</span>
+        </a>
+        <a href="index.html#news" class="quick-action-pill">
+          <i class="fa-solid fa-circle-play text-cyan"></i>
+          <span data-en="📺 Watch Highlights" data-sw="📺 Tazama Highlights">📺 Watch Highlights</span>
+        </a>
+        <a href="nbc-premier-league.html#news" class="quick-action-pill">
+          <i class="fa-solid fa-newspaper text-green"></i>
+          <span data-en="📰 Latest News" data-sw="📰 Habari Mpya">📰 Latest News</span>
+        </a>
+      </div>
+
+      <div class="mobile-copyright">© 2026 Tanzania Football • Official Platform</div>
+  </aside>
+
+<!-- HERO SECTION -->
+<section class="league-hero" style="background:linear-gradient(135deg,#0d0118 0%,#1a0133 30%,#2d0050 60%,#0a0a1f 100%);min-height:520px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(233,30,140,.18),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-60px;left:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(147,51,234,.15),transparent 70%);pointer-events:none;"></div>
+  <div class="container">
+    <div class="league-hero-grid wpl-hero-2col">
+      <!-- LEFT -->
+      <div>
+        <div class="wpl-season-badge" style="margin-bottom:1.2rem;">
+          <i class="fa-solid fa-venus"></i>
+          <span data-en="Women's Premier League • Season 2025/26" data-sw="Ligi Kuu ya Wanawake • Msimu wa 2025/26">Women's Premier League • Season 2025/26</span>
+        </div>
+        <h1 class="league-hero-title" style="font-family:var(--font-heading);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;background:linear-gradient(135deg,#fda4af 0%,#e91e8c 40%,#c026d3 70%,#9333ea 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;" data-en="THE PRIDE OF TANZANIAN WOMEN'S FOOTBALL" data-sw="FAHARI YA SOKA LA WANAWAKE TANZANIA">
+          THE PRIDE OF TANZANIAN WOMEN'S FOOTBALL
+        </h1>
+        <p class="league-hero-sub" style="color:rgba(255,255,255,.75);max-width:600px;font-size:1rem;line-height:1.65;margin-bottom:1.8rem;" data-en="12 elite clubs. 22 rounds of fierce competition. The premier stage for Tanzanian women's football excellence." data-sw="Klabu 12 za juu. Rundi 22 za ushindani mkali. Jukwaa kuu la soka la wanawake Tanzania.">
+          12 elite clubs. 22 rounds of fierce competition. The premier stage for Tanzanian women's football excellence.
+        </p>
+        <div class="league-stats-grid" style="grid-template-columns:repeat(4,1fr);">
+          <div class="league-stat-card" style="border-color:rgba(233,30,140,.35);">
+            <span class="league-stat-icon">&#x26BD;</span>
+            <div><div class="league-stat-num" style="color:#fda4af;">312</div><div class="league-stat-lbl" data-en="Goals Scored" data-sw="Mabao Yaliyofungwa">Goals Scored</div></div>
+          </div>
+          <div class="league-stat-card" style="border-color:rgba(233,30,140,.35);">
+            <span class="league-stat-icon">&#x1F3C3;</span>
+            <div><div class="league-stat-num" style="color:#fda4af;">132</div><div class="league-stat-lbl" data-en="Matches Played" data-sw="Mechi Zilizochezwa">Matches Played</div></div>
+          </div>
+          <div class="league-stat-card" style="border-color:rgba(233,30,140,.35);">
+            <span class="league-stat-icon">&#x1F9E4;</span>
+            <div><div class="league-stat-num" style="color:#fda4af;">68</div><div class="league-stat-lbl" data-en="Clean Sheets" data-sw="Mechi Bila Kuruhusu">Clean Sheets</div></div>
+          </div>
+          <div class="league-stat-card" style="border-color:rgba(233,30,140,.35);">
+            <span class="league-stat-icon">&#x1F465;</span>
+            <div><div class="league-stat-num" style="color:#fda4af;">8,200</div><div class="league-stat-lbl" data-en="Avg Attendance" data-sw="Wastani wa Mashabiki">Avg Attendance</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT: Defending Champions -->
+      <div class="wpl-champion-hide">
+        <div class="widget-glass-card" style="background:linear-gradient(145deg,rgba(40,10,50,.97),rgba(20,5,30,.98));border:1.5px solid rgba(233,30,140,.5);border-radius:28px;padding:1.8rem;box-shadow:0 20px 50px rgba(233,30,140,.2),inset 0 1px 0 rgba(255,255,255,.1);position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-30px;right:-30px;width:130px;height:130px;background:radial-gradient(circle,rgba(233,30,140,.35),transparent 70%);pointer-events:none;"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:.9rem;margin-bottom:1.4rem;">
+            <span class="badge-pill" style="background:rgba(233,30,140,.2);color:#fda4af;border:1px solid rgba(233,30,140,.4);font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;" data-en="&#x1F3C6; DEFENDING CHAMPIONS" data-sw="&#x1F3C6; MABINGWA WANAOTETEA">&#x1F3C6; DEFENDING CHAMPIONS</span>
+            <i class="fa-solid fa-crown" style="color:#e91e8c;font-size:1.25rem;"></i>
+          </div>
+          <div style="display:flex;align-items:center;gap:1.1rem;margin-bottom:1.4rem;">
+            <img src="images/simba-queens.jpg" alt="Simba Queens" style="width:64px;height:64px;border-radius:50%;border:3px solid #e91e8c;box-shadow:0 0 20px rgba(233,30,140,.5);object-fit:cover;flex-shrink:0;">
+            <div>
+              <h3 style="font-family:var(--font-heading);font-size:1.25rem;font-weight:900;color:#fff;line-height:1.2;margin:0;">Simba Queens</h3>
+              <span style="font-size:.82rem;color:#e91e8c;font-weight:800;display:block;margin-top:.25rem;" data-en="Queens of the East &#x2022; 5x Champions" data-sw="Malkia wa Mashariki &#x2022; Mabingwa mara 5">Queens of the East &#x2022; 5x Champions</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);padding:.85rem .6rem;border-radius:18px;text-align:center;margin-bottom:1.2rem;">
+            <div>
+              <div style="font-family:var(--font-heading);font-size:1.35rem;font-weight:900;color:#e91e8c;line-height:1;">5</div>
+              <div style="font-size:.68rem;color:var(--text-muted);text-transform:uppercase;font-weight:800;margin-top:.3rem;" data-en="Titles Won" data-sw="Mataji">Titles Won</div>
+            </div>
+            <div style="border-left:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08);">
+              <div style="font-family:var(--font-heading);font-size:1.35rem;font-weight:900;color:#22c55e;line-height:1;">68</div>
+              <div style="font-size:.68rem;color:var(--text-muted);text-transform:uppercase;font-weight:800;margin-top:.3rem;" data-en="Points" data-sw="Punti">Points</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-heading);font-size:1.35rem;font-weight:900;color:#38bdf8;line-height:1;">2x</div>
+              <div style="font-size:.68rem;color:var(--text-muted);text-transform:uppercase;font-weight:800;margin-top:.3rem;" data-en="In a Row" data-sw="Mfululizo">In a Row</div>
+            </div>
+          </div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,.85);font-style:italic;border-left:2px solid #e91e8c;padding-left:.7rem;margin-bottom:1.25rem;" data-en="Reigning 2024/25 Women's Premier League Champions, setting the standard for women's football in Tanzania." data-sw="Mabingwa waliopo wa 2024/25 wa Ligi Kuu ya Wanawake, wakiweka kiwango kipya kwa soka la wanawake Tanzania.">
+            "Reigning 2024/25 Women's Premier League Champions, setting the standard for women's football in Tanzania."
+          </div>
+          <a href="#teams" class="section-link" style="font-size:.85rem;font-weight:800;color:#e91e8c;display:flex;align-items:center;gap:.4rem;" data-en="Explore Champions Squad &#x2192;" data-sw="Tazama Kikosi cha Mabingwa &#x2192;">Explore Champions Squad &#x2192;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABS NAV -->
+<nav class="league-tabs-nav" style="border-bottom:1px solid rgba(233,30,140,.25);">
+  <div class="container">
+    <ul class="league-tabs-list">
+      <li><button class="league-tab-btn active" data-tab="overview"><i class="fa-solid fa-chart-pie"></i> <span data-en="Overview" data-sw="Jumla">Overview</span></button></li>
+      <li><button class="league-tab-btn" data-tab="fixtures"><i class="fa-solid fa-calendar-days"></i> <span data-en="Fixtures & Results" data-sw="Ratiba na Matokeo">Fixtures & Results</span></button></li>
+      <li><button class="league-tab-btn" data-tab="teams"><i class="fa-solid fa-shield-halved"></i> <span data-en="Teams" data-sw="Timu">Teams</span></button></li>
+      <li><button class="league-tab-btn" data-tab="transfers"><i class="fa-solid fa-right-left"></i> <span data-en="Transfers" data-sw="Usajili">Transfers</span></button></li>
+      <li><button class="league-tab-btn" data-tab="history"><i class="fa-solid fa-trophy"></i> <span data-en="Season History" data-sw="Historia ya Msimu">Season History</span></button></li>
+      <li><button class="league-tab-btn" data-tab="news"><i class="fa-solid fa-newspaper"></i> <span data-en="News & Media" data-sw="Habari na Vyombo">News & Media</span></button></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- MAIN DASHBOARD -->
+<main class="league-dashboard-sec">
+  <div class="container">
+
+    <!-- TAB: OVERVIEW -->
+    <div class="tab-panel active" id="tab-overview">
+      <div class="race-dashboard-grid">
+        <!-- LEFT: Standings Table -->
+        <div class="table-card-container">
+          <div class="table-header-flex">
+            <div>
+              <h2 style="font-family:var(--font-heading);font-size:1.4rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:.5rem;">
+                &#x1F3C6; <span data-en="Title Race Standings" data-sw="Msimamo wa Mbio za Ubingwa">Title Race Standings</span>
+              </h2>
+              <p style="font-size:.85rem;color:var(--text-muted);" data-en="Only 4 points separate Simba Queens and JKT Queens" data-sw="Pointi 4 pekee zinatenganisha Simba Queens na JKT Queens">Only 4 points separate Simba Queens and JKT Queens</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <span class="badge-pill" style="background:rgba(233,30,140,.2);border:1px solid #e91e8c;color:#fda4af;font-size:.72rem;padding:.3rem .75rem;" data-en="&#x1F534; LIVE SEASON" data-sw="&#x1F534; MSIMU WA MOJA KWA MOJA">&#x1F534; LIVE SEASON</span>
+              <input type="text" class="table-search-input" placeholder="Search team..." id="wplTableSearchInput" data-en-placeholder="Search team..." data-sw-placeholder="Tafuta timu...">
+            </div>
+          </div>
+          <div class="league-table-wrap">
+            <table class="league-table" id="wplStandingsTable">
+              <thead>
+                <tr>
+                  <th data-en="Pos" data-sw="Naf">Pos</th>
+                  <th data-en="Club" data-sw="Klabu">Club</th>
+                  <th>P</th><th>W</th><th>D</th><th>L</th>
+                  <th>GF</th><th>GA</th><th>GD</th>
+                  <th data-en="Pts" data-sw="Punti">Pts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background:rgba(233,30,140,.12);border-left:3px solid #e91e8c;">
+                  <td>1</td>
+                  <td class="team-name-cell"><img src="images/simba-queens.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Simba Queens</td>
+                  <td>22</td><td>21</td><td>1</td><td>0</td><td>68</td><td>8</td><td>+60</td><td style="color:#fda4af;font-weight:900;">64</td>
+                </tr>
+                <tr style="background:rgba(233,30,140,.06);">
+                  <td>2</td>
+                  <td class="team-name-cell"><img src="images/jkt-quens.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> JKT Queens</td>
+                  <td>22</td><td>20</td><td>0</td><td>2</td><td>61</td><td>12</td><td>+49</td><td style="color:#fda4af;font-weight:900;">60</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td class="team-name-cell"><img src="images/yanga.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Yanga Women</td>
+                  <td>22</td><td>16</td><td>3</td><td>3</td><td>48</td><td>18</td><td>+30</td><td>51</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td class="team-name-cell"><img src="images/azam.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Azam Queens</td>
+                  <td>22</td><td>14</td><td>4</td><td>4</td><td>42</td><td>22</td><td>+20</td><td>46</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td class="team-name-cell"><img src="images/costal-union.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Coastal Queens</td>
+                  <td>22</td><td>11</td><td>5</td><td>6</td><td>35</td><td>28</td><td>+7</td><td>38</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td class="team-name-cell"><img src="images/dodoma-jiji.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Dodoma Queens</td>
+                  <td>22</td><td>9</td><td>5</td><td>8</td><td>30</td><td>32</td><td>-2</td><td>32</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td class="team-name-cell"><img src="images/singida.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Singida Queens</td>
+                  <td>22</td><td>8</td><td>6</td><td>8</td><td>28</td><td>33</td><td>-5</td><td>30</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td class="team-name-cell"><img src="images/tra-united.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> TRA Queens</td>
+                  <td>22</td><td>7</td><td>5</td><td>10</td><td>24</td><td>36</td><td>-12</td><td>26</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td class="team-name-cell"><img src="images/jkt-tanzania.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Kagera Women</td>
+                  <td>22</td><td>6</td><td>4</td><td>12</td><td>20</td><td>38</td><td>-18</td><td>22</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td class="team-name-cell"><img src="images/pamba-jiji.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Mwanza Queens</td>
+                  <td>22</td><td>4</td><td>6</td><td>12</td><td>18</td><td>42</td><td>-24</td><td>18</td>
+                </tr>
+                <tr style="background:rgba(239,68,68,.08);">
+                  <td style="color:#f87171;">11</td>
+                  <td class="team-name-cell"><img src="images/namungo-fc.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Namungo Women</td>
+                  <td>22</td><td>2</td><td>4</td><td>16</td><td>12</td><td>55</td><td>-43</td><td style="color:#f87171;">10</td>
+                </tr>
+                <tr style="background:rgba(239,68,68,.08);">
+                  <td style="color:#f87171;">12</td>
+                  <td class="team-name-cell"><img src="images/mashujaa-fc.jpg" width="24" height="24" style="border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:6px;"> Mbeya Queens</td>
+                  <td>22</td><td>1</td><td>3</td><td>18</td><td>8</td><td>62</td><td>-54</td><td style="color:#f87171;">6</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex;gap:1.5rem;margin-top:.75rem;font-size:.72rem;color:var(--text-muted);flex-wrap:wrap;">
+            <span style="display:flex;align-items:center;gap:.4rem;"><span style="width:12px;height:12px;background:rgba(233,30,140,.4);border-radius:3px;"></span> <span data-en="Title Race Zone" data-sw="Eneo la Ubingwa">Title Race Zone</span></span>
+            <span style="display:flex;align-items:center;gap:.4rem;"><span style="width:12px;height:12px;background:rgba(239,68,68,.35);border-radius:3px;"></span> <span data-en="Relegation Zone" data-sw="Eneo la Kushuka">Relegation Zone</span></span>
+          </div>
+        </div>
+
+        <!-- RIGHT: Widgets Sidebar -->
+        <div class="widgets-sidebar">
+          <!-- Golden Boot Widget -->
+          <div class="widget-glass-card" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(233,30,140,.35);border-radius:20px;padding:1.4rem;">
+            <h3 style="font-family:var(--font-heading);font-size:1rem;font-weight:900;color:#fff;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;">
+              <span style="color:#fda4af;">&#x26BD;</span> <span data-en="Golden Boot Race" data-sw="Mbio za Buti ya Dhahabu">Golden Boot Race</span>
+            </h3>
+            <div style="display:flex;flex-direction:column;gap:.75rem;">
+              <div style="display:flex;align-items:center;gap:.75rem;background:rgba(233,30,140,.12);border:1px solid rgba(233,30,140,.3);padding:.65rem .85rem;border-radius:14px;">
+                <span style="font-family:var(--font-heading);font-size:1.2rem;font-weight:900;color:#e91e8c;min-width:28px;">1</span>
+                <img src="images/fatma-nhonoli.png" style="width:38px;height:38px;border-radius:50%;border:2px solid #e91e8c;object-fit:cover;">
+                <div><strong style="color:#fff;font-size:.9rem;display:block;">Fatma Nhonoli</strong><span style="font-size:.72rem;color:#fda4af;">Simba Queens</span></div>
+                <span style="margin-left:auto;font-family:var(--font-heading);color:#ffd700;font-weight:900;font-size:1.05rem;">22</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:.75rem;padding:.65rem .85rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;">
+                <span style="font-family:var(--font-heading);font-size:1rem;font-weight:900;color:#cbd5e1;min-width:28px;">2</span>
+                <img src="images/neema-hassan.png" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.2);">
+                <div><strong style="color:#fff;font-size:.9rem;display:block;">Neema Hassan</strong><span style="font-size:.72rem;color:var(--text-muted);">JKT Queens</span></div>
+                <span style="margin-left:auto;font-family:var(--font-heading);color:#cbd5e1;font-weight:900;font-size:1rem;">18</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:.75rem;padding:.65rem .85rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;">
+                <span style="font-family:var(--font-heading);font-size:1rem;font-weight:900;color:#cbd5e1;min-width:28px;">3</span>
+                <img src="images/maua-rubibi.png" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.2);">
+                <div><strong style="color:#fff;font-size:.9rem;display:block;">Maua Rubibi</strong><span style="font-size:.72rem;color:var(--text-muted);">Yanga Women</span></div>
+                <span style="margin-left:auto;font-family:var(--font-heading);color:#cbd5e1;font-weight:900;font-size:1rem;">14</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:.75rem;padding:.65rem .85rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;">
+                <span style="font-family:var(--font-heading);font-size:1rem;font-weight:900;color:#cbd5e1;min-width:28px;">4</span>
+                <img src="images/fatma-abdallah.png" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.2);">
+                <div><strong style="color:#fff;font-size:.9rem;display:block;">Fatma Abdallah</strong><span style="font-size:.72rem;color:var(--text-muted);">Azam Queens</span></div>
+                <span style="margin-left:auto;font-family:var(--font-heading);color:#cbd5e1;font-weight:900;font-size:1rem;">11</span>
+              </div>
+            </div>
+          </div>
+          <!-- League Info Widget -->
+          <div class="widget-glass-card" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(233,30,140,.3);border-radius:20px;padding:1.4rem;margin-top:1.25rem;">
+            <h3 style="font-family:var(--font-heading);font-size:1rem;font-weight:900;color:#fff;margin-bottom:1rem;">
+              <span style="color:#fda4af;">&#x2640;</span> <span data-en="League Info" data-sw="Taarifa za Ligi">League Info</span>
+            </h3>
+            <div style="display:flex;flex-direction:column;gap:.6rem;font-size:.85rem;">
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);"><span style="color:var(--text-muted);" data-en="Season" data-sw="Msimu">Season</span><span style="color:#fff;font-weight:700;">2025/26</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);"><span style="color:var(--text-muted);" data-en="Format" data-sw="Muundo">Format</span><span style="color:#fff;font-weight:700;" data-en="Home &amp; Away" data-sw="Nyumbani na Ugenini">Home &amp; Away</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);"><span style="color:var(--text-muted);" data-en="Total Clubs" data-sw="Jumla ya Klabu">Total Clubs</span><span style="color:#fda4af;font-weight:800;">12</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);"><span style="color:var(--text-muted);" data-en="Total Rounds" data-sw="Rundi Zote">Total Rounds</span><span style="color:#fda4af;font-weight:800;">22</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;"><span style="color:var(--text-muted);" data-en="Governing Body" data-sw="Chombo cha Usimamizi">Governing Body</span><span style="color:#fff;font-weight:700;">TFF / TPLB</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================================================
+           PLAYER STATISTICS SECTION (GOLDEN BOOT & ASSIST LEADERS)
+           ========================================================================== -->
+      <section style="margin-top:3.5rem;">
+        <div class="section-header" style="text-align:left; margin-bottom:1.75rem;">
+          <h2 style="font-family:var(--font-heading); font-size:1.65rem; font-weight:900; color:#fff; display:flex; align-items:center; gap:0.6rem;">
+            ⭐ <span data-en="Player Statistics" data-sw="Takwimu za Wachezaji">Player Statistics</span>
+          </h2>
+        </div>
+
+        <div class="stats-split-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.75rem;">
+          
+          <!-- Golden Boot Race Card -->
+          <div class="widget-glass-card player-stats-widget-card" style="background:linear-gradient(145deg, rgba(40, 10, 50, 0.95), rgba(20, 5, 30, 0.98)); border:1px solid rgba(233, 30, 140, 0.4); border-radius:24px; padding:1.75rem; box-shadow:0 16px 45px rgba(233,30,140,0.15), inset 0 1px 0 rgba(255,255,255,0.1);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:1rem; margin-bottom:1.5rem;">
+              <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; display:flex; align-items:center; gap:0.6rem; margin:0;">
+                🥇 <span data-en="Golden Boot Race" data-sw="Mbio za Ufungaji Bora">Golden Boot Race</span>
+              </h3>
+              <span style="background:rgba(233,30,140,0.2); border:1px solid rgba(233,30,140,0.5); color:#fda4af; font-size:0.7rem; font-weight:900; padding:0.25rem 0.75rem; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px;">
+                2025/26 Season
+              </span>
+            </div>
+
+            <!-- Rank #1 Featured Leader (Fatma Nhonoli) -->
+            <div class="leader-hero-card" style="background:linear-gradient(135deg, rgba(233, 30, 140, 0.2), rgba(192, 38, 211, 0.1)); border:1px solid rgba(233, 30, 140, 0.5); border-radius:20px; padding:1.25rem; margin-bottom:1.25rem; position:relative; box-shadow:0 10px 30px rgba(233, 30, 140, 0.2); transition:all 0.3s ease;">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                <div style="display:flex; align-items:center; gap:0.9rem;">
+                  <div style="position:relative;">
+                    <img src="images/fatma-nhonoli.png" width="56" height="56" style="border-radius:50%; object-fit:cover; border:2.5px solid #e91e8c; box-shadow:0 0 16px rgba(233,30,140,0.5); flex-shrink:0;">
+                    <span style="position:absolute; bottom:-4px; right:-4px; background:linear-gradient(135deg, #ffd700, #b8860b); color:#000; font-family:var(--font-heading); font-weight:900; font-size:0.7rem; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid #0a1834; box-shadow:0 2px 6px rgba(0,0,0,0.5);">1</span>
+                  </div>
+                  <div>
+                    <strong style="font-family:var(--font-heading); color:#fff; font-size:1.1rem; display:block; line-height:1.2;">Fatma Nhonoli</strong>
+                    <div style="font-size:0.78rem; color:#fda4af; font-weight:700; display:flex; align-items:center; gap:0.35rem; margin-top:0.2rem;">
+                      <img src="images/simba-queens.jpg" width="16" height="16" style="border-radius:50%;"> Simba Queens
+                    </div>
+                  </div>
+                </div>
+
+                <div style="text-align:right; background:rgba(233,30,140,0.25); border:1px solid rgba(233,30,140,0.6); padding:0.4rem 1rem; border-radius:16px;">
+                  <span style="font-family:var(--font-heading); font-size:1.4rem; font-weight:900; color:#ffd700; display:block; line-height:1;">22</span>
+                  <span style="font-size:0.65rem; color:rgba(255,255,255,0.8); text-transform:uppercase; font-weight:800; letter-spacing:0.5px;" data-en="Goals" data-sw="Mabao">Goals</span>
+                </div>
+              </div>
+
+              <!-- Leader Goal Progress Bar -->
+              <div style="margin-top:0.85rem; height:6px; background:rgba(255,255,255,0.08); border-radius:4px; overflow:hidden; border:1px solid rgba(255,255,255,0.1);">
+                <div style="width:92%; height:100%; background:linear-gradient(90deg, #e91e8c, #ffd700); border-radius:4px; box-shadow:0 0 10px rgba(233,30,140,0.6);"></div>
+              </div>
+            </div>
+
+            <!-- Rank #2 & #3 -->
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              
+              <!-- Rank 2 Card (Neema Hassan) -->
+              <div class="stat-player-row-card" style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); padding:0.8rem 1rem; border-radius:16px;">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <span style="font-family:var(--font-heading); font-weight:900; font-size:0.8rem; color:#38bdf8; background:rgba(56,189,248,0.15); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span>
+                  <img src="images/neema-hassan.png" width="38" height="38" style="border-radius:50%; object-fit:cover; border:2px solid rgba(56,189,248,0.6); flex-shrink:0;">
+                  <div>
+                    <strong style="color:#fff; font-size:0.92rem; display:block;">Neema Hassan</strong>
+                    <span style="font-size:0.72rem; color:var(--text-muted); display:flex; align-items:center; gap:0.3rem;">
+                      <img src="images/jkt-quens.jpg" width="14" height="14" style="border-radius:50%;"> JKT Queens
+                    </span>
+                  </div>
+                </div>
+                <div style="background:rgba(56,189,248,0.18); border:1px solid rgba(56,189,248,0.4); padding:0.3rem 0.75rem; border-radius:14px; text-align:center;">
+                  <span style="font-family:var(--font-heading); font-size:1rem; font-weight:900; color:#38bdf8;">18 <small style="font-size:0.65rem; color:rgba(255,255,255,0.7);" data-en="goals" data-sw="mabao">goals</small></span>
+                </div>
+              </div>
+
+              <!-- Rank 3 Card (Maua Rubibi) -->
+              <div class="stat-player-row-card" style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); padding:0.8rem 1rem; border-radius:16px;">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <span style="font-family:var(--font-heading); font-weight:900; font-size:0.8rem; color:#4ade80; background:rgba(34,197,94,0.15); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
+                  <img src="images/maua-rubibi.png" width="38" height="38" style="border-radius:50%; object-fit:cover; border:2px solid rgba(34,197,94,0.6); flex-shrink:0;">
+                  <div>
+                    <strong style="color:#fff; font-size:0.92rem; display:block;">Maua Rubibi</strong>
+                    <span style="font-size:0.72rem; color:var(--text-muted); display:flex; align-items:center; gap:0.3rem;">
+                      <img src="images/yanga.jpg" width="14" height="14" style="border-radius:50%;"> Yanga Women
+                    </span>
+                  </div>
+                </div>
+                <div style="background:rgba(34,197,94,0.18); border:1px solid rgba(34,197,94,0.4); padding:0.3rem 0.75rem; border-radius:14px; text-align:center;">
+                  <span style="font-family:var(--font-heading); font-size:1rem; font-weight:900; color:#4ade80;">14 <small style="font-size:0.65rem; color:rgba(255,255,255,0.7);" data-en="goals" data-sw="mabao">goals</small></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Assist Leaders Card -->
+          <div class="widget-glass-card player-stats-widget-card" style="background:linear-gradient(145deg, rgba(40, 10, 50, 0.95), rgba(20, 5, 30, 0.98)); border:1px solid rgba(192, 38, 211, 0.4); border-radius:24px; padding:1.75rem; box-shadow:0 16px 45px rgba(192,38,211,0.15), inset 0 1px 0 rgba(255,255,255,0.1);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:1rem; margin-bottom:1.5rem;">
+              <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:900; color:#fff; display:flex; align-items:center; gap:0.6rem; margin:0;">
+                🎯 <span data-en="Assist Leaders" data-sw="Wanaoongoza kwa Pasi za Mabao">Assist Leaders</span>
+              </h3>
+              <span style="background:rgba(192,38,211,0.2); border:1px solid rgba(192,38,211,0.5); color:#e879f9; font-size:0.7rem; font-weight:900; padding:0.25rem 0.75rem; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px;">
+                2025/26 Season
+              </span>
+            </div>
+
+            <!-- Rank #1 Featured Assist Leader (Stumai Abdallah) -->
+            <div class="leader-hero-card" style="background:linear-gradient(135deg, rgba(192, 38, 211, 0.2), rgba(147, 51, 234, 0.1)); border:1px solid rgba(192, 38, 211, 0.5); border-radius:20px; padding:1.25rem; margin-bottom:1.25rem; position:relative; box-shadow:0 10px 30px rgba(192, 38, 211, 0.2); transition:all 0.3s ease;">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+                <div style="display:flex; align-items:center; gap:0.9rem;">
+                  <div style="position:relative;">
+                    <img src="images/neema-hassan.png" width="56" height="56" style="border-radius:50%; object-fit:cover; border:2.5px solid #c026d3; box-shadow:0 0 16px rgba(192,38,211,0.5); flex-shrink:0;">
+                    <span style="position:absolute; bottom:-4px; right:-4px; background:linear-gradient(135deg, #c026d3, #9333ea); color:#fff; font-family:var(--font-heading); font-weight:900; font-size:0.7rem; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid #0a1834; box-shadow:0 2px 6px rgba(0,0,0,0.5);">1</span>
+                  </div>
+                  <div>
+                    <strong style="font-family:var(--font-heading); color:#fff; font-size:1.1rem; display:block; line-height:1.2;">Stumai Abdallah</strong>
+                    <div style="font-size:0.78rem; color:#e879f9; font-weight:700; display:flex; align-items:center; gap:0.35rem; margin-top:0.2rem;">
+                      <img src="images/jkt-quens.jpg" width="16" height="16" style="border-radius:50%;"> JKT Queens
+                    </div>
+                  </div>
+                </div>
+
+                <div style="text-align:right; background:rgba(192,38,211,0.25); border:1px solid rgba(192,38,211,0.6); padding:0.4rem 1rem; border-radius:16px;">
+                  <span style="font-family:var(--font-heading); font-size:1.4rem; font-weight:900; color:#e879f9; display:block; line-height:1;">14</span>
+                  <span style="font-size:0.65rem; color:rgba(255,255,255,0.8); text-transform:uppercase; font-weight:800; letter-spacing:0.5px;" data-en="Assists" data-sw="Pasi">Assists</span>
+                </div>
+              </div>
+
+              <!-- Leader Assist Progress Bar -->
+              <div style="margin-top:0.85rem; height:6px; background:rgba(255,255,255,0.08); border-radius:4px; overflow:hidden; border:1px solid rgba(255,255,255,0.1);">
+                <div style="width:85%; height:100%; background:linear-gradient(90deg, #c026d3, #e879f9); border-radius:4px; box-shadow:0 0 10px rgba(192,38,211,0.6);"></div>
+              </div>
+            </div>
+
+            <!-- Rank #2 & #3 Assists -->
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              
+              <!-- Rank 2 Card (Aisha Masaka) -->
+              <div class="stat-player-row-card" style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); padding:0.8rem 1rem; border-radius:16px;">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <span style="font-family:var(--font-heading); font-weight:900; font-size:0.8rem; color:#e91e8c; background:rgba(233,30,140,0.15); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span>
+                  <img src="images/fatma-nhonoli.png" width="38" height="38" style="border-radius:50%; object-fit:cover; border:2px solid rgba(233,30,140,0.6); flex-shrink:0;">
+                  <div>
+                    <strong style="color:#fff; font-size:0.92rem; display:block;">Aisha Masaka</strong>
+                    <span style="font-size:0.72rem; color:var(--text-muted); display:flex; align-items:center; gap:0.3rem;">
+                      <img src="images/simba-queens.jpg" width="14" height="14" style="border-radius:50%;"> Simba Queens
+                    </span>
+                  </div>
+                </div>
+                <div style="background:rgba(233,30,140,0.18); border:1px solid rgba(233,30,140,0.4); padding:0.3rem 0.75rem; border-radius:14px; text-align:center;">
+                  <span style="font-family:var(--font-heading); font-size:1rem; font-weight:900; color:#fda4af;">11 <small style="font-size:0.65rem; color:rgba(255,255,255,0.7);" data-en="assists" data-sw="pasi">assists</small></span>
+                </div>
+              </div>
+
+              <!-- Rank 3 Card (Opa Clement) -->
+              <div class="stat-player-row-card" style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); padding:0.8rem 1rem; border-radius:16px;">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <span style="font-family:var(--font-heading); font-weight:900; font-size:0.8rem; color:#e91e8c; background:rgba(233,30,140,0.15); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span>
+                  <img src="images/fatma-abdallah.png" width="38" height="38" style="border-radius:50%; object-fit:cover; border:2px solid rgba(233,30,140,0.6); flex-shrink:0;">
+                  <div>
+                    <strong style="color:#fff; font-size:0.92rem; display:block;">Opa Clement</strong>
+                    <span style="font-size:0.72rem; color:var(--text-muted); display:flex; align-items:center; gap:0.3rem;">
+                      <img src="images/simba-queens.jpg" width="14" height="14" style="border-radius:50%;"> Simba Queens
+                    </span>
+                  </div>
+                </div>
+                <div style="background:rgba(233,30,140,0.18); border:1px solid rgba(233,30,140,0.4); padding:0.3rem 0.75rem; border-radius:14px; text-align:center;">
+                  <span style="font-family:var(--font-heading); font-size:1rem; font-weight:900; color:#fda4af;">9 <small style="font-size:0.65rem; color:rgba(255,255,255,0.7);" data-en="assists" data-sw="pasi">assists</small></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           MATCH ROUNDS SELECTOR (ROUNDS 1 - 22)
+           ========================================================================== -->
+      <section style="margin-top:3.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:0.75rem;">
+          <h3 style="font-family:var(--font-heading); font-size:1.3rem; font-weight:900; color:#fff; display:flex; align-items:center; gap:0.5rem;" data-en="Match Rounds Selector" data-sw="Chagua Rundi ya Mechi">
+            ⚽ Match Rounds Selector
+          </h3>
+          <span style="font-size:0.88rem; color:#fda4af; font-weight:800; background:rgba(233,30,140,0.15); border:1px solid rgba(233,30,140,0.4); padding:0.4rem 0.9rem; border-radius:20px;" id="wplSelectedRoundDisplay">
+            Selected: <strong id="wplSelectedRoundVal" style="color:#fff;">ROUND 17</strong>
+          </span>
+        </div>
+
+        <div class="rounds-selector-track" id="wplRoundsSelectorTrack" style="display:flex; gap:0.5rem; overflow-x:auto; padding-bottom:0.5rem; scrollbar-width:thin;">
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="1">Rd 1</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="2">Rd 2</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="3">Rd 3</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="4">Rd 4</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="5">Rd 5</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="6">Rd 6</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="7">Rd 7</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="8">Rd 8</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="9">Rd 9</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="10">Rd 10</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="11">Rd 11</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="12">Rd 12</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="13">Rd 13</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="14">Rd 14</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="15">Rd 15</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="16">Rd 16</button>
+          <button class="round-pill-btn wpl-round-pill-btn active" data-round="17" style="background:linear-gradient(135deg,#be185d,#e91e8c); color:#fff; border:none;">ROUND 17</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="18">Rd 18</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="19">Rd 19</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="20">Rd 20</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="21">Rd 21</button>
+          <button class="round-pill-btn wpl-round-pill-btn" data-round="22">Rd 22</button>
+        </div>
+
+        <!-- Dynamic Matches Display Grid for Selected Round -->
+        <div id="wplRoundMatchesDisplayContainer" style="margin-top:1.6rem;"></div>
+      </section>
+
+      <!-- ==========================================================================
+           NEXT BIG FIXTURE (SIMBA QUEENS vs JKT QUEENS — DAR CLASSICO BANNER)
+           ========================================================================== -->
+      <section style="margin-top:3.5rem;">
+        <div class="derby-banner-card" style="position:relative; background:linear-gradient(135deg, rgba(40, 10, 50, 0.95), rgba(20, 5, 30, 0.98)), url('images/amaan_stadium07.jpg') center/cover no-repeat; border:1.5px solid rgba(233, 30, 140, 0.5); border-radius:28px; padding:2.5rem 1.75rem; text-align:center; box-shadow:0 20px 50px rgba(233,30,140,0.2), 0 0 35px rgba(233,30,140,0.15); overflow:hidden;">
+          
+          <!-- Background Glow Elements -->
+          <div style="position:absolute; top:-50px; left:-50px; width:200px; height:200px; background:radial-gradient(circle, rgba(233,30,140,0.25), transparent 70%); pointer-events:none;"></div>
+          <div style="position:absolute; bottom:-50px; right:-50px; width:200px; height:200px; background:radial-gradient(circle, rgba(56,189,248,0.2), transparent 70%); pointer-events:none;"></div>
+
+          <!-- Top Badge Pill -->
+          <div style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(233,30,140,0.2); border:1px solid rgba(233,30,140,0.5); padding:0.4rem 1.25rem; border-radius:25px; margin-bottom:1rem; box-shadow:0 0 15px rgba(233,30,140,0.3);">
+            <span style="width:8px; height:8px; border-radius:50%; background:#e91e8c; display:inline-block; box-shadow:0 0 10px #e91e8c;"></span>
+            <span style="font-family:var(--font-heading); font-weight:900; font-size:0.78rem; color:#fda4af; text-transform:uppercase; letter-spacing:1px;" data-en="🔥 NEXT BIG FIXTURE" data-sw="🔥 MECHI KUBWA INAYOFUATA">
+              🔥 NEXT BIG FIXTURE
+            </span>
+          </div>
+
+          <!-- Derby Title -->
+          <h2 style="font-family:var(--font-heading); font-size:2.4rem; font-weight:900; color:#fff; text-transform:uppercase; letter-spacing:1.5px; text-shadow:0 0 25px rgba(233,30,140,0.4); margin-bottom:1.5rem;" data-en="DAR ES SALAAM WOMEN'S DERBY" data-sw="DERBY YA WANAWAKE DAR ES SALAAM">
+            DAR ES SALAAM WOMEN'S DERBY
+          </h2>
+
+          <!-- Teams Face-Off Cards Grid -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:1.5rem; margin-bottom:2rem; flex-wrap:wrap;">
+            
+            <!-- Home Team (Simba Queens) -->
+            <div class="derby-team-card" style="display:flex; align-items:center; gap:1rem; background:linear-gradient(135deg, rgba(233, 30, 140, 0.2), rgba(192, 38, 211, 0.1)); border:1px solid rgba(233, 30, 140, 0.5); padding:0.9rem 1.4rem; border-radius:20px; box-shadow:0 8px 25px rgba(233, 30, 140, 0.2); transition:all 0.3s ease;">
+              <img src="images/simba-queens.jpg" width="58" height="58" style="border-radius:50%; border:2.5px solid #e91e8c; box-shadow:0 0 16px rgba(233,30,140,0.5); object-fit:cover;">
+              <div style="text-align:left;">
+                <strong style="font-family:var(--font-heading); font-size:1.3rem; font-weight:900; color:#fff; display:block;">Simba Queens</strong>
+                <span style="font-size:0.72rem; color:#fda4af; font-weight:800;" data-en="5 Titles • Msimbazi Queens" data-sw="Mataji 5 • Malkia wa Msimbazi">5 Titles • Msimbazi Queens</span>
+              </div>
+            </div>
+
+            <!-- VS Badge -->
+            <div style="background:linear-gradient(135deg, rgba(233,30,140,0.3), rgba(192,38,211,0.3)); border:1px solid rgba(233,30,140,0.6); width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:1.2rem; font-weight:900; color:#fff; box-shadow:0 0 20px rgba(233,30,140,0.4); flex-shrink:0;">
+              VS
+            </div>
+
+            <!-- Away Team (JKT Queens) -->
+            <div class="derby-team-card" style="display:flex; align-items:center; gap:1rem; background:linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(2, 132, 199, 0.1)); border:1px solid rgba(56, 189, 248, 0.4); padding:0.9rem 1.4rem; border-radius:20px; box-shadow:0 8px 25px rgba(56, 189, 248, 0.15); transition:all 0.3s ease;">
+              <div style="text-align:right;">
+                <strong style="font-family:var(--font-heading); font-size:1.3rem; font-weight:900; color:#fff; display:block;">JKT Queens</strong>
+                <span style="font-size:0.72rem; color:#38bdf8; font-weight:800;" data-en="3 Titles • Army Queens" data-sw="Mataji 3 • Malkia wa Jeshi">3 Titles • Army Queens</span>
+              </div>
+              <img src="images/jkt-quens.jpg" width="58" height="58" style="border-radius:50%; border:2.5px solid #38bdf8; box-shadow:0 0 16px rgba(56,189,248,0.5); object-fit:cover;">
+            </div>
+
+          </div>
+
+          <!-- Live Dynamic Countdown Boxes -->
+          <div class="countdown-flex" style="display:flex; justify-content:center; gap:1.25rem; margin-bottom:2rem; flex-wrap:wrap;">
+            <div class="countdown-box" style="background:rgba(20, 5, 35, 0.85); border:1px solid rgba(233, 30, 140, 0.4); border-radius:18px; padding:0.85rem 1.25rem; min-width:85px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+              <div class="count-val" id="wpl-derby-days" style="font-family:var(--font-heading); font-size:2.2rem; font-weight:900; color:#fda4af; text-shadow:0 0 15px rgba(233,30,140,0.5);">05</div>
+              <div class="count-lbl" style="font-size:0.7rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-top:0.25rem;" data-en="Days" data-sw="Siku">Days</div>
+            </div>
+            <div class="countdown-box" style="background:rgba(20, 5, 35, 0.85); border:1px solid rgba(233, 30, 140, 0.4); border-radius:18px; padding:0.85rem 1.25rem; min-width:85px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+              <div class="count-val" id="wpl-derby-hours" style="font-family:var(--font-heading); font-size:2.2rem; font-weight:900; color:#fda4af; text-shadow:0 0 15px rgba(233,30,140,0.5);">14</div>
+              <div class="count-lbl" style="font-size:0.7rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-top:0.25rem;" data-en="Hours" data-sw="Masaa">Hours</div>
+            </div>
+            <div class="countdown-box" style="background:rgba(20, 5, 35, 0.85); border:1px solid rgba(233, 30, 140, 0.4); border-radius:18px; padding:0.85rem 1.25rem; min-width:85px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+              <div class="count-val" id="wpl-derby-minutes" style="font-family:var(--font-heading); font-size:2.2rem; font-weight:900; color:#fda4af; text-shadow:0 0 15px rgba(233,30,140,0.5);">31</div>
+              <div class="count-lbl" style="font-size:0.7rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-top:0.25rem;" data-en="Minutes" data-sw="Dakika">Minutes</div>
+            </div>
+            <div class="countdown-box" style="background:rgba(20, 5, 35, 0.85); border:1px solid rgba(233, 30, 140, 0.4); border-radius:18px; padding:0.85rem 1.25rem; min-width:85px; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+              <div class="count-val" id="wpl-derby-seconds" style="font-family:var(--font-heading); font-size:2.2rem; font-weight:900; color:#fda4af; text-shadow:0 0 15px rgba(233,30,140,0.5);">45</div>
+              <div class="count-lbl" style="font-size:0.7rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-top:0.25rem;" data-en="Seconds" data-sw="Sekunde">Seconds</div>
+            </div>
+          </div>
+
+          <!-- Venue & Action CTA Buttons -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:1rem;">
+            <p style="font-size:0.88rem; color:var(--text-muted); display:flex; align-items:center; justify-content:center; gap:0.5rem; margin:0;" data-en="📍 Uhuru Stadium • Dar es Salaam • 25,000 Capacity" data-sw="📍 Uwanja wa Uhuru • Dar es Salaam • Uwezo wa Mashabiki 25,000">
+              📍 Uhuru Stadium • Dar es Salaam • 25,000 Capacity
+            </p>
+            
+            <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:0.5rem;">
+              <a href="#fixtures" class="btn-primary" style="padding:0.6rem 1.4rem; font-size:0.85rem; border-radius:25px; background:linear-gradient(135deg,#be185d,#e91e8c);" data-en="🎟️ Book Tickets" data-sw="🎟️ Kata Tiketi">🎟️ Book Tickets</a>
+              <a href="#news" class="btn-secondary" style="padding:0.6rem 1.4rem; font-size:0.85rem; border-radius:25px; border-color:rgba(233,30,140,0.4);" data-en="📊 Match Preview" data-sw="📊 Uchambuzi wa Mechi">📊 Match Preview</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           WOMEN'S PREMIER LEAGUE NEWS SECTION (6 NEWS CARDS)
+           ========================================================================== -->
+      <section style="margin-top:3.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+          <h2 style="font-family:var(--font-heading); font-size:1.6rem; font-weight:900; color:#fff;">
+            📰 <span data-en="Women's Premier League News" data-sw="Habari za Ligi Kuu ya Wanawake">Women's Premier League News</span>
+          </h2>
+        </div>
+
+        <div class="league-news-grid" style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:0.85rem; width:100%; box-sizing:border-box;">
+          
+          <!-- News Card 1 -->
+          <article class="league-news-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(233,30,140,0.25); border-radius:20px; overflow:hidden; display:flex; flex-direction:column; justify-space-between;">
+            <div class="news-card-thumb" style="position:relative; height:180px; overflow:hidden;">
+              <img src="images/simba-queens.jpg" alt="Simba Queens vs JKT Queens" style="width:100%; height:100%; object-fit:cover;">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:#e91e8c; color:#fff;">matches</span>
+            </div>
+            <div class="news-card-body" style="padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="Today" data-sw="Leo">Today</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Simba Queens vs JKT Queens: Title Showdown Preview
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  Everything you need to know before the biggest match of the season at Uhuru Stadium.
+                </p>
+              </div>
+              <a href="#news" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center; border-color:rgba(233,30,140,0.4); color:#fda4af;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+          <!-- News Card 2 -->
+          <article class="league-news-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(56,189,248,0.25); border-radius:20px; overflow:hidden; display:flex; flex-direction:column; justify-space-between;">
+            <div class="news-card-thumb" style="position:relative; height:180px; overflow:hidden;">
+              <img src="images/jkt-quens.jpg" alt="JKT Queens Transfer">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:#38bdf8; color:#000;">transfers</span>
+            </div>
+            <div class="news-card-body" style="padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="Today" data-sw="Leo">Today</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  JKT Queens Complete Signing of Top Midfield Star Ahead of Round 20
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  JKT Queens have bolstered their midfield options with a key national team playmaker.
+                </p>
+              </div>
+              <a href="#news" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center; border-color:rgba(56,189,248,0.4); color:#38bdf8;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+          <!-- News Card 3 -->
+          <article class="league-news-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,193,7,0.25); border-radius:20px; overflow:hidden; display:flex; flex-direction:column; justify-space-between;">
+            <div class="news-card-thumb" style="position:relative; height:180px; overflow:hidden;">
+              <img src="images/fatma-nhonoli.png" alt="Fatma Nhonoli WPL Player of the Month">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:#ffd700; color:#000;">awards</span>
+            </div>
+            <div class="news-card-body" style="padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="Yesterday" data-sw="Jana">Yesterday</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Fatma Nhonoli Wins WPL Player of the Month Award
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  The Simba Queens goal machine claims top honors following a sparkling month with 6 goals.
+                </p>
+              </div>
+              <a href="#history" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center; border-color:rgba(255,193,7,0.4); color:#ffd700;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+          <!-- News Card 4 -->
+          <article class="league-news-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(34,197,94,0.25); border-radius:20px; overflow:hidden; display:flex; flex-direction:column; justify-space-between;">
+            <div class="news-card-thumb" style="position:relative; height:180px; overflow:hidden;">
+              <img src="images/simba-queens.jpg" alt="Simba Queens Kit">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:#22c55e; color:#000;">clubs</span>
+            </div>
+            <div class="news-card-body" style="padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="2 Days Ago" data-sw="Siku 2 Zilizopita">2 Days Ago</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Simba Queens Unveil Striking New Home Kit for Season 2025/26
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  Simba Queens officially launch their new red-and-white jersey ahead of upcoming title fixtures.
+                </p>
+              </div>
+              <a href="#teams" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center; border-color:rgba(34,197,94,0.4); color:#4ade80;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+          <!-- News Card 5 -->
+          <article class="league-news-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(233,30,140,0.25); border-radius:20px; overflow:hidden; display:flex; flex-direction:column; justify-space-between;">
+            <div class="news-card-thumb" style="position:relative; height:180px; overflow:hidden;">
+              <img src="images/women-ligue-nbc.png" alt="WPL League Schedule">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:#e91e8c; color:#fff;">League</span>
+            </div>
+            <div class="news-card-body" style="padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="3 Days Ago" data-sw="Siku 3 Zilizopita">3 Days Ago</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Women's Premier League Confirms Matchweek 18 Schedule
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  TPLB releases updated kickoff times and venue confirmations for all weekend matches.
+                </p>
+              </div>
+              <a href="#fixtures" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center; border-color:rgba(233,30,140,0.4); color:#fda4af;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+          <!-- News Card 6 -->
+          <article class="league-news-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(34,197,94,0.25); border-radius:20px; overflow:hidden; display:flex; flex-direction:column; justify-space-between;">
+            <div class="news-card-thumb" style="position:relative; height:180px; overflow:hidden;">
+              <img src="images/yanga.jpg" alt="Yanga Women Victory">
+              <span class="badge-pill" style="position:absolute; top:12px; left:12px; background:#22c55e; color:#000;">matches</span>
+            </div>
+            <div class="news-card-body" style="padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; flex:1;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);" data-en="3 Days Ago" data-sw="Siku 3 Zilizopita">3 Days Ago</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:#fff; margin:0.4rem 0 0.6rem;">
+                  Yanga Women Continue Strong Start with Away Victory
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                  A late goal secures 3 points on the road to keep Yanga Women in the top-three race.
+                </p>
+              </div>
+              <a href="#fixtures" class="btn-secondary" style="margin-top:1.2rem; padding:0.5rem 1rem; font-size:0.8rem; text-align:center; border-color:rgba(34,197,94,0.4); color:#4ade80;" data-en="Read Now" data-sw="Soma Sasa">Read Now</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+    </div><!-- /tab-overview -->
+
+    <!-- TAB: FIXTURES -->
+    <div class="tab-panel" id="tab-fixtures">
+      <div style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(233,30,140,.3);border-radius:24px;padding:1.5rem;box-shadow:0 16px 40px rgba(233,30,140,.15);margin-bottom:2rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;">
+          <div style="display:flex;align-items:center;gap:.75rem;">
+            <span style="font-size:1.5rem;">&#x1F4C5;</span>
+            <div>
+              <h3 style="font-family:var(--font-heading);font-size:1.3rem;font-weight:900;color:#fff;margin:0;" data-en="Fixtures &amp; Results" data-sw="Ratiba na Matokeo">Fixtures &amp; Results</h3>
+              <span style="font-size:.78rem;color:var(--text-muted);" data-en="Season 2025/26 — Women's Premier League Official Schedules" data-sw="Msimu wa 2025/26 — Ratiba Rasmi ya Ligi Kuu ya Wanawake">Season 2025/26 — Women's Premier League Official Schedules</span>
+            </div>
+          </div>
+          <span class="badge-pill" style="background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.4);color:#fda4af;font-weight:800;padding:.35rem .85rem;border-radius:20px;font-size:.75rem;" data-en="Official Match Center" data-sw="Kituo Rasmi cha Mechi">Official Match Center</span>
+        </div>
+        <div style="position:relative;width:100%;max-width:480px;margin-bottom:1.25rem;">
+          <input type="text" id="wplFixtureSearch" placeholder="Search team or venue..." data-en-placeholder="Search team or venue..." data-sw-placeholder="Tafuta timu au uwanja..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;padding:.75rem 1rem .75rem 2.8rem;border-radius:22px;font-size:.88rem;outline:none;">
+          <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:1.1rem;top:50%;transform:translateY(-50%);color:var(--text-muted);"></i>
+        </div>
+        <div id="wplFilterContainer" style="display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.4rem;scrollbar-width:thin;">
+          <button class="pill-filter-btn active" data-filter="all" style="background:linear-gradient(135deg,#be185d,#e91e8c);color:#fff;font-size:.78rem;font-weight:800;padding:.45rem 1rem;border-radius:20px;border:none;cursor:pointer;white-space:nowrap;" data-en="All Rounds" data-sw="Rundi Zote">All Rounds</button>
+          <button class="pill-filter-btn" data-filter="upcoming" style="background:rgba(255,255,255,.06);color:#cbd5e1;font-size:.78rem;font-weight:800;padding:.45rem 1rem;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;white-space:nowrap;" data-en="Upcoming" data-sw="Zinazofuata">Upcoming</button>
+          <button class="pill-filter-btn" data-filter="completed" style="background:rgba(255,255,255,.06);color:#cbd5e1;font-size:.78rem;font-weight:800;padding:.45rem 1rem;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;white-space:nowrap;" data-en="Completed (FT)" data-sw="Zilizokwisha (FT)">Completed (FT)</button>
+          <button class="pill-filter-btn" data-filter="rd1-5" style="background:rgba(255,255,255,.06);color:#cbd5e1;font-size:.78rem;font-weight:800;padding:.45rem 1rem;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;white-space:nowrap;">Rd 1-5</button>
+          <button class="pill-filter-btn" data-filter="rd6-10" style="background:rgba(255,255,255,.06);color:#cbd5e1;font-size:.78rem;font-weight:800;padding:.45rem 1rem;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;white-space:nowrap;">Rd 6-10</button>
+          <button class="pill-filter-btn" data-filter="rd11-15" style="background:rgba(255,255,255,.06);color:#cbd5e1;font-size:.78rem;font-weight:800;padding:.45rem 1rem;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;white-space:nowrap;">Rd 11-15</button>
+          <button class="pill-filter-btn" data-filter="rd16-22" style="background:rgba(255,255,255,.06);color:#cbd5e1;font-size:.78rem;font-weight:800;padding:.45rem 1rem;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;white-space:nowrap;">Rd 16-22</button>
+        </div>
+      </div>
+      <div id="wplFixtureList" class="round-matches-2col-grid" style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:0.65rem;width:100%;box-sizing:border-box;">
+        <!-- FEATURED UPCOMING -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd20" data-status="upcoming" style="background:linear-gradient(145deg,rgba(40,10,50,.97),rgba(20,5,30,.98));border:1.5px solid rgba(233,30,140,.55);border-radius:24px;padding:1.6rem;box-shadow:0 16px 40px rgba(233,30,140,.18);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:.75rem;">
+            <span class="badge-pill" style="background:rgba(233,30,140,.25);color:#fda4af;border:1px solid rgba(233,30,140,.45);font-size:.72rem;font-weight:900;" data-en="&#x1F525; TOP OF TABLE CLASH" data-sw="&#x1F525; PAMBANO LA VIONGOZI">&#x1F525; TOP OF TABLE CLASH</span>
+            <span style="font-size:.8rem;color:#e91e8c;font-weight:800;" data-en="Round 20 &#x2022; UPCOMING" data-sw="Rundi 20 &#x2022; INAYOFUATA">Round 20 &#x2022; UPCOMING</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:.5rem;">
+              <img src="images/simba-queens.jpg" style="width:52px;height:52px;border-radius:50%;border:2px solid #e91e8c;object-fit:cover;">
+              <strong style="color:#fff;font-size:1.05rem;">Simba Queens</strong>
+              <span style="font-size:.75rem;color:var(--text-muted);" data-en="Home &#x2022; 1st (64 pts)" data-sw="Nyumbani &#x2022; Wa 1 (Punti 64)">Home &#x2022; 1st (64 pts)</span>
+            </div>
+            <div style="background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.4);padding:.6rem 1.25rem;border-radius:18px;color:#fda4af;font-family:var(--font-heading);font-size:1.3rem;font-weight:900;">VS</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:.5rem;">
+              <img src="images/jkt-quens.jpg" style="width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,.25);object-fit:cover;">
+              <strong style="color:#fff;font-size:1.05rem;">JKT Queens</strong>
+              <span style="font-size:.75rem;color:var(--text-muted);" data-en="Away &#x2022; 2nd (60 pts)" data-sw="Ugenini &#x2022; Wa 2 (Punti 60)">Away &#x2022; 2nd (60 pts)</span>
+            </div>
+          </div>
+          <div style="margin-top:1.25rem;text-align:center;font-size:.8rem;color:var(--text-muted);">
+            <i class="fa-solid fa-location-dot" style="color:#e91e8c;"></i> Uhuru Stadium &#x2022; Dar es Salaam
+          </div>
+        </div>
+        <!-- FT Rd 19 -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd19" data-status="completed" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.6rem;">
+            <span class="badge-pill" style="background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);font-size:.7rem;font-weight:800;" data-en="Round 19 &#x2022; FT" data-sw="Rundi 19 &#x2022; FT">Round 19 &#x2022; FT</span>
+            <span style="font-size:.78rem;color:var(--text-muted);">Uhuru Stadium &#x2022; Dar es Salaam</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;align-items:center;gap:.75rem;justify-content:flex-end;">
+              <strong style="color:#fff;font-size:1rem;">Simba Queens</strong>
+              <img src="images/simba-queens.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div style="background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.4);padding:.4rem 1rem;border-radius:14px;color:#fda4af;font-family:var(--font-heading);font-size:1.15rem;font-weight:900;">3 - 0</div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/yanga.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <strong style="color:#fff;font-size:1rem;">Yanga Women</strong>
+            </div>
+          </div>
+        </div>
+        <!-- FT Rd 8 -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd8" data-status="completed" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.6rem;">
+            <span class="badge-pill" style="background:rgba(233,30,140,.15);color:#fda4af;border:1px solid rgba(233,30,140,.3);font-size:.7rem;font-weight:800;" data-en="Round 8 &#x2022; FT" data-sw="Rundi 8 &#x2022; FT">Round 8 &#x2022; FT</span>
+            <span style="font-size:.78rem;color:var(--text-muted);">Benjamin Mkapa Stadium</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;align-items:center;gap:.75rem;justify-content:flex-end;">
+              <strong style="color:#fff;font-size:1rem;">Simba Queens</strong>
+              <img src="images/simba-queens.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div style="background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.4);padding:.4rem 1rem;border-radius:14px;color:#fda4af;font-family:var(--font-heading);font-size:1.15rem;font-weight:900;">2 - 0</div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/costal-union.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <strong style="color:#fff;font-size:1rem;">Coastal Queens</strong>
+            </div>
+          </div>
+        </div>
+        <!-- FT Rd 3 -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd3" data-status="completed" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.6rem;">
+            <span class="badge-pill" style="background:rgba(56,189,248,.15);color:#38bdf8;border:1px solid rgba(56,189,248,.3);font-size:.7rem;font-weight:800;" data-en="Round 3 &#x2022; FT" data-sw="Rundi 3 &#x2022; FT">Round 3 &#x2022; FT</span>
+            <span style="font-size:.78rem;color:var(--text-muted);">Majaliwa Ground &#x2022; Dar es Salaam</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;align-items:center;gap:.75rem;justify-content:flex-end;">
+              <strong style="color:#fff;font-size:1rem;">JKT Queens</strong>
+              <img src="images/jkt-quens.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div style="background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);padding:.4rem 1rem;border-radius:14px;color:#38bdf8;font-family:var(--font-heading);font-size:1.15rem;font-weight:900;">4 - 1</div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/azam.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <strong style="color:#fff;font-size:1rem;">Azam Queens</strong>
+            </div>
+          </div>
+        </div>
+        <!-- UPCOMING Rd 21 -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd21" data-status="upcoming" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.6rem;">
+            <span class="badge-pill" style="background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);font-size:.7rem;font-weight:800;" data-en="Round 21 &#x2022; UPCOMING" data-sw="Rundi 21 &#x2022; INAYOFUATA">Round 21 &#x2022; UPCOMING</span>
+            <span style="font-size:.78rem;color:var(--text-muted);">CCM Kirumba Stadium &#x2022; Mwanza</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;align-items:center;gap:.75rem;justify-content:flex-end;">
+              <strong style="color:#fff;font-size:1rem;">Yanga Women</strong>
+              <img src="images/yanga.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:.4rem 1rem;border-radius:14px;color:#cbd5e1;font-family:var(--font-heading);font-size:1rem;font-weight:800;">VS</div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/dodoma-jiji.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <strong style="color:#fff;font-size:1rem;">Dodoma Queens</strong>
+            </div>
+          </div>
+        </div>
+        <!-- FT Rd 17 - Match A -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd17" data-status="completed" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.6rem;">
+            <span class="badge-pill" style="background:rgba(233,30,140,.15);color:#fda4af;border:1px solid rgba(233,30,140,.3);font-size:.7rem;font-weight:800;" data-en="Round 17 &#x2022; FT" data-sw="Rundi 17 &#x2022; FT">Round 17 &#x2022; FT</span>
+            <span style="font-size:.78rem;color:var(--text-muted);">Uhuru Stadium &#x2022; Dar es Salaam</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;align-items:center;gap:.75rem;justify-content:flex-end;">
+              <strong style="color:#fff;font-size:1rem;">Simba Queens</strong>
+              <img src="images/simba-queens.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div style="background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.4);padding:.4rem 1rem;border-radius:14px;color:#fda4af;font-family:var(--font-heading);font-size:1.15rem;font-weight:900;">2 - 1</div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/jkt-quens.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <strong style="color:#fff;font-size:1rem;">JKT Queens</strong>
+            </div>
+          </div>
+        </div>
+        <!-- FT Rd 17 - Match B -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd17" data-status="completed" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.6rem;">
+            <span class="badge-pill" style="background:rgba(233,30,140,.15);color:#fda4af;border:1px solid rgba(233,30,140,.3);font-size:.7rem;font-weight:800;">Round 17 &#x2022; FT</span>
+            <span style="font-size:.78rem;color:var(--text-muted);">Benjamin Mkapa Stadium &#x2022; Dar es Salaam</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;align-items:center;gap:.75rem;justify-content:flex-end;">
+              <strong style="color:#fff;font-size:1rem;">Yanga Women</strong>
+              <img src="images/yanga.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div style="background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.4);padding:.4rem 1rem;border-radius:14px;color:#fda4af;font-family:var(--font-heading);font-size:1.15rem;font-weight:900;">3 - 0</div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/costal-union.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <strong style="color:#fff;font-size:1rem;">Coastal Queens</strong>
+            </div>
+          </div>
+        </div>
+        <!-- FT Rd 18 -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd18" data-status="completed" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.6rem;">
+            <span class="badge-pill" style="background:rgba(56,189,248,.15);color:#38bdf8;border:1px solid rgba(56,189,248,.3);font-size:.7rem;font-weight:800;">Round 18 &#x2022; FT</span>
+            <span style="font-size:.78rem;color:var(--text-muted);">Majaliwa Ground &#x2022; Dar es Salaam</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;align-items:center;gap:.75rem;justify-content:flex-end;">
+              <strong style="color:#fff;font-size:1rem;">JKT Queens</strong>
+              <img src="images/jkt-quens.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div style="background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);padding:.4rem 1rem;border-radius:14px;color:#38bdf8;font-family:var(--font-heading);font-size:1.15rem;font-weight:900;">2 - 0</div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/costal-union.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <strong style="color:#fff;font-size:1rem;">Coastal Queens</strong>
+            </div>
+          </div>
+        </div>
+        <!-- FT Rd 9 -->
+        <div class="fixture-card-item wpl-fixture-card" data-round="rd9" data-status="completed" style="background:linear-gradient(145deg,rgba(40,10,50,.95),rgba(20,5,30,.98));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:1.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.6rem;">
+            <span class="badge-pill" style="background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);font-size:.7rem;font-weight:800;">Round 9 &#x2022; FT</span>
+            <span style="font-size:.78rem;color:var(--text-muted);">Benjamin Mkapa Stadium &#x2022; Dar es Salaam</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;text-align:center;">
+            <div style="display:flex;align-items:center;gap:.75rem;justify-content:flex-end;">
+              <strong style="color:#fff;font-size:1rem;">Yanga Women</strong>
+              <img src="images/yanga.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+            </div>
+            <div style="background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);padding:.4rem 1rem;border-radius:14px;color:#4ade80;font-family:var(--font-heading);font-size:1.15rem;font-weight:900;">1 - 1</div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/simba-queens.jpg" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+              <strong style="color:#fff;font-size:1rem;">Simba Queens</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /tab-fixtures -->
+
+
+    <!-- TAB: TEAMS -->
+    <div class="tab-panel" id="tab-teams">
+      <div style="margin-bottom:2rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h2 style="font-family:var(--font-heading);font-size:1.6rem;font-weight:900;color:#fff;" data-en="Women's Premier League Clubs" data-sw="Klabu za Ligi Kuu ya Wanawake">Women's Premier League Clubs</h2>
+            <span style="font-size:.85rem;color:var(--text-muted);" data-en="12 Elite Clubs — Season 2025/26" data-sw="Klabu 12 za Juu — Msimu wa 2025/26">12 Elite Clubs — Season 2025/26</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;">
+          <!-- 1. Simba Queens -->
+          <div class="wpl-club-card" style="background:linear-gradient(145deg,rgba(40,10,50,.97),rgba(20,5,30,.98));border:1.5px solid rgba(233,30,140,.55);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/simba-queens.jpg" style="width:64px;height:64px;border-radius:50%;border:2.5px solid #e91e8c;margin-bottom:.75rem;object-fit:cover;box-shadow:0 0 16px rgba(233,30,140,.4);">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Simba Queens</h3>
+            <span style="font-size:.75rem;color:#e91e8c;font-weight:800;">Queens of the East &#x2022; 5 Titles</span>
+            <div style="margin:1rem 0;font-size:.78rem;color:var(--text-muted);">Uhuru Stadium &#x2022; Dar es Salaam</div>
+            <div style="background:rgba(233,30,140,.15);color:#fda4af;padding:.4rem;border-radius:12px;font-weight:800;font-size:.8rem;">1st &#x2022; 64 PTS</div>
+          </div>
+          <!-- 2. JKT Queens -->
+          <div class="wpl-club-card" style="background:linear-gradient(145deg,rgba(20,30,50,.97),rgba(10,20,40,.98));border:1.5px solid rgba(56,189,248,.5);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/jkt-quens.jpg" style="width:64px;height:64px;border-radius:50%;border:2.5px solid #38bdf8;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">JKT Queens</h3>
+            <span style="font-size:.75rem;color:#38bdf8;font-weight:800;">Army Queens &#x2022; 3 Titles</span>
+            <div style="margin:1rem 0;font-size:.78rem;color:var(--text-muted);">Majaliwa Ground &#x2022; Dar es Salaam</div>
+            <div style="background:rgba(56,189,248,.15);color:#38bdf8;padding:.4rem;border-radius:12px;font-weight:800;font-size:.8rem;">2nd &#x2022; 60 PTS</div>
+          </div>
+          <!-- 3. Yanga Women -->
+          <div class="wpl-club-card" style="background:linear-gradient(145deg,rgba(16,36,20,.97),rgba(6,20,12,.98));border:1.5px solid rgba(34,197,94,.5);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/yanga.jpg" style="width:64px;height:64px;border-radius:50%;border:2.5px solid #22c55e;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Yanga Women</h3>
+            <span style="font-size:.75rem;color:#4ade80;font-weight:800;">Wananchi Queens</span>
+            <div style="margin:1rem 0;font-size:.78rem;color:var(--text-muted);">Benjamin Mkapa Stadium &#x2022; Dar es Salaam</div>
+            <div style="background:rgba(34,197,94,.15);color:#4ade80;padding:.4rem;border-radius:12px;font-weight:800;font-size:.8rem;">3rd &#x2022; 51 PTS</div>
+          </div>
+          <!-- 4. Azam Queens -->
+          <div class="wpl-club-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/azam.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Azam Queens</h3>
+            <span style="font-size:.75rem;color:var(--text-muted);font-weight:700;">Ice Cream Queens</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">Azam Complex Chamazi &#x2022; Dar es Salaam</div>
+            <div style="background:rgba(255,255,255,.06);color:#cbd5e1;padding:.4rem;border-radius:12px;font-size:.8rem;">4th &#x2022; 46 PTS</div>
+          </div>
+          <!-- 5. Coastal Queens -->
+          <div class="wpl-club-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/costal-union.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Coastal Queens</h3>
+            <span style="font-size:.75rem;color:var(--text-muted);font-weight:700;">Pwani Queens</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">Mkwakwani Stadium &#x2022; Tanga</div>
+            <div style="background:rgba(255,255,255,.06);color:#cbd5e1;padding:.4rem;border-radius:12px;font-size:.8rem;">5th &#x2022; 38 PTS</div>
+          </div>
+          <!-- 6. Dodoma Queens -->
+          <div class="wpl-club-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/dodoma-jiji.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Dodoma Queens</h3>
+            <span style="font-size:.75rem;color:var(--text-muted);font-weight:700;">Capital City Queens</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">Jamhuri Stadium &#x2022; Dodoma</div>
+            <div style="background:rgba(255,255,255,.06);color:#cbd5e1;padding:.4rem;border-radius:12px;font-size:.8rem;">6th &#x2022; 32 PTS</div>
+          </div>
+          <!-- 7. Singida Queens -->
+          <div class="wpl-club-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/singida.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Singida Queens</h3>
+            <span style="font-size:.75rem;color:var(--text-muted);font-weight:700;">Centre Queens</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">Liti Stadium &#x2022; Singida</div>
+            <div style="background:rgba(255,255,255,.06);color:#cbd5e1;padding:.4rem;border-radius:12px;font-size:.8rem;">7th &#x2022; 30 PTS</div>
+          </div>
+          <!-- 8. TRA Queens -->
+          <div class="wpl-club-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/tra-united.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">TRA Queens</h3>
+            <span style="font-size:.75rem;color:var(--text-muted);font-weight:700;">Tax Ladies</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">Jamhuri Stadium &#x2022; Dodoma</div>
+            <div style="background:rgba(255,255,255,.06);color:#cbd5e1;padding:.4rem;border-radius:12px;font-size:.8rem;">8th &#x2022; 26 PTS</div>
+          </div>
+          <!-- 9. Kagera Women -->
+          <div class="wpl-club-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/jkt-tanzania.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Kagera Women</h3>
+            <span style="font-size:.75rem;color:var(--text-muted);font-weight:700;">Ziwa Victoria Queens</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">Kaitaba Stadium &#x2022; Bukoba</div>
+            <div style="background:rgba(255,255,255,.06);color:#cbd5e1;padding:.4rem;border-radius:12px;font-size:.8rem;">9th &#x2022; 22 PTS</div>
+          </div>
+          <!-- 10. Mwanza Queens -->
+          <div class="wpl-club-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/pamba-jiji.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Mwanza Queens</h3>
+            <span style="font-size:.75rem;color:var(--text-muted);font-weight:700;">Ziwa Queens</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">CCM Kirumba Stadium &#x2022; Mwanza</div>
+            <div style="background:rgba(255,255,255,.06);color:#cbd5e1;padding:.4rem;border-radius:12px;font-size:.8rem;">10th &#x2022; 18 PTS</div>
+          </div>
+          <!-- 11. Namungo Women (relegation) -->
+          <div class="wpl-club-card" style="background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.2);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/namungo-fc.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Namungo Women</h3>
+            <span style="font-size:.75rem;color:#f87171;font-weight:700;">Namungo Ladies</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">Majaliwa Stadium &#x2022; Ruangwa</div>
+            <div style="background:rgba(239,68,68,.1);color:#f87171;padding:.4rem;border-radius:12px;font-size:.8rem;">11th &#x2022; 10 PTS</div>
+          </div>
+          <!-- 12. Mbeya Queens (relegation) -->
+          <div class="wpl-club-card" style="background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.2);border-radius:20px;padding:1.4rem;text-align:center;">
+            <img src="images/mashujaa-fc.jpg" style="width:64px;height:64px;border-radius:50%;margin-bottom:.75rem;object-fit:cover;">
+            <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:900;color:#fff;margin:0;">Mbeya Queens</h3>
+            <span style="font-size:.75rem;color:#f87171;font-weight:700;">Southern Queens</span>
+            <div style="margin:.75rem 0;font-size:.78rem;color:var(--text-muted);">Sokoine Stadium &#x2022; Mbeya</div>
+            <div style="background:rgba(239,68,68,.1);color:#f87171;padding:.4rem;border-radius:12px;font-size:.8rem;">12th &#x2022; 6 PTS</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /tab-teams -->
+
+
+
+    <!-- TAB: TRANSFERS -->
+    <div class="tab-panel" id="tab-transfers">
+      <div style="background:linear-gradient(145deg,rgba(40,10,50,.97),rgba(20,5,30,.98));border:1px solid rgba(233,30,140,.35);border-radius:24px;padding:1.75rem;box-shadow:0 16px 45px rgba(233,30,140,.12);">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:1rem;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h2 style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#fff;margin:0;" data-en="2025/26 Official Transfer Window" data-sw="Dirisha Rasmi la Usajili 2025/26">2025/26 Official Transfer Window</h2>
+            <span style="font-size:.8rem;color:var(--text-muted);" data-en="All confirmed deals in Tanzanian women's football" data-sw="Usajili wote uliothibitishwa wa soka la wanawake Tanzania.">All confirmed deals in Tanzanian women's football</span>
+          </div>
+          <span class="badge-pill" style="background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);color:#4ade80;font-weight:800;padding:.4rem 1rem;border-radius:20px;font-size:.78rem;" data-en="WINDOW OPEN" data-sw="DIRISHA WAZI">WINDOW OPEN</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.2rem;background:rgba(233,30,140,.08);border:1px solid rgba(233,30,140,.25);padding:1rem 1.25rem;border-radius:18px;">
+            <img src="images/fatma-nhonoli.png" style="width:50px;height:50px;border-radius:50%;border:2px solid #e91e8c;object-fit:cover;">
+            <div><strong style="color:#fff;font-size:1.05rem;display:block;">Fatma Nhonoli</strong><span style="font-size:.78rem;color:#fda4af;font-weight:700;">Simba Queens — Contract Extension (2 Years)</span></div>
+            <span style="background:rgba(233,30,140,.18);color:#fda4af;border:1px solid rgba(233,30,140,.4);font-size:.75rem;font-weight:800;padding:.3rem .75rem;border-radius:14px;">RENEWAL</span>
+          </div>
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.2rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:1rem 1.25rem;border-radius:18px;">
+            <img src="images/neema-hassan.png" style="width:50px;height:50px;border-radius:50%;border:2px solid #38bdf8;object-fit:cover;">
+            <div><strong style="color:#fff;font-size:1.05rem;display:block;">Neema Hassan</strong><span style="font-size:.78rem;color:#38bdf8;font-weight:700;">Coastal Queens to JKT Queens</span></div>
+            <span style="background:rgba(56,189,248,.15);color:#38bdf8;border:1px solid rgba(56,189,248,.4);font-size:.75rem;font-weight:800;padding:.3rem .75rem;border-radius:14px;">CONFIRMED</span>
+          </div>
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.2rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:1rem 1.25rem;border-radius:18px;">
+            <img src="images/maua-rubibi.png" style="width:50px;height:50px;border-radius:50%;border:2px solid #4ade80;object-fit:cover;">
+            <div><strong style="color:#fff;font-size:1.05rem;display:block;">Maua Rubibi</strong><span style="font-size:.78rem;color:#4ade80;font-weight:700;">Yanga Women — Contract Renewal</span></div>
+            <span style="background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.4);font-size:.75rem;font-weight:800;padding:.3rem .75rem;border-radius:14px;">RENEWAL</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- /tab-transfers -->
+
+    <!-- TAB: SEASON HISTORY -->
+    <div class="tab-panel" id="tab-history">
+      <div style="background:linear-gradient(145deg,rgba(40,10,50,.97),rgba(20,5,30,.98));border:1px solid rgba(233,30,140,.35);border-radius:24px;padding:1.8rem;box-shadow:0 16px 45px rgba(233,30,140,.12);margin-bottom:2rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:1.2rem;margin-bottom:1.5rem;">
+          <div>
+            <h2 style="font-family:var(--font-heading);font-size:1.65rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:.6rem;margin:0;" data-en="Women's Premier League Roll of Honor" data-sw="Orodha ya Mabingwa wa Ligi Kuu ya Wanawake">
+              &#x1F3C6; Women's Premier League Roll of Honor
+            </h2>
+            <span style="font-size:.85rem;color:var(--text-muted);" data-en="Official Season Champions, Runners-Up and Golden Boot Record Holders" data-sw="Mabingwa Rasmi wa Msimu, Waliofika Pili na Wafungaji Bora">Official Season Champions, Runners-Up and Golden Boot Record Holders</span>
+          </div>
+          <span class="badge-pill" style="background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.4);color:#fda4af;font-weight:900;padding:.4rem 1rem;border-radius:20px;font-size:.78rem;" data-en="HALL OF FAME" data-sw="UKUMBI WA SIFA">HALL OF FAME</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+          <div style="display:flex;align-items:center;gap:.85rem;background:rgba(233,30,140,.1);border:1px solid rgba(233,30,140,.3);padding:.85rem 1.1rem;border-radius:18px;">
+            <img src="images/simba-queens.jpg" style="width:42px;height:42px;border-radius:50%;border:2px solid #e91e8c;object-fit:cover;">
+            <div><strong style="color:#fff;font-size:.95rem;display:block;">Simba Queens</strong><span style="font-size:.75rem;color:#fda4af;font-weight:800;" data-en="5 League Titles (Record)" data-sw="Mataji 5 ya Ligi (Rekodi)">5 League Titles (Record)</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:.85rem;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);padding:.85rem 1.1rem;border-radius:18px;">
+            <img src="images/jkt-quens.jpg" style="width:42px;height:42px;border-radius:50%;border:2px solid #38bdf8;object-fit:cover;">
+            <div><strong style="color:#fff;font-size:.95rem;display:block;">JKT Queens</strong><span style="font-size:.75rem;color:#38bdf8;font-weight:800;" data-en="3 League Titles" data-sw="Mataji 3 ya Ligi">3 League Titles</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:.85rem;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);padding:.85rem 1.1rem;border-radius:18px;">
+            <img src="images/yanga.jpg" style="width:42px;height:42px;border-radius:50%;border:2px solid #22c55e;object-fit:cover;">
+            <div><strong style="color:#fff;font-size:.95rem;display:block;">Yanga Women</strong><span style="font-size:.75rem;color:#4ade80;font-weight:800;" data-en="2 League Titles" data-sw="Mataji 2 ya Ligi">2 League Titles</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Season cards -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <!-- 2024/25 -->
+        <div class="wpl-season-card" style="background:linear-gradient(145deg,rgba(40,10,50,.97),rgba(20,5,30,.98));border:1.5px solid rgba(233,30,140,.5);border-radius:24px;padding:1.5rem;box-shadow:0 12px 35px rgba(233,30,140,.12);">
+          <div style="display:grid;grid-template-columns:140px 1fr 1fr 1.2fr;align-items:center;gap:1.25rem;" class="wpl-season-row">
+            <div>
+              <span style="background:linear-gradient(135deg,#be185d,#e91e8c);color:#fff;font-family:var(--font-heading);font-size:.9rem;font-weight:900;padding:.45rem 1rem;border-radius:20px;display:inline-block;box-shadow:0 0 14px rgba(233,30,140,.4);">2024/25</span>
+              <span style="font-size:.72rem;color:var(--text-muted);display:block;margin-top:.35rem;" data-en="CURRENT CHAMPIONS" data-sw="MABINGWA WALIOPU">CURRENT CHAMPIONS</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.85rem;">
+              <img src="images/simba-queens.jpg" style="width:48px;height:48px;border-radius:50%;border:2.5px solid #e91e8c;object-fit:cover;box-shadow:0 0 12px rgba(233,30,140,.4);">
+              <div><span style="font-size:.68rem;color:#fda4af;font-weight:900;text-transform:uppercase;">&#x1F451; CHAMPION</span><strong style="color:#fff;font-size:1.05rem;display:block;">Simba Queens</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/jkt-quens.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.2);">
+              <div><span style="font-size:.68rem;color:#cbd5e1;font-weight:800;">&#x1F948; RUNNER-UP</span><strong style="color:#cbd5e1;font-size:.95rem;display:block;">JKT Queens</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);padding:.65rem .85rem;border-radius:16px;">
+              <img src="images/fatma-nhonoli.png" style="width:42px;height:42px;border-radius:50%;border:2px solid #e91e8c;object-fit:cover;">
+              <div><span style="font-size:.68rem;color:#fda4af;font-weight:900;">&#x1F947; GOLDEN BOOT</span><strong style="color:#fff;font-size:.88rem;display:block;">Fatma Nhonoli</strong><span style="font-size:.72rem;color:#4ade80;font-weight:800;">22 Goals</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 2023/24 -->
+        <div class="wpl-season-card" style="background:linear-gradient(145deg,rgba(40,10,50,.97),rgba(20,5,30,.98));border:1.5px solid rgba(233,30,140,.5);border-radius:24px;padding:1.5rem;box-shadow:0 12px 35px rgba(233,30,140,.12);">
+          <div style="display:grid;grid-template-columns:140px 1fr 1fr 1.2fr;align-items:center;gap:1.25rem;" class="wpl-season-row">
+            <div>
+              <span style="background:rgba(255,255,255,.1);color:#fff;font-family:var(--font-heading);font-size:.9rem;font-weight:900;padding:.45rem 1rem;border-radius:20px;display:inline-block;border:1px solid rgba(255,255,255,.15);">2023/24</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.85rem;">
+              <img src="images/simba-queens.jpg" style="width:48px;height:48px;border-radius:50%;border:2.5px solid #e91e8c;object-fit:cover;">
+              <div><span style="font-size:.68rem;color:#fda4af;font-weight:900;">&#x1F451; CHAMPION</span><strong style="color:#fff;font-size:1.05rem;display:block;">Simba Queens</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/yanga.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid #22c55e;">
+              <div><span style="font-size:.68rem;color:#cbd5e1;font-weight:800;">&#x1F948; RUNNER-UP</span><strong style="color:#cbd5e1;font-size:.95rem;display:block;">Yanga Women</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);padding:.65rem .85rem;border-radius:16px;">
+              <img src="images/fatma-nhonoli.png" style="width:42px;height:42px;border-radius:50%;border:2px solid #e91e8c;object-fit:cover;">
+              <div><span style="font-size:.68rem;color:#fda4af;font-weight:900;">&#x1F947; GOLDEN BOOT</span><strong style="color:#fff;font-size:.88rem;display:block;">Fatma Nhonoli</strong><span style="font-size:.72rem;color:#4ade80;font-weight:800;">19 Goals</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 2022/23 -->
+        <div class="wpl-season-card" style="background:linear-gradient(145deg,rgba(20,30,50,.97),rgba(10,20,40,.98));border:1.5px solid rgba(56,189,248,.5);border-radius:24px;padding:1.5rem;box-shadow:0 12px 35px rgba(56,189,248,.12);">
+          <div style="display:grid;grid-template-columns:140px 1fr 1fr 1.2fr;align-items:center;gap:1.25rem;" class="wpl-season-row">
+            <div>
+              <span style="background:rgba(56,189,248,.2);color:#38bdf8;border:1px solid rgba(56,189,248,.4);font-family:var(--font-heading);font-size:.9rem;font-weight:900;padding:.45rem 1rem;border-radius:20px;display:inline-block;">2022/23</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.85rem;">
+              <img src="images/jkt-quens.jpg" style="width:48px;height:48px;border-radius:50%;border:2.5px solid #38bdf8;object-fit:cover;box-shadow:0 0 12px rgba(56,189,248,.4);">
+              <div><span style="font-size:.68rem;color:#38bdf8;font-weight:900;">&#x1F451; CHAMPION</span><strong style="color:#fff;font-size:1.05rem;display:block;">JKT Queens</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/simba-queens.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.2);">
+              <div><span style="font-size:.68rem;color:#cbd5e1;font-weight:800;">&#x1F948; RUNNER-UP</span><strong style="color:#cbd5e1;font-size:.95rem;display:block;">Simba Queens</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);padding:.65rem .85rem;border-radius:16px;">
+              <img src="images/neema-hassan.png" style="width:42px;height:42px;border-radius:50%;border:2px solid #38bdf8;object-fit:cover;">
+              <div><span style="font-size:.68rem;color:#38bdf8;font-weight:900;">&#x1F947; GOLDEN BOOT</span><strong style="color:#fff;font-size:.88rem;display:block;">Neema Hassan</strong><span style="font-size:.72rem;color:#4ade80;font-weight:800;">16 Goals</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 2021/22 -->
+        <div class="wpl-season-card" style="background:linear-gradient(145deg,rgba(16,36,20,.97),rgba(6,20,12,.98));border:1.5px solid rgba(34,197,94,.5);border-radius:24px;padding:1.5rem;box-shadow:0 12px 35px rgba(34,197,94,.12);">
+          <div style="display:grid;grid-template-columns:140px 1fr 1fr 1.2fr;align-items:center;gap:1.25rem;" class="wpl-season-row">
+            <div>
+              <span style="background:rgba(34,197,94,.2);color:#4ade80;border:1px solid rgba(34,197,94,.4);font-family:var(--font-heading);font-size:.9rem;font-weight:900;padding:.45rem 1rem;border-radius:20px;display:inline-block;">2021/22</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.85rem;">
+              <img src="images/yanga.jpg" style="width:48px;height:48px;border-radius:50%;border:2.5px solid #22c55e;object-fit:cover;box-shadow:0 0 12px rgba(34,197,94,.4);">
+              <div><span style="font-size:.68rem;color:#4ade80;font-weight:900;">&#x1F451; CHAMPION</span><strong style="color:#fff;font-size:1.05rem;display:block;">Yanga Women</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/jkt-quens.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.2);">
+              <div><span style="font-size:.68rem;color:#cbd5e1;font-weight:800;">&#x1F948; RUNNER-UP</span><strong style="color:#cbd5e1;font-size:.95rem;display:block;">JKT Queens</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);padding:.65rem .85rem;border-radius:16px;">
+              <img src="images/maua-rubibi.png" style="width:42px;height:42px;border-radius:50%;border:2px solid #22c55e;object-fit:cover;">
+              <div><span style="font-size:.68rem;color:#4ade80;font-weight:900;">&#x1F947; GOLDEN BOOT</span><strong style="color:#fff;font-size:.88rem;display:block;">Maua Rubibi</strong><span style="font-size:.72rem;color:#4ade80;font-weight:800;">15 Goals</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 2020/21 -->
+        <div class="wpl-season-card" style="background:linear-gradient(145deg,rgba(40,10,50,.97),rgba(20,5,30,.98));border:1.5px solid rgba(233,30,140,.4);border-radius:24px;padding:1.5rem;box-shadow:0 12px 35px rgba(233,30,140,.08);">
+          <div style="display:grid;grid-template-columns:140px 1fr 1fr 1.2fr;align-items:center;gap:1.25rem;" class="wpl-season-row">
+            <div>
+              <span style="background:rgba(255,255,255,.08);color:#94a3b8;border:1px solid rgba(255,255,255,.12);font-family:var(--font-heading);font-size:.9rem;font-weight:900;padding:.45rem 1rem;border-radius:20px;display:inline-block;">2020/21</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.85rem;">
+              <img src="images/simba-queens.jpg" style="width:48px;height:48px;border-radius:50%;border:2.5px solid #e91e8c;object-fit:cover;">
+              <div><span style="font-size:.68rem;color:#fda4af;font-weight:900;">&#x1F451; CHAMPION</span><strong style="color:#fff;font-size:1.05rem;display:block;">Simba Queens</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;">
+              <img src="images/yanga.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.2);">
+              <div><span style="font-size:.68rem;color:#cbd5e1;font-weight:800;">&#x1F948; RUNNER-UP</span><strong style="color:#cbd5e1;font-size:.95rem;display:block;">Yanga Women</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);padding:.65rem .85rem;border-radius:16px;">
+              <img src="images/fatma-nhonoli.png" style="width:42px;height:42px;border-radius:50%;border:2px solid #e91e8c;object-fit:cover;">
+              <div><span style="font-size:.68rem;color:#fda4af;font-weight:900;">&#x1F947; GOLDEN BOOT</span><strong style="color:#fff;font-size:.88rem;display:block;">Fatma Nhonoli</strong><span style="font-size:.72rem;color:#4ade80;font-weight:800;">14 Goals</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /tab-history -->
+
+    <!-- TAB: NEWS -->
+    <div class="tab-panel" id="tab-news">
+      <h2 style="font-family:var(--font-heading);font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:1.5rem;" data-en="Women's Premier League News &amp; Media" data-sw="Habari na Vyombo vya Habari vya Ligi Kuu ya Wanawake">Women's Premier League News &amp; Media</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;">
+        <div class="widget-glass-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(233,30,140,.25);border-radius:20px;overflow:hidden;transition:all .3s ease;">
+          <img src="images/simba-queens.jpg" style="width:100%;height:180px;object-fit:cover;">
+          <div style="padding:1.25rem;">
+            <span class="badge-pill" style="background:rgba(233,30,140,.2);color:#fda4af;font-size:.7rem;font-weight:800;">MATCH PREVIEW</span>
+            <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin:.6rem 0 .4rem;" data-en="Simba Queens vs JKT Queens: Title Showdown Preview" data-sw="Simba Queens dhidi ya JKT Queens: Mapambano ya Ubingwa">Simba Queens vs JKT Queens: Title Showdown Preview</h3>
+            <p style="font-size:.8rem;color:var(--text-muted);line-height:1.4;" data-en="The ultimate title decider awaits as Tanzania's two biggest women's clubs clash in Round 20." data-sw="Pambano la mwisho linangoja huku klabu mbili kubwa za wanawake Tanzania zikigongana katika Rundi ya 20.">The ultimate title decider awaits as Tanzania's two biggest women's clubs clash in Round 20.</p>
+            <a href="javascript:void(0);" class="section-link" style="font-size:.8rem;" data-en="Read Article &#x2192;" data-sw="Soma Makala &#x2192;">Read Article &#x2192;</a>
+          </div>
+        </div>
+        <div class="widget-glass-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;transition:all .3s ease;">
+          <img src="images/fatma-nhonoli.png" style="width:100%;height:180px;object-fit:cover;">
+          <div style="padding:1.25rem;">
+            <span class="badge-pill" style="background:rgba(255,193,7,.2);color:#ffd700;font-size:.7rem;font-weight:800;">PLAYER SPOTLIGHT</span>
+            <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin:.6rem 0 .4rem;" data-en="Fatma Nhonoli: Tanzania Golden Boot Leader 22 Goals" data-sw="Fatma Nhonoli: Kiongozi wa Buti ya Dhahabu Tanzania — Mabao 22">Fatma Nhonoli: Tanzania's Golden Boot Leader — 22 Goals</h3>
+            <p style="font-size:.8rem;color:var(--text-muted);line-height:1.4;" data-en="The Simba Queens striker scores 22 goals in 22 matches — a record-breaking pace." data-sw="Mshambuliaji wa Simba Queens amefunga mabao 22 katika mechi 22 — rekodi.">The Simba Queens striker has scored an incredible 22 goals in 22 matches — a record-breaking pace.</p>
+            <a href="javascript:void(0);" class="section-link" style="font-size:.8rem;" data-en="Read Article &#x2192;" data-sw="Soma Makala &#x2192;">Read Article &#x2192;</a>
+          </div>
+        </div>
+        <div class="widget-glass-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;transition:all .3s ease;">
+          <img src="images/jkt-queens-won-community-shield.jpg" style="width:100%;height:180px;object-fit:cover;">
+          <div style="padding:1.25rem;">
+            <span class="badge-pill" style="background:rgba(34,197,94,.2);color:#4ade80;font-size:.7rem;font-weight:800;">AWARDS</span>
+            <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin:.6rem 0 .4rem;" data-en="JKT Queens Win Community Shield in Style" data-sw="JKT Queens Wanashinda Community Shield kwa Kipekee">JKT Queens Win Community Shield in Style</h3>
+            <p style="font-size:.8rem;color:var(--text-muted);line-height:1.4;" data-en="JKT Queens showed their class with a dominant community shield win ahead of the new season." data-sw="JKT Queens walionyesha darasa lao kwa kushinda Community Shield kabla ya msimu mpya.">JKT Queens showed their class with a dominant community shield win ahead of the new season.</p>
+            <a href="javascript:void(0);" class="section-link" style="font-size:.8rem;" data-en="Read Article &#x2192;" data-sw="Soma Makala &#x2192;">Read Article &#x2192;</a>
+          </div>
+        </div>
+        <div class="widget-glass-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(233,30,140,.2);border-radius:20px;overflow:hidden;transition:all .3s ease;">
+          <img src="images/yanga.jpg" style="width:100%;height:180px;object-fit:cover;">
+          <div style="padding:1.25rem;">
+            <span class="badge-pill" style="background:rgba(233,30,140,.2);color:#fda4af;font-size:.7rem;font-weight:800;">MATCH RESULT</span>
+            <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin:.6rem 0 .4rem;">Yanga Women Thrash Coastal Queens 3-0 in Round 17</h3>
+            <p style="font-size:.8rem;color:var(--text-muted);line-height:1.4;">Maua Rubibi scored twice as Yanga Women secured a dominant three-point victory to stay in the title race.</p>
+            <a href="javascript:void(0);" class="section-link" style="font-size:.8rem;">Read Article &#x2192;</a>
+          </div>
+        </div>
+        <div class="widget-glass-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,193,7,.2);border-radius:20px;overflow:hidden;transition:all .3s ease;">
+          <img src="images/women-ligue-nbc.png" style="width:100%;height:180px;object-fit:cover;">
+          <div style="padding:1.25rem;">
+            <span class="badge-pill" style="background:rgba(255,193,7,.2);color:#ffd700;font-size:.7rem;font-weight:800;">GOLDEN BOOT</span>
+            <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin:.6rem 0 .4rem;">Fatma Nhonoli Extends Golden Boot Lead to 22 Goals</h3>
+            <p style="font-size:.8rem;color:var(--text-muted);line-height:1.4;">Simba Queens captain is on course to break the all-time WPL single-season scoring record with 4 rounds remaining.</p>
+            <a href="javascript:void(0);" class="section-link" style="font-size:.8rem;">Read Article &#x2192;</a>
+          </div>
+        </div>
+        <div class="widget-glass-card" style="background:rgba(255,255,255,.03);border:1px solid rgba(56,189,248,.2);border-radius:20px;overflow:hidden;transition:all .3s ease;">
+          <img src="images/women_troph.png" style="width:100%;height:180px;object-fit:cover;">
+          <div style="padding:1.25rem;">
+            <span class="badge-pill" style="background:rgba(56,189,248,.2);color:#38bdf8;font-size:.7rem;font-weight:800;">SCHEDULE</span>
+            <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin:.6rem 0 .4rem;">WPL Announces Final Fixture Schedule for Rounds 20-22</h3>
+            <p style="font-size:.8rem;color:var(--text-muted);line-height:1.4;">TPLB releases final matchday schedule as the title race enters its most crucial phase of the season.</p>
+            <a href="javascript:void(0);" class="section-link" style="font-size:.8rem;">Read Article &#x2192;</a>
+          </div>
+        </div>
+      </div>
+    </div><!-- /tab-news -->
+
+  </div>
+</main>
+
+<!-- OFFICIAL SPONSORS & COMPETITIONS SHOWCASE SECTION -->
+<section class="sponsors-showcase-section" id="partners">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 2rem;">
+      <span class="badge-pill" style="background:rgba(233,30,140,0.2); color:#fda4af; border:1px solid rgba(233,30,140,0.4); padding:0.35rem 1rem; font-size:0.75rem; font-weight:900; letter-spacing:1.5px; text-transform:uppercase;" data-en="OFFICIAL SPONSORS & COMPETITIONS" data-sw="WADHAMINI NA MASHINDANO RASMI">
+        OFFICIAL SPONSORS & COMPETITIONS
+      </span>
+      <h2 style="font-family:var(--font-heading); font-size:2rem; font-weight:900; color:#fff; margin-top:0.6rem;" data-en="OUR OFFICIAL PARTNERS & LEAGUES" data-sw="WADHAMINI NA LIGI YETU">
+        OUR OFFICIAL PARTNERS & LEAGUES
+      </h2>
+    </div>
+
+    <!-- TOP ROW: CORPORATE SPONSORS (WHITE CARD BOXES MATCHING SCREENSHOT) -->
+    <div class="sponsors-corporate-grid">
+      <div class="sponsor-white-card" title="NBC Bank (National Bank of Commerce)">
+        <img src="images/NBC-1 bank.jpg" alt="NBC Bank Title Sponsor">
+      </div>
+      <div class="sponsor-white-card" title="CRDB Bank">
+        <img src="images/crdb bank.jpg" alt="CRDB Bank">
+      </div>
+      <div class="sponsor-white-card" title="Azam Media">
+        <img src="images/azam media.jpg" alt="Azam Media">
+      </div>
+      <div class="sponsor-white-card" title="TBC (Tanzania Broadcasting Corporation)">
+        <img src="images/tbc tanzania.png" alt="TBC Broadcast Partner">
+      </div>
+    </div>
+
+    <!-- BOTTOM ROW: COMPETITIONS & LEAGUES (CLEAN BADGES MATCHING SCREENSHOT) -->
+    <div class="competitions-badge-row">
+      <a href="nbc-premier-league.html" class="comp-badge-item">
+        <img src="images/nbc-pl-logo.png" alt="NBC Premier League">
+        <span data-en="NBC Premier League" data-sw="NBC Premier League">NBC Premier League</span>
+      </a>
+      <div class="comp-badge-item">
+        <img src="images/crdb-cup.jpg" alt="CRDB Bank Federation Cup">
+        <span data-en="CRDB Federation Cup" data-sw="Kombe la Shirikisho la CRDB">CRDB Federation Cup</span>
+      </div>
+      <a href="womens-premier-league.html" class="comp-badge-item">
+        <img src="images/Tanzania Women premier league.png" alt="Women's Premier League">
+        <span data-en="Women's Premier League" data-sw="Ligi Kuu ya Wanawake">Women's Premier League</span>
+      </a>
+      <div class="comp-badge-item">
+        <img src="images/Tanzania beach soccer.png" alt="Beach Soccer League">
+        <span data-en="Beach Soccer League" data-sw="Ligi ya Soka la Ufukweni">Beach Soccer League</span>
+      </div>
+      <div class="comp-badge-item">
+        <img src="images/Tanzania Reaginal champions league.png" alt="Regional Champions League">
+        <span data-en="Regional Champions League" data-sw="Ligi ya Mabingwa wa Mikoa">Regional Champions League</span>
+      </div>
+      <a href="championship-league.html" class="comp-badge-item">
+        <img src="images/Tz Nbc championship.png" alt="NBC Championship League">
+        <span data-en="Championship League" data-sw="Ligi ya Championship">Championship League</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Scripts -->
+<script>
+  (function(){
+    // WPL Fixture Filter
+    var pills = document.querySelectorAll('#tab-fixtures .pill-filter-btn');
+    var cards = document.querySelectorAll('#wplFixtureList .fixture-card-item');
+    var srch  = document.getElementById('wplFixtureSearch');
+    var active = 'all';
+    function doFilter(){
+      var q = srch ? srch.value.toLowerCase().trim() : '';
+      cards.forEach(function(c){
+        var st = (c.getAttribute('data-status')||'').toLowerCase();
+        var rd = parseInt((c.getAttribute('data-round')||'').replace('rd',''))||0;
+        var txt= c.textContent.toLowerCase();
+        var show = false;
+        if(active==='all') show=true;
+        else if(active==='upcoming') show=st==='upcoming';
+        else if(active==='completed') show=st==='completed';
+        else if(active==='rd1-5') show=rd>=1&&rd<=5;
+        else if(active==='rd6-10') show=rd>=6&&rd<=10;
+        else if(active==='rd11-15') show=rd>=11&&rd<=15;
+        else if(active==='rd16-22') show=rd>=16&&rd<=22;
+        if(q&&!txt.includes(q)) show=false;
+        c.style.display=show?'block':'none';
+      });
+    }
+    pills.forEach(function(b){
+      b.addEventListener('click',function(){
+        pills.forEach(function(x){
+          x.classList.remove('active');
+          x.style.background='rgba(255,255,255,.06)';
+          x.style.color='#cbd5e1';
+          x.style.border='1px solid rgba(255,255,255,.1)';
+        });
+        b.classList.add('active');
+        b.style.background='linear-gradient(135deg,#be185d,#e91e8c)';
+        b.style.color='#fff';
+        b.style.border='none';
+        active=b.getAttribute('data-filter')||'all';
+        doFilter();
+      });
+    });
+    if(srch) srch.addEventListener('input',doFilter);
+
+    // Standings search
+    var ts = document.getElementById('wplTableSearchInput');
+    var tb = document.getElementById('wplStandingsTable');
+    if(ts&&tb){
+      ts.addEventListener('input',function(){
+        var q=this.value.toLowerCase().trim();
+        tb.querySelectorAll('tbody tr').forEach(function(r){
+          r.style.display=(!q||r.textContent.toLowerCase().includes(q))?'':'none';
+        });
+      });
+    }
+
+    // =========================================================
+    // WPL INTERACTIVE MATCH ROUNDS SELECTOR ENGINE (ROUNDS 1-22)
+    // =========================================================
+    var wplClubs = {
+      simba: { name: 'Simba Queens', crest: 'images/simba-queens.jpg', stadium: 'Uhuru Stadium • Dar es Salaam' },
+      jkt: { name: 'JKT Queens', crest: 'images/jkt-quens.jpg', stadium: 'Majaliwa Ground • Dar es Salaam' },
+      yanga: { name: 'Yanga Women', crest: 'images/yanga.jpg', stadium: 'Benjamin Mkapa Stadium • Dar es Salaam' },
+      azam: { name: 'Azam Queens', crest: 'images/azam.jpg', stadium: 'Azam Complex • Chamazi' },
+      coastal: { name: 'Coastal Queens', crest: 'images/costal-union.jpg', stadium: 'Mkwakwani Stadium • Tanga' },
+      dodoma: { name: 'Dodoma Queens', crest: 'images/dodoma-jiji.jpg', stadium: 'Jamhuri Stadium • Dodoma' },
+      singida: { name: 'Singida Queens', crest: 'images/singida.jpg', stadium: 'Liti Stadium • Singida' },
+      tra: { name: 'TRA Queens', crest: 'images/tra-united.jpg', stadium: 'Jamhuri Stadium • Dodoma' },
+      kagera: { name: 'Kagera Women', crest: 'images/jkt-tanzania.jpg', stadium: 'Kaitaba Stadium • Bukoba' },
+      mwanza: { name: 'Mwanza Queens', crest: 'images/pamba-jiji.jpg', stadium: 'CCM Kirumba Stadium • Mwanza' },
+      namungo: { name: 'Namungo Women', crest: 'images/namungo-fc.jpg', stadium: 'Majaliwa Stadium • Ruangwa' },
+      mbeya: { name: 'Mbeya Queens', crest: 'images/mashujaa-fc.jpg', stadium: 'Sokoine Stadium • Mbeya' }
+    };
+
+    var wplRoundsData = {
+      1: [
+        { home: wplClubs.simba, away: wplClubs.mwanza, score: '4 - 0', status: 'FT', date: 'Sat, 16 Aug 2025' },
+        { home: wplClubs.jkt, away: wplClubs.namungo, score: '3 - 0', status: 'FT', date: 'Sun, 17 Aug 2025' },
+        { home: wplClubs.yanga, away: wplClubs.mbeya, score: '2 - 0', status: 'FT', date: 'Sun, 17 Aug 2025' },
+        { home: wplClubs.azam, away: wplClubs.coastal, score: '1 - 0', status: 'FT', date: 'Mon, 18 Aug 2025' }
+      ],
+      2: [
+        { home: wplClubs.dodoma, away: wplClubs.simba, score: '0 - 3', status: 'FT', date: 'Fri, 22 Aug 2025' },
+        { home: wplClubs.tra, away: wplClubs.jkt, score: '1 - 2', status: 'FT', date: 'Sat, 23 Aug 2025' },
+        { home: wplClubs.singida, away: wplClubs.yanga, score: '0 - 2', status: 'FT', date: 'Sat, 23 Aug 2025' },
+        { home: wplClubs.kagera, away: wplClubs.azam, score: '0 - 1', status: 'FT', date: 'Sun, 24 Aug 2025' }
+      ],
+      3: [
+        { home: wplClubs.jkt, away: wplClubs.azam, score: '4 - 1', status: 'FT', date: 'Sat, 13 Sep 2025' },
+        { home: wplClubs.simba, away: wplClubs.coastal, score: '2 - 0', status: 'FT', date: 'Sun, 14 Sep 2025' },
+        { home: wplClubs.yanga, away: wplClubs.dodoma, score: '1 - 0', status: 'FT', date: 'Sun, 14 Sep 2025' },
+        { home: wplClubs.mwanza, away: wplClubs.singida, score: '1 - 1', status: 'FT', date: 'Mon, 15 Sep 2025' }
+      ],
+      4: [
+        { home: wplClubs.simba, away: wplClubs.tra, score: '3 - 0', status: 'FT', date: 'Sat, 20 Sep 2025' },
+        { home: wplClubs.azam, away: wplClubs.singida, score: '2 - 0', status: 'FT', date: 'Sun, 21 Sep 2025' },
+        { home: wplClubs.coastal, away: wplClubs.kagera, score: '2 - 1', status: 'FT', date: 'Sun, 21 Sep 2025' },
+        { home: wplClubs.namungo, away: wplClubs.jkt, score: '0 - 3', status: 'FT', date: 'Mon, 22 Sep 2025' }
+      ],
+      5: [
+        { home: wplClubs.jkt, away: wplClubs.coastal, score: '2 - 0', status: 'FT', date: 'Sat, 27 Sep 2025' },
+        { home: wplClubs.yanga, away: wplClubs.azam, score: '1 - 1', status: 'FT', date: 'Sun, 28 Sep 2025' },
+        { home: wplClubs.simba, away: wplClubs.dodoma, score: '4 - 0', status: 'FT', date: 'Sun, 28 Sep 2025' },
+        { home: wplClubs.mbeya, away: wplClubs.singida, score: '0 - 1', status: 'FT', date: 'Mon, 29 Sep 2025' }
+      ],
+      6: [
+        { home: wplClubs.coastal, away: wplClubs.simba, score: '0 - 2', status: 'FT', date: 'Sat, 04 Oct 2025' },
+        { home: wplClubs.dodoma, away: wplClubs.jkt, score: '1 - 2', status: 'FT', date: 'Sun, 05 Oct 2025' },
+        { home: wplClubs.tra, away: wplClubs.yanga, score: '0 - 3', status: 'FT', date: 'Sun, 05 Oct 2025' },
+        { home: wplClubs.singida, away: wplClubs.azam, score: '1 - 1', status: 'FT', date: 'Mon, 06 Oct 2025' }
+      ],
+      7: [
+        { home: wplClubs.simba, away: wplClubs.namungo, score: '5 - 0', status: 'FT', date: 'Sat, 11 Oct 2025' },
+        { home: wplClubs.jkt, away: wplClubs.mbeya, score: '3 - 0', status: 'FT', date: 'Sun, 12 Oct 2025' },
+        { home: wplClubs.yanga, away: wplClubs.tra, score: '2 - 0', status: 'FT', date: 'Sun, 12 Oct 2025' },
+        { home: wplClubs.azam, away: wplClubs.mwanza, score: '2 - 1', status: 'FT', date: 'Mon, 13 Oct 2025' }
+      ],
+      8: [
+        { home: wplClubs.simba, away: wplClubs.coastal, score: '2 - 0', status: 'FT', date: 'Sat, 01 Nov 2025' },
+        { home: wplClubs.jkt, away: wplClubs.yanga, score: '3 - 1', status: 'FT', date: 'Sun, 02 Nov 2025' },
+        { home: wplClubs.dodoma, away: wplClubs.azam, score: '0 - 2', status: 'FT', date: 'Sun, 02 Nov 2025' },
+        { home: wplClubs.singida, away: wplClubs.tra, score: '1 - 0', status: 'FT', date: 'Mon, 03 Nov 2025' }
+      ],
+      9: [
+        { home: wplClubs.yanga, away: wplClubs.simba, score: '1 - 1', status: 'FT', date: 'Sat, 08 Nov 2025' },
+        { home: wplClubs.azam, away: wplClubs.jkt, score: '0 - 2', status: 'FT', date: 'Sun, 09 Nov 2025' },
+        { home: wplClubs.coastal, away: wplClubs.singida, score: '3 - 0', status: 'FT', date: 'Sun, 09 Nov 2025' },
+        { home: wplClubs.kagera, away: wplClubs.dodoma, score: '1 - 2', status: 'FT', date: 'Mon, 10 Nov 2025' }
+      ],
+      10: [
+        { home: wplClubs.simba, away: wplClubs.kagera, score: '4 - 0', status: 'FT', date: 'Sat, 15 Nov 2025' },
+        { home: wplClubs.jkt, away: wplClubs.singida, score: '2 - 0', status: 'FT', date: 'Sun, 16 Nov 2025' },
+        { home: wplClubs.yanga, away: wplClubs.namungo, score: '3 - 0', status: 'FT', date: 'Sun, 16 Nov 2025' },
+        { home: wplClubs.mwanza, away: wplClubs.coastal, score: '0 - 2', status: 'FT', date: 'Mon, 17 Nov 2025' }
+      ],
+      11: [
+        { home: wplClubs.azam, away: wplClubs.simba, score: '0 - 1', status: 'FT', date: 'Sat, 22 Nov 2025' },
+        { home: wplClubs.jkt, away: wplClubs.dodoma, score: '3 - 0', status: 'FT', date: 'Sun, 23 Nov 2025' },
+        { home: wplClubs.coastal, away: wplClubs.tra, score: '2 - 0', status: 'FT', date: 'Sun, 23 Nov 2025' },
+        { home: wplClubs.singida, away: wplClubs.mbeya, score: '2 - 1', status: 'FT', date: 'Mon, 24 Nov 2025' }
+      ],
+      12: [
+        { home: wplClubs.simba, away: wplClubs.azam, score: '3 - 0', status: 'FT', date: 'Sat, 29 Nov 2025' },
+        { home: wplClubs.yanga, away: wplClubs.jkt, score: '0 - 2', status: 'FT', date: 'Sun, 30 Nov 2025' },
+        { home: wplClubs.dodoma, away: wplClubs.coastal, score: '1 - 1', status: 'FT', date: 'Sun, 30 Nov 2025' },
+        { home: wplClubs.kagera, away: wplClubs.namungo, score: '2 - 0', status: 'FT', date: 'Mon, 01 Dec 2025' }
+      ],
+      13: [
+        { home: wplClubs.jkt, away: wplClubs.simba, score: '1 - 2', status: 'FT', date: 'Sat, 06 Dec 2025' },
+        { home: wplClubs.azam, away: wplClubs.yanga, score: '1 - 1', status: 'FT', date: 'Sun, 07 Dec 2025' },
+        { home: wplClubs.tra, away: wplClubs.singida, score: '0 - 1', status: 'FT', date: 'Sun, 07 Dec 2025' },
+        { home: wplClubs.mbeya, away: wplClubs.mwanza, score: '0 - 1', status: 'FT', date: 'Mon, 08 Dec 2025' }
+      ],
+      14: [
+        { home: wplClubs.simba, away: wplClubs.singida, score: '3 - 0', status: 'FT', date: 'Sat, 13 Dec 2025' },
+        { home: wplClubs.jkt, away: wplClubs.tra, score: '2 - 0', status: 'FT', date: 'Sun, 14 Dec 2025' },
+        { home: wplClubs.coastal, away: wplClubs.azam, score: '0 - 1', status: 'FT', date: 'Sun, 14 Dec 2025' },
+        { home: wplClubs.dodoma, away: wplClubs.yanga, score: '0 - 2', status: 'FT', date: 'Mon, 15 Dec 2025' }
+      ],
+      15: [
+        { home: wplClubs.yanga, away: wplClubs.coastal, score: '2 - 0', status: 'FT', date: 'Sat, 10 Jan 2026' },
+        { home: wplClubs.simba, away: wplClubs.mbeya, score: '5 - 0', status: 'FT', date: 'Sun, 11 Jan 2026' },
+        { home: wplClubs.azam, away: wplClubs.kagera, score: '2 - 0', status: 'FT', date: 'Sun, 11 Jan 2026' },
+        { home: wplClubs.singida, away: wplClubs.jkt, score: '0 - 2', status: 'FT', date: 'Mon, 12 Jan 2026' }
+      ],
+      16: [
+        { home: wplClubs.jkt, away: wplClubs.namungo, score: '4 - 0', status: 'FT', date: 'Sat, 17 Jan 2026' },
+        { home: wplClubs.simba, away: wplClubs.tra, score: '3 - 0', status: 'FT', date: 'Sun, 18 Jan 2026' },
+        { home: wplClubs.coastal, away: wplClubs.dodoma, score: '1 - 0', status: 'FT', date: 'Sun, 18 Jan 2026' },
+        { home: wplClubs.mwanza, away: wplClubs.azam, score: '0 - 2', status: 'FT', date: 'Mon, 19 Jan 2026' }
+      ],
+      17: [
+        { home: wplClubs.simba, away: wplClubs.jkt, score: '2 - 1', status: 'FT', date: 'Sun, 15 Feb 2026' },
+        { home: wplClubs.yanga, away: wplClubs.coastal, score: '3 - 0', status: 'FT', date: 'Sat, 14 Feb 2026' },
+        { home: wplClubs.azam, away: wplClubs.dodoma, score: '1 - 0', status: 'FT', date: 'Sun, 15 Feb 2026' },
+        { home: wplClubs.singida, away: wplClubs.mwanza, score: '2 - 0', status: 'FT', date: 'Mon, 16 Feb 2026' }
+      ],
+      18: [
+        { home: wplClubs.jkt, away: wplClubs.coastal, score: '2 - 0', status: 'FT', date: 'Sat, 22 Feb 2026' },
+        { home: wplClubs.azam, away: wplClubs.simba, score: '0 - 1', status: 'FT', date: 'Sun, 23 Feb 2026' },
+        { home: wplClubs.dodoma, away: wplClubs.yanga, score: '0 - 3', status: 'FT', date: 'Sun, 23 Feb 2026' },
+        { home: wplClubs.tra, away: wplClubs.singida, score: '1 - 1', status: 'FT', date: 'Mon, 24 Feb 2026' }
+      ],
+      19: [
+        { home: wplClubs.simba, away: wplClubs.yanga, score: '3 - 0', status: 'FT', date: 'Sun, 01 Mar 2026' },
+        { home: wplClubs.jkt, away: wplClubs.azam, score: '2 - 0', status: 'FT', date: 'Sat, 28 Feb 2026' },
+        { home: wplClubs.coastal, away: wplClubs.mwanza, score: '1 - 0', status: 'FT', date: 'Sun, 01 Mar 2026' },
+        { home: wplClubs.singida, away: wplClubs.namungo, score: '3 - 0', status: 'FT', date: 'Mon, 02 Mar 2026' }
+      ],
+      20: [
+        { home: wplClubs.simba, away: wplClubs.jkt, score: 'VS', status: '18:00 EAT', date: 'Sun, 15 Mar 2026' },
+        { home: wplClubs.yanga, away: wplClubs.azam, score: 'VS', status: '16:00 EAT', date: 'Sat, 14 Mar 2026' },
+        { home: wplClubs.coastal, away: wplClubs.singida, score: 'VS', status: '15:00 EAT', date: 'Sat, 14 Mar 2026' },
+        { home: wplClubs.dodoma, away: wplClubs.tra, score: 'VS', status: '15:00 EAT', date: 'Sun, 15 Mar 2026' }
+      ],
+      21: [
+        { home: wplClubs.yanga, away: wplClubs.dodoma, score: 'VS', status: '16:00 EAT', date: 'Sat, 21 Mar 2026' },
+        { home: wplClubs.coastal, away: wplClubs.simba, score: 'VS', status: '18:00 EAT', date: 'Sun, 22 Mar 2026' },
+        { home: wplClubs.azam, away: wplClubs.singida, score: 'VS', status: '16:00 EAT', date: 'Sat, 21 Mar 2026' },
+        { home: wplClubs.jkt, away: wplClubs.kagera, score: 'VS', status: '16:00 EAT', date: 'Sun, 22 Mar 2026' }
+      ],
+      22: [
+        { home: wplClubs.simba, away: wplClubs.singida, score: 'VS', status: '16:00 EAT', date: 'Sun, 05 Apr 2026' },
+        { home: wplClubs.jkt, away: wplClubs.mwanza, score: 'VS', status: '16:00 EAT', date: 'Sun, 05 Apr 2026' },
+        { home: wplClubs.yanga, away: wplClubs.coastal, score: 'VS', status: '16:00 EAT', date: 'Sat, 04 Apr 2026' },
+        { home: wplClubs.azam, away: wplClubs.dodoma, score: 'VS', status: '16:00 EAT', date: 'Sat, 04 Apr 2026' }
+      ]
+    };
+
+    function renderWplRoundMatches(roundNum) {
+      var container = document.getElementById('wplRoundMatchesDisplayContainer');
+      var valSpan = document.getElementById('wplSelectedRoundVal');
+      if (valSpan) valSpan.textContent = 'ROUND ' + roundNum;
+      if (!container) return;
+
+      var matches = wplRoundsData[roundNum] || [
+        { home: wplClubs.simba, away: wplClubs.tra, score: '2 - 0', status: 'FT', date: 'Matchday ' + roundNum },
+        { home: wplClubs.jkt, away: wplClubs.dodoma, score: '3 - 1', status: 'FT', date: 'Matchday ' + roundNum },
+        { home: wplClubs.yanga, away: wplClubs.mwanza, score: '1 - 0', status: 'FT', date: 'Matchday ' + roundNum },
+        { home: wplClubs.azam, away: wplClubs.singida, score: '2 - 1', status: 'FT', date: 'Matchday ' + roundNum }
+      ];
+
+      var html = '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem;">';
+      matches.forEach(function(m) {
+        var isLive = m.status !== 'FT';
+        var scoreStyle = isLive ? 'background:rgba(233,30,140,0.2); border:1px solid rgba(233,30,140,0.5); color:#fda4af;' : 'background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); color:#fff;';
+        
+        html += '<div class="match-card-widget" style="background:linear-gradient(145deg, rgba(40,10,50,0.95), rgba(20,5,30,0.98)); border:1px solid rgba(233,30,140,0.25); border-radius:20px; padding:1.2rem; box-shadow:0 10px 30px rgba(0,0,0,0.4); transition:all 0.3s ease;">';
+        html += '  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem; font-size:0.75rem; color:var(--text-muted);">';
+        html += '    <span>ROUND ' + roundNum + ' • ' + m.date + '</span>';
+        html += '    <span class="badge-pill" style="background:rgba(233,30,140,0.18); color:#fda4af; font-weight:800; font-size:0.68rem; padding:0.2rem 0.55rem; border-radius:10px;">' + m.status + '</span>';
+        html += '  </div>';
+        
+        html += '  <div style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:0.75rem; text-align:center;">';
+        html += '    <div style="display:flex; flex-direction:column; align-items:center; gap:0.35rem;">';
+        html += '      <img src="' + m.home.crest + '" width="40" height="40" style="border-radius:50%; object-fit:cover; border:1.5px solid rgba(233,30,140,0.4);">';
+        html += '      <strong style="color:#fff; font-size:0.88rem; line-height:1.2;">' + m.home.name + '</strong>';
+        html += '    </div>';
+        
+        html += '    <div style="' + scoreStyle + ' padding:0.45rem 0.9rem; border-radius:14px; font-family:var(--font-heading); font-size:1.15rem; font-weight:900;">' + m.score + '</div>';
+        
+        html += '    <div style="display:flex; flex-direction:column; align-items:center; gap:0.35rem;">';
+        html += '      <img src="' + m.away.crest + '" width="40" height="40" style="border-radius:50%; object-fit:cover; border:1.5px solid rgba(255,255,255,0.2);">';
+        html += '      <strong style="color:#fff; font-size:0.88rem; line-height:1.2;">' + m.away.name + '</strong>';
+        html += '    </div>';
+        html += '  </div>';
+        
+        html += '  <div style="margin-top:0.85rem; pt:0.6rem; border-top:1px solid rgba(255,255,255,0.06); font-size:0.72rem; color:var(--text-muted); text-align:center;">';
+        html += '    <i class="fa-solid fa-location-dot" style="color:#e91e8c; margin-right:4px;"></i> ' + m.home.stadium;
+        html += '  </div>';
+        html += '</div>';
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    // Attach Round Pills Click Handlers
+    var wplRoundPills = document.querySelectorAll('.wpl-round-pill-btn');
+    wplRoundPills.forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        wplRoundPills.forEach(function(p) {
+          p.classList.remove('active');
+          p.style.background = 'rgba(255,255,255,0.06)';
+          p.style.color = '#cbd5e1';
+          p.style.border = '1px solid rgba(255,255,255,0.1)';
+        });
+        pill.classList.add('active');
+        pill.style.background = 'linear-gradient(135deg,#be185d,#e91e8c)';
+        pill.style.color = '#fff';
+        pill.style.border = 'none';
+
+        var rd = parseInt(pill.getAttribute('data-round'), 10) || 17;
+        renderWplRoundMatches(rd);
+      });
+    });
+
+    // Initial Render of default WPL Round 17 matches
+    renderWplRoundMatches(17);
+
+    // Dynamic Derby Countdown
+    var secVal = 45;
+    setInterval(function() {
+      secVal--;
+      if (secVal < 0) secVal = 59;
+      var el = document.getElementById('wpl-derby-seconds');
+      if (el) el.textContent = (secVal < 10 ? '0' : '') + secVal;
+    }, 1000);
+  })();
+</script>
+
+  <!-- FOOTER WITH ALL 6 DASHBOARD SECTIONS LINKS -->
+  <footer class="site-footer" style="background:linear-gradient(180deg, #1f032e 0%, #0d0118 100%); border-top:1px solid rgba(233,30,140,0.3); margin-top:4rem; padding:4rem 0 2rem;">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-logo-group" style="margin-bottom:1rem; display:inline-flex;">
+            <img src="images/nbc-pl-logo.png" alt="Women's Premier League" style="height:44px;">
+            <div class="brand-text">
+              <span class="brand-title" style="color:#fff;" data-en="Women's Premier League" data-sw="Ligi Kuu ya Wanawake">Women's Premier League</span>
+              <span class="brand-subtitle" style="color:#fda4af;">Ligi Kuu ya Wanawake Tanzania</span>
+            </div>
+          </a>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;" data-en="Official national women's football competition managed by Tanzania Football Federation (TFF). The premier stage for female football excellence." data-sw="Ligi rasmi ya soka la wanawake inayosimamiwa na Shirikisho la Mpira wa Miguu Tanzania (TFF).">
+            Official national women's football competition managed by Tanzania Football Federation (TFF). The premier stage for female football excellence.
+          </p>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <h5 style="color:#fda4af; font-family:var(--font-heading); font-weight:800; margin:0;" data-en="Dashboard Sections" data-sw="Sehemu za Mfumo">Dashboard Sections</h5>
+            <i class="fa-solid fa-chevron-down footer-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="#overview" data-en="📊 Overview" data-sw="📊 Jumla">📊 Overview</a></li>
+              <li><a href="#fixtures" data-en="📅 Fixtures &amp; Results" data-sw="📅 Ratiba na Matokeo">📅 Fixtures &amp; Results</a></li>
+              <li><a href="#teams" data-en="🛡️ Teams &amp; Standings" data-sw="🛡️ Timu na Msimamo">🛡️ Teams &amp; Standings</a></li>
+              <li><a href="#transfers" data-en="🔄 Transfers" data-sw="🔄 Usajili">🔄 Transfers</a></li>
+              <li><a href="#history" data-en="🏆 Season History" data-sw="🏆 Historia ya Msimu">🏆 Season History</a></li>
+              <li><a href="#news" data-en="📰 News &amp; Media" data-sw="📰 Habari na Vyombo">📰 News &amp; Media</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <h5 style="color:#fda4af; font-family:var(--font-heading); font-weight:800; margin:0;" data-en="Competitions" data-sw="Mashindano">Competitions</h5>
+            <i class="fa-solid fa-chevron-down footer-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="nbc-premier-league.html">NBC Premier League</a></li>
+              <li><a href="womens-premier-league.html" style="color:#e91e8c; font-weight:800;">Women's Premier League</a></li>
+              <li><a href="championship-league.html">Championship League</a></li>
+              <li><a href="first-division-league.html">First Division League</a></li>
+              <li><a href="efootball-league.html">E-Football League</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <h5 style="color:#fda4af; font-family:var(--font-heading); font-weight:800; margin:0;" data-en="Fan Zone" data-sw="Eneo la Mashabiki">Fan Zone</h5>
+            <i class="fa-solid fa-chevron-down footer-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="index.html#fanzone">Fan Zone Hub</a></li>
+              <li><a href="index.html#games">Quizzes &amp; Games</a></li>
+              <li><a href="index.html#app">Mobile App</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <h5 style="color:#fda4af; font-family:var(--font-heading); font-weight:800; margin:0;" data-en="Governance" data-sw="Uongozi">Governance</h5>
+            <i class="fa-solid fa-chevron-down footer-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="index.html#tff">TFF Secretariat</a></li>
+              <li><a href="index.html#tff">TPLB Board</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom" style="margin-top:3rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; font-size:0.8rem; color:var(--text-muted);">
+        <div data-en="© 2026 Tanzania Football Federation (TFF). All Rights Reserved." data-sw="© 2026 Shirikisho la Mpira wa Miguu Tanzania (TFF). Haki Zote Zimehifadhiwa.">© 2026 Tanzania Football Federation (TFF). All Rights Reserved.</div>
+        <div style="color:#fda4af; font-weight:800;">Women's Premier League • WPL Official</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

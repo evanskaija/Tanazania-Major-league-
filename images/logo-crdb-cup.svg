@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="none"/>
+  <!-- Green Mountain Base -->
+  <path d="M40 160 L100 100 L160 160 Z" fill="#15803D"/>
+  <path d="M85 115 L100 100 L115 115 Z" fill="#22C55E"/>
+  <!-- Trophy Cup -->
+  <path d="M70 40 L130 40 L125 90 C125 115 75 115 75 90 Z" fill="#FACC15" stroke="#CA8A04" stroke-width="3"/>
+  <!-- Handles -->
+  <path d="M70 45 C50 45 50 75 73 80" fill="none" stroke="#FACC15" stroke-width="5"/>
+  <path d="M130 45 C150 45 150 75 127 80" fill="none" stroke="#FACC15" stroke-width="5"/>
+  <!-- Football Globe on top -->
+  <circle cx="100" cy="30" r="16" fill="#0EA5E9" stroke="#FFF" stroke-width="2"/>
+  <!-- CRDB Text -->
+  <text x="100" y="145" font-family="'Poppins', sans-serif" font-weight="900" font-size="14" fill="#15803D" text-anchor="middle">CRDB BANK</text>
+  <text x="100" y="165" font-family="'Poppins', sans-serif" font-weight="900" font-size="13" fill="#22C55E" text-anchor="middle">FEDERATION CUP</text>
+</svg>

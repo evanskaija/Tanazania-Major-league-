@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="none"/>
+  <!-- Top Blue Arc -->
+  <path d="M70 65 C120 20, 280 20, 330 65 C280 40, 120 40, 70 65 Z" fill="url(#azamBlueGrad)"/>
+  <defs>
+    <linearGradient id="azamBlueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#003399"/>
+      <stop offset="50%" stop-color="#00A3E0"/>
+      <stop offset="100%" stop-color="#003399"/>
+    </linearGradient>
+  </defs>
+  <!-- Red "azam" Text -->
+  <text x="120" y="98" font-family="'Poppins', sans-serif" font-weight="900" font-size="52" fill="#E30613" font-style="italic">azam</text>
+  <!-- Cyan/Blue "Media" Text -->
+  <text x="175" y="138" font-family="'Poppins', sans-serif" font-weight="900" font-size="48" fill="#00A3E0" font-style="italic">Media</text>
+</svg>

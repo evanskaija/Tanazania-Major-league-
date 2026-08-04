@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="none"/>
+  <!-- Mt Kilimanjaro Peak -->
+  <polygon points="120,70 170,25 210,70" fill="#E2E8F0"/>
+  <polygon points="170,25 210,70 260,70 210,40" fill="#CBD5E1"/>
+  <polygon points="155,38 170,25 185,38 170,45" fill="#FFFFFF"/>
+  <!-- Red Giraffe Silhouette -->
+  <path d="M50 110 C50 80, 65 65, 80 50 C85 45, 90 35, 92 25 C93 20, 96 18, 100 18 C104 18, 106 22, 104 28 C102 34, 108 30, 112 35 C108 40, 100 45, 95 55 C90 65, 95 85, 90 110 Z" fill="#DC2626"/>
+  <circle cx="98" cy="22" r="2.5" fill="#FFF"/>
+  <!-- Giraffe Spots -->
+  <path d="M75 60 Q82 58 78 68 Q72 66 75 60 Z M82 75 Q90 72 86 84 Q78 82 82 75 Z M65 85 Q72 82 70 94 Q62 92 65 85 Z" fill="#991B1B"/>
+  <!-- NBC Blue Text -->
+  <text x="125" y="102" font-family="'Poppins', 'Arial Black', sans-serif" font-weight="900" font-size="64" fill="#0E2F6B" letter-spacing="-1">NBC</text>
+  <!-- Red Subtext -->
+  <text x="62" y="126" font-family="'Inter', sans-serif" font-weight="800" font-size="16" fill="#DC2626" letter-spacing="0.5">National Bank of Commerce</text>
+  <!-- Blue Tagline -->
+  <text x="95" y="146" font-family="'Inter', sans-serif" font-weight="600" font-style="italic" font-size="14" fill="#0E2F6B">Conveniently Everywhere.</text>
+</svg>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixtures & Results | Tanzania Football Federation (TFF)</title>
+  <meta name="description"
+    content="Official Fixtures & Results portal for Tanzanian football. Follow real-time live scores, upcoming matchday schedules, completed match results, and H2H statistics across all leagues.">
+
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:ital,wght@0,600;0,700;0,800;0,900;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- GSAP Animations CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/ligikuu.png">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ==========================================================================
+       PREMIUM FIXTURES & RESULTS MATCH CENTER DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --primary-gold: #FFB400;
+      --electric-cyan: #00D4FF;
+      --dark-navy: #001B44;
+      --success-green: #00C853;
+      --live-red: #FF3B30;
+      --dark-bg: #020919;
+      --card-border: rgba(255, 255, 255, 0.12);
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* GLASSMORPHISM CARDS */
+    .fix-glass-card {
+      background: linear-gradient(145deg, rgba(10, 26, 58, 0.9), rgba(4, 14, 34, 0.96));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.25rem;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+      transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fix-glass-card:hover {
+      border-color: rgba(255, 180, 0, 0.5);
+      box-shadow: 0 18px 45px rgba(255, 180, 0, 0.2);
+      transform: translateY(-4px);
+    }
+
+    /* HERO SECTION WITH TOP PADDING FIX FOR STICKY NAVBAR */
+    .hero-fixtures {
+      position: relative;
+      padding: 8rem 1rem 3.5rem;
+      background: radial-gradient(circle at 50% 20%, rgba(0, 212, 255, 0.18), transparent 70%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 180, 0, 0.15), transparent 60%),
+                  linear-gradient(180deg, #020919 0%, #061533 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-fixtures-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge-cyan {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 212, 255, 0.15);
+      border: 1px solid rgba(0, 212, 255, 0.4);
+      color: var(--electric-cyan);
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-fixtures-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.1rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .hero-fixtures-title span {
+      background: linear-gradient(135deg, #FFB400 0%, #00D4FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* MATCH STATUS COUNTER CARDS */
+    .match-status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      max-width: 1200px;
+      margin: -2rem auto 2.5rem;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 3;
+    }
+
+    .status-counter-card {
+      background: linear-gradient(145deg, rgba(10, 26, 58, 0.95), rgba(4, 12, 30, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .status-counter-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .status-icon-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    /* FILTER CENTER */
+    .fixture-filter-center {
+      background: linear-gradient(145deg, rgba(8, 22, 50, 0.95), rgba(4, 12, 30, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 1.25rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto 2.5rem;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 2-COLUMN SIDE-BY-SIDE MOBILE GRID */
+    .round-matches-2col-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    /* LANGUAGE SWITCHER BUTTON */
+    .lang-switcher-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 180, 0, 0.4);
+      color: var(--primary-gold);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.25s ease;
+    }
+
+    .lang-switcher-btn:hover {
+      background: rgba(255, 180, 0, 0.2);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .hero-fixtures { padding-top: 7.5rem !important; }
+      .hero-fixtures-title { font-size: 2rem; }
+      .match-status-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.65rem !important;
+      }
+      .round-matches-2col-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.5rem !important;
+      }
+      .fix-glass-card {
+        padding: 0.85rem 0.65rem !important;
+        border-radius: 14px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo-group">
+        <img src="images/nbc-pl-logo.png" alt="TFF Logo">
+        <div class="brand-text">
+          <span class="brand-title">NBC Premier League</span>
+          <span class="brand-subtitle">Ligi Kuu Tanzania</span>
+        </div>
+      </a>
+
+      <!-- Horizontal Menu -->
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link" data-en="Home" data-sw="Nyumbani">Home</a></li>
+        <li class="nav-item"><a href="live-matches.html" class="nav-link" data-en="Live Matches" data-sw="Mechi za Moja kwa Moja">Live Matches</a></li>
+        <li class="nav-item active"><a href="fixtures-results.html" class="nav-link" data-en="Fixtures &amp; Results" data-sw="Ratiba na Matokeo">Fixtures &amp; Results</a></li>
+        <li class="nav-item"><a href="awards.html" class="nav-link" data-en="Awards &amp; Honors" data-sw="Tuzo na Heshima">Awards &amp; Honors</a></li>
+      </ul>
+
+      <!-- Nav Action Group (Language Switcher & Mobile Toggle) -->
+      <div class="nav-actions">
+        <div class="lang-switcher-capsule">
+          <button class="lang-btn active" id="lang-eng">ENG</button>
+          <button class="lang-btn" id="lang-swa">SWA</button>
+        </div>
+        <!-- Hamburger Menu Button (Visible below 1200px) -->
+        <button class="mobile-toggle-btn" id="mobile-menu-toggle" aria-label="Toggle Mobile Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE SLIDE-OUT MENU DRAWER -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <!-- Floating Background Decorative Football Elements -->
+    <div class="mobile-drawer-decor">
+      <i class="fa-solid fa-futbol decor-icon decor-icon-1"></i>
+      <i class="fa-solid fa-trophy decor-icon decor-icon-2"></i>
+      <i class="fa-solid fa-whistle decor-icon decor-icon-3"></i>
+      <i class="fa-solid fa-star decor-icon decor-icon-4"></i>
+    </div>
+
+    <!-- Animated Premium Drawer Header -->
+    <div class="mobile-drawer-header">
+      <div class="mobile-brand-box">
+        <div class="mobile-logo-wrapper">
+          <img src="images/nbc-pl-logo.png" alt="Tanzania Football Logo" class="mobile-brand-logo">
+          <div class="logo-pulse-ring"></div>
+        </div>
+        <div class="mobile-brand-text">
+          <div class="mobile-brand-title-wrap">
+            <span class="mobile-brand-title">⚽ Tanzania Football</span>
+            <div class="title-light-beam"></div>
+          </div>
+          <span class="mobile-brand-subtitle" data-en="Official Football Platform" data-sw="Jukwaa Rasmi la Soka">Official Football Platform</span>
+        </div>
+      </div>
+      <button class="mobile-drawer-close" id="mobile-menu-close" aria-label="Close Mobile Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="mobile-drawer-body">
+      <ul class="mobile-nav-list">
+        <!-- 1. HOME -->
+        <li class="mobile-nav-item">
+          <a href="index.html" class="mobile-nav-link">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-house mobile-link-icon text-gold"></i>
+              <span data-en="Home" data-sw="Nyumbani">Home</span>
+            </span>
+            <i class="fa-solid fa-chevron-right mobile-link-arrow"></i>
+          </a>
+        </li>
+
+        <!-- 2. COMPETITIONS ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-trophy mobile-link-icon text-gold"></i>
+              <span data-en="Competitions" data-sw="Mashindano">Competitions</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="nbc-premier-league.html" class="mobile-sub-link"><span class="mobile-badge badge-gold">NBC</span><span>NBC Premier League</span></a></li>
+            <li><a href="womens-premier-league.html" class="mobile-sub-link"><span class="mobile-badge badge-pink">WPL</span><span>Women's Premier League</span></a></li>
+            <li><a href="championship-league.html" class="mobile-sub-link"><span class="mobile-badge badge-red">TCL</span><span>Championship League</span></a></li>
+            <li><a href="first-division-league.html" class="mobile-sub-link"><span class="mobile-badge badge-green">FDL</span><span>First League</span></a></li>
+            <li><a href="efootball-league.html" class="mobile-sub-link"><span class="mobile-badge badge-purple">EFL</span><span>E-Football League</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 3. MATCH CENTRE ACCORDION (ACTIVE PAGE) -->
+        <li class="mobile-nav-item mobile-has-submenu active">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-calendar-days mobile-link-icon text-gold"></i>
+              <span data-en="Match Centre" data-sw="Kituo cha Mechi">Match Centre</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="live-matches.html" class="mobile-sub-link"><span class="mobile-badge badge-red">LIVE</span><span>Live Matches</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 4. CLUBS ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-shield-halved mobile-link-icon text-gold"></i>
+              <span data-en="Clubs" data-sw="Klabu">Clubs</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="clubs.html" class="mobile-sub-link"><span class="mobile-badge badge-green">PLY</span><span>Clubs &amp; Squad Rosters</span></a></li>
+            <li><a href="clubs.html#stadiums" class="mobile-sub-link"><span class="mobile-badge badge-purple">STD</span><span>Stadiums &amp; Venues</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 5. AWARDS (DIRECT LINK - NO SUBLINKS) -->
+        <li class="mobile-nav-item">
+          <a href="awards.html" class="mobile-nav-link">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-crown mobile-link-icon text-gold"></i>
+              <span data-en="Awards" data-sw="Tuzo">Awards</span>
+            </span>
+            <i class="fa-solid fa-chevron-right mobile-link-arrow"></i>
+          </a>
+        </li>
+
+        <!-- 6. NEWS & MEDIA ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-newspaper mobile-link-icon text-gold"></i>
+              <span data-en="News &amp; Media" data-sw="Habari">News &amp; Media</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="nbc-premier-league.html#news" class="mobile-sub-link"><span class="mobile-badge badge-red">NEW</span><span>Latest News &amp; Transfers</span></a></li>
+            <li><a href="index.html#news" class="mobile-sub-link"><span class="mobile-badge badge-cyan">VID</span><span>Videos &amp; Highlights</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 7. FAN ZONE ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-fire mobile-link-icon text-gold"></i>
+              <span data-en="Fan Zone" data-sw="Mashabiki">Fan Zone</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="index.html#fanzone" class="mobile-sub-link"><span class="mobile-badge badge-gold">FAN</span><span>Match Predictions</span></a></li>
+            <li><a href="awards.html#votingOptions" class="mobile-sub-link"><span class="mobile-badge badge-cyan">VOTE</span><span>Fan Voting &amp; Polls</span></a></li>
+          </ul>
+        </li>
+
+        <!-- 8. ABOUT ACCORDION -->
+        <li class="mobile-nav-item mobile-has-submenu">
+          <button class="mobile-submenu-toggle" type="button">
+            <span class="mobile-link-left">
+              <i class="fa-solid fa-circle-info mobile-link-icon text-gold"></i>
+              <span data-en="About" data-sw="Kuhusu">About</span>
+            </span>
+            <i class="fa-solid fa-chevron-down mobile-chevron"></i>
+          </button>
+          <ul class="mobile-submenu">
+            <li><a href="index.html#tff" class="mobile-sub-link"><span class="mobile-badge badge-blue">TFF</span><span>About TFF &amp; TPLB</span></a></li>
+            <li><a href="#footer" class="mobile-sub-link"><span class="mobile-badge badge-green">CNT</span><span>Contact &amp; Media</span></a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Language Switcher Redesign in Mobile Drawer -->
+      <div class="mobile-lang-box">
+        <div class="lang-switcher-capsule">
+          <button class="lang-btn active" id="mobile-lang-eng">
+            <i class="fa-solid fa-globe"></i>
+            <span>ENG</span>
+          </button>
+          <button class="lang-btn" id="mobile-lang-swa">
+            <i class="fa-solid fa-globe"></i>
+            <span>SWA</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Footer with Socials & Quick Action Pills -->
+    <div class="mobile-drawer-footer">
+      <div class="mobile-footer-divider"></div>
+      <div class="mobile-social-title">
+        <i class="fa-solid fa-futbol text-gold"></i>
+        <span data-en="Follow Tanzanian Football" data-sw="Tufuatilie Soka la Tanzania">Follow Tanzanian Football</span>
+      </div>
+      <div class="mobile-social-links">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+
+      <!-- Quick Action Pills -->
+      <div class="mobile-quick-actions">
+        <a href="index.html#app" class="quick-action-pill">
+          <i class="fa-solid fa-mobile-screen-button text-gold"></i>
+          <span data-en="📱 Download Mobile App" data-sw="📱 Pakua App ya Simu">📱 Download Mobile App</span>
+        </a>
+        <a href="index.html#news" class="quick-action-pill">
+          <i class="fa-solid fa-circle-play text-cyan"></i>
+          <span data-en="📺 Watch Highlights" data-sw="📺 Tazama Highlights">📺 Watch Highlights</span>
+        </a>
+        <a href="nbc-premier-league.html#news" class="quick-action-pill">
+          <i class="fa-solid fa-newspaper text-green"></i>
+          <span data-en="📰 Latest News" data-sw="📰 Habari Mpya">📰 Latest News</span>
+        </a>
+      </div>
+
+      <div class="mobile-copyright">© 2026 Tanzania Football • Official Platform</div>
+    </div>
+  </aside>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION -->
+  <section class="hero-fixtures">
+    <div class="hero-fixtures-content">
+      <div class="hero-badge-cyan">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span data-en="MATCHDAY FIXTURES &amp; SCORES" data-sw="RATIBA ZA MECHI NA MATOKEO">MATCHDAY FIXTURES &amp; SCORES</span>
+      </div>
+      <h1 class="hero-fixtures-title" data-en="FIXTURES &amp; <span>RESULTS MATCH CENTER</span>" data-sw="RATIBA NA <span>MATOKEO YA MECHI</span>">
+        FIXTURES &amp; <span>RESULTS MATCH CENTER</span>
+      </h1>
+      <p style="font-size:1.1rem; color:#94a3b8; max-width:700px; margin:0 auto 2rem;" data-en="Follow every fixture, live score, and result from Tanzanian football." data-sw="Fuatilia ratiba zote za mechi, matokeo ya moja kwa moja na matokeo yaliyokamilika.">
+        Follow every fixture, live score, and result from Tanzanian football.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. MATCH STATUS COUNTERS -->
+  <div class="match-status-grid">
+    <div class="status-counter-card" style="border-color:rgba(255,59,48,0.4);">
+      <div class="status-icon-badge" style="background:rgba(255,59,48,0.18); color:var(--live-red);">
+        <i class="fa-solid fa-tower-broadcast"></i>
+      </div>
+      <div>
+        <div style="font-family:'Poppins',sans-serif; font-size:1.8rem; font-weight:900; color:#fff;">5</div>
+        <div style="font-size:0.75rem; font-weight:800; color:var(--live-red);" data-en="LIVE MATCHES" data-sw="MOJA KWA MOJA">LIVE MATCHES</div>
+      </div>
+    </div>
+
+    <div class="status-counter-card" style="border-color:rgba(0,212,255,0.4);">
+      <div class="status-icon-badge" style="background:rgba(0,212,255,0.18); color:var(--electric-cyan);">
+        <i class="fa-solid fa-clock"></i>
+      </div>
+      <div>
+        <div style="font-family:'Poppins',sans-serif; font-size:1.8rem; font-weight:900; color:#fff;">12</div>
+        <div style="font-size:0.75rem; font-weight:800; color:var(--electric-cyan);" data-en="UPCOMING" data-sw="RATIBA ZIJAZO">UPCOMING</div>
+      </div>
+    </div>
+
+    <div class="status-counter-card" style="border-color:rgba(0,200,83,0.4);">
+      <div class="status-icon-badge" style="background:rgba(0,200,83,0.18); color:var(--success-green);">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <div>
+        <div style="font-family:'Poppins',sans-serif; font-size:1.8rem; font-weight:900; color:#fff;">240</div>
+        <div style="font-size:0.75rem; font-weight:800; color:var(--success-green);" data-en="FINISHED" data-sw="ZILIZOKAMILIKA">FINISHED</div>
+      </div>
+    </div>
+
+    <div class="status-counter-card" style="border-color:rgba(255,180,0,0.4);">
+      <div class="status-icon-badge" style="background:rgba(255,180,0,0.18); color:var(--primary-gold);">
+        <i class="fa-solid fa-futbol"></i>
+      </div>
+      <div>
+        <div style="font-family:'Poppins',sans-serif; font-size:1.8rem; font-weight:900; color:#fff;">38</div>
+        <div style="font-size:0.75rem; font-weight:800; color:var(--primary-gold);" data-en="GOALS THIS WEEK" data-sw="MABAO WIKI HII">GOALS THIS WEEK</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container" style="max-width:1200px; margin:0 auto; padding:0 1rem 4rem;">
+    <!-- 3. LIVE MATCHES SECTION -->
+    <div style="margin-bottom:3rem;">
+      <h2 style="font-family:'Poppins',sans-serif; font-size:1.35rem; font-weight:900; color:#fff; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;" data-en="🔴 LIVE MATCHES NOW" data-sw="🔴 MECHI ZINAZOENDELEA SASA">
+        🔴 LIVE MATCHES NOW
+      </h2>
+
+      <div class="round-matches-2col-grid">
+        <div class="fix-glass-card" style="border-color:rgba(255,59,48,0.5);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span class="badge-pill" style="background:rgba(255,59,48,0.2); color:var(--live-red); font-size:0.68rem; font-weight:900;">67' LIVE</span>
+            <span style="font-size:0.72rem; color:#94a3b8;">📍 Benjamin Mkapa</span>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <img src="images/yanga.jpg" style="width:28px; height:28px; border-radius:50%;">
+              <span style="font-weight:900; color:#fff; font-size:0.9rem;">Yanga SC</span>
+            </div>
+            <span style="font-family:'Poppins',sans-serif; font-size:1.3rem; font-weight:900; color:var(--primary-gold);">2</span>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <img src="images/simba.jpg" style="width:28px; height:28px; border-radius:50%;">
+              <span style="font-weight:900; color:#fff; font-size:0.9rem;">Simba SC</span>
+            </div>
+            <span style="font-family:'Poppins',sans-serif; font-size:1.3rem; font-weight:900; color:var(--primary-gold);">1</span>
+          </div>
+
+          <a href="live-matches.html" class="btn-primary-gold" style="width:100%; display:block; text-align:center; padding:0.4rem; font-size:0.75rem; border-radius:8px;" data-en="View Match →" data-sw="Tazama Mechi →">View Match →</a>
+        </div>
+
+        <div class="fix-glass-card" style="border-color:rgba(255,59,48,0.5);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <span class="badge-pill" style="background:rgba(255,59,48,0.2); color:var(--live-red); font-size:0.68rem; font-weight:900;">82' LIVE</span>
+            <span style="font-size:0.72rem; color:#94a3b8;">📍 Azam Complex</span>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <img src="images/azam.jpg" style="width:28px; height:28px; border-radius:50%;">
+              <span style="font-weight:900; color:#fff; font-size:0.9rem;">Azam FC</span>
+            </div>
+            <span style="font-family:'Poppins',sans-serif; font-size:1.3rem; font-weight:900; color:var(--primary-gold);">1</span>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <img src="images/singida.jpg" style="width:28px; height:28px; border-radius:50%;">
+              <span style="font-weight:900; color:#fff; font-size:0.9rem;">Singida BS</span>
+            </div>
+            <span style="font-family:'Poppins',sans-serif; font-size:1.3rem; font-weight:900; color:var(--primary-gold);">0</span>
+          </div>
+
+          <a href="live-matches.html" class="btn-primary-gold" style="width:100%; display:block; text-align:center; padding:0.4rem; font-size:0.75rem; border-radius:8px;" data-en="View Match →" data-sw="Tazama Mechi →">View Match →</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 11. SITE FOOTER WITH MOBILE ACCORDIONS -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-logo-group" style="margin-bottom:1rem; display:inline-flex;">
+            <img src="images/nbc-pl-logo.png" alt="NBC Premier League" style="height:40px;">
+            <div class="brand-text">
+              <span class="brand-title">NBC Premier League</span>
+              <span class="brand-subtitle">Ligi Kuu Tanzania</span>
+            </div>
+          </a>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;" data-en="The official digital platform of the NBC Premier League, managed by Tanzania Football Federation (TFF)." data-sw="Mfumo rasmi wa kidijitali wa NBC Premier League, unaosimamiwa na Shirikisho la Mpira wa Miguu Tanzania (TFF).">
+            The official digital platform of the NBC Premier League, managed by Tanzania Football Federation (TFF).
+          </p>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <span data-en="Competitions" data-sw="Mashindano">Competitions</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="nbc-premier-league.html">NBC Premier League</a></li>
+              <li><a href="championship-league.html" data-en="Championship League" data-sw="Ligi ya Mabingwa">Championship League</a></li>
+              <li><a href="first-division-league.html" data-en="First Division League" data-sw="Ligi ya Daraja la Kwanza">First Division League</a></li>
+              <li><a href="womens-premier-league.html" data-en="Women's Premier League" data-sw="Ligi Kuu ya Wanawake">Women's Premier League</a></li>
+              <li><a href="efootball-league.html" data-en="E-Football League" data-sw="Ligi ya E-Football">E-Football League</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <span data-en="Match Center" data-sw="Kituo cha Mechi">Match Center</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="live-matches.html" data-en="Live Matches" data-sw="Mechi za Moja kwa Moja">Live Matches</a></li>
+              <li><a href="fixtures-results.html" data-en="Fixtures &amp; Results" data-sw="Ratiba na Matokeo">Fixtures &amp; Results</a></li>
+              <li><a href="index.html#title-race" data-en="Standings" data-sw="Msimamo">Standings</a></li>
+              <li><a href="index.html#title-race" data-en="Statistics" data-sw="Takwimu">Statistics</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <span data-en="Fan Zone" data-sw="Eneo la Mashabiki">Fan Zone</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="index.html#fanzone" data-en="Fan Zone Hub" data-sw="Kituo cha Mashabiki">Fan Zone Hub</a></li>
+              <li><a href="index.html#games" data-en="Quizzes &amp; Games" data-sw="Maswali na Michezo">Quizzes &amp; Games</a></li>
+              <li><a href="index.html#fanzone" data-en="Matchday Challenge" data-sw="Changamoto ya Mechi">Matchday Challenge</a></li>
+              <li><a href="index.html#app" data-en="Mobile App" data-sw="Programu ya Simu">Mobile App</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-accordion-col">
+          <button class="footer-accordion-toggle">
+            <span data-en="About Us" data-sw="Kuhusu Sisi">About Us</span>
+            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+          </button>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="index.html#tff" data-en="About TPLB" data-sw="Kuhusu TPLB">About TPLB</a></li>
+              <li><a href="index.html#honors-spotlights" data-en="History of TPLB" data-sw="Historia ya TPLB">History of TPLB</a></li>
+              <li><a href="#" data-open-modal="radiusBsss">FCMS Login</a></li>
+              <li><a href="#" data-open-modal="radiusBsss" data-en="Media Accreditation" data-sw="Uthibitisho wa Vyombo vya Habari">Media Accreditation</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-en="© 2026 Tanzania Football Federation (TFF). All Rights Reserved." data-sw="© 2026 Shirikisho la Mpira wa Miguu Tanzania (TFF). Haki Zote Zimehifadhiwa.">© 2026 Tanzania Football Federation (TFF). All Rights Reserved.</div>
+        <div>
+          <a href="#" data-open-modal="radiusBsss" style="color:var(--primary-gold);">Radius BSSS Certified Software</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC -->
+  <script src="script.js"></script>
+</body>
+</html>
