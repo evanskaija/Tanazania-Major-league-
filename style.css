@@ -34,7 +34,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 body {
@@ -9801,15 +9808,14 @@ body.fdl-page .league-tab-btn.active {
     gap: 0.5rem !important;
     padding: 0.2rem 0.2rem 0.65rem 0.2rem !important;
     -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: thin !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
   }
 
   .contender-cards-grid::-webkit-scrollbar {
-    height: 4px;
-  }
-  .contender-cards-grid::-webkit-scrollbar-thumb {
-    background: #ffb400;
-    border-radius: 4px;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   .contender-card {
@@ -9894,16 +9900,14 @@ body.fdl-page .league-tab-btn.active {
     gap: 0.75rem !important;
     padding: 0.25rem 0.25rem 0.85rem 0.25rem !important;
     -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: thin !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
   }
 
   .honors-spotlight-wrapper .spotlight-cards-grid::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .honors-spotlight-wrapper .spotlight-cards-grid::-webkit-scrollbar-thumb {
-    background: #ffb400;
-    border-radius: 4px;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   .honors-spotlight-wrapper .spotlight-card {
@@ -10144,16 +10148,14 @@ body.fdl-page .league-tab-btn.active {
     gap: 0.5rem !important;
     padding: 0.2rem 0.2rem 0.65rem 0.2rem !important;
     -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: thin !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
   }
 
   .historic-clashes-grid::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .historic-clashes-grid::-webkit-scrollbar-thumb {
-    background: #ffb400;
-    border-radius: 4px;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   .clash-card-tile {
