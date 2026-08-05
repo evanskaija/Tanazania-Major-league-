@@ -1772,17 +1772,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   function initScrollRevealEngine() {
     const revealSelectors = [
-      '.reveal-fade-up', '.reveal-fade-left', '.reveal-fade-right', '.reveal-scale-in',
+      '.reveal-fade-up', '.reveal-fade-left', '.reveal-fade-right', '.reveal-fade-down', '.reveal-zoom-in', '.reveal-scale-in', '.reveal-fade-in',
       '.reveal-up', '.reveal-left', '.reveal-right', '.reveal-scale', '[data-reveal]',
       '.comp-card', '.spotlight-card', '.news-card', '.hero-card',
       '.leader-hero-card', '.stat-player-row-card', '.standings-card',
       '.title-race-card', '.club-card', '.player-spotlight-card', '.next-fixture-card',
-      '.footer-col', '.section-header', '.hero-title', '.hero-subtitle',
+      '.footer-col', '.section-header', '.section-header-alt', '.hero-title', '.hero-subtitle',
       '.hero-cta-group', '.stats-counter-strip', '.match-card',
       '.live-match-tile', '.live-marquee-card', '.competition-selector-container',
       '.match-filter-card', '.match-detail-section', '.sponsors-showcase-section',
       '.sponsor-white-card', '.comp-badge-item', '.bracket-card-box',
-      '.bracket-container', '.widget-glass-card', '.table-card-container'
+      '.bracket-container', '.widget-glass-card', '.table-card-container',
+      '.comp-image-card', '.honors-card', '.quiz-split-card', '.netflix-highlight-card',
+      '.classic-clash-card', '.community-photo-card', '.feature-box-main', '.feature-box-sub',
+      '.legend-card-hero', '.command-card-futuristic', '.app-promo-card'
     ];
 
     const elementsToReveal = document.querySelectorAll(revealSelectors.join(', '));
@@ -1793,27 +1796,27 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!el.classList.contains('reveal-fade-up') &&
           !el.classList.contains('reveal-fade-left') &&
           !el.classList.contains('reveal-fade-right') &&
+          !el.classList.contains('reveal-fade-down') &&
+          !el.classList.contains('reveal-zoom-in') &&
           !el.classList.contains('reveal-scale-in') &&
+          !el.classList.contains('reveal-fade-in') &&
           !el.classList.contains('reveal-up') &&
           !el.classList.contains('reveal-left') &&
           !el.classList.contains('reveal-right') &&
           !el.classList.contains('reveal-scale')) {
         
-        if (el.classList.contains('spotlight-card') ||
+        if (el.classList.contains('comp-image-card') ||
+            el.classList.contains('honors-card') ||
+            el.classList.contains('quiz-split-card') ||
+            el.classList.contains('netflix-highlight-card') ||
+            el.classList.contains('classic-clash-card') ||
+            el.classList.contains('community-photo-card') ||
+            el.classList.contains('spotlight-card') ||
             el.classList.contains('news-card') ||
             el.classList.contains('comp-card') ||
-            el.classList.contains('hero-card') ||
-            el.classList.contains('leader-hero-card') ||
-            el.classList.contains('club-card') ||
-            el.classList.contains('player-spotlight-card') ||
-            el.classList.contains('live-match-tile') ||
-            el.classList.contains('match-filter-card') ||
-            el.classList.contains('sponsor-white-card') ||
-            el.classList.contains('comp-badge-item') ||
-            el.classList.contains('bracket-card-box') ||
-            el.classList.contains('widget-glass-card')) {
-          el.classList.add('reveal-scale-in');
-        } else if (el.classList.contains('section-header')) {
+            el.classList.contains('hero-card')) {
+          el.classList.add('reveal-zoom-in');
+        } else if (el.classList.contains('section-header') || el.classList.contains('section-header-alt')) {
           el.classList.add('reveal-fade-left');
         } else {
           el.classList.add('reveal-fade-up');
@@ -1823,21 +1826,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Auto stagger delay for siblings inside parent grid
       const parent = el.parentElement;
       if (parent) {
-        const siblings = Array.from(parent.children).filter(child => 
-          child.classList.contains('reveal-fade-up') ||
-          child.classList.contains('reveal-fade-left') ||
-          child.classList.contains('reveal-fade-right') ||
-          child.classList.contains('reveal-scale-in') ||
-          child.classList.contains('reveal-up') ||
-          child.classList.contains('reveal-left') ||
-          child.classList.contains('reveal-right') ||
-          child.classList.contains('reveal-scale')
-        );
-
+        const siblings = Array.from(parent.children);
         if (siblings.length > 1) {
           const index = siblings.indexOf(el);
-          if (index >= 0 && index < 8) {
-            el.style.transitionDelay = `${index * 80}ms`;
+          if (index >= 0 && index < 12) {
+            el.style.transitionDelay = `${(index % 6) * 90}ms`;
           }
         }
       }
@@ -1846,15 +1839,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('IntersectionObserver' in window) {
       const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -20px 0px',
-        threshold: 0.05
+        rootMargin: '0px 0px -30px 0px',
+        threshold: 0.08
       };
 
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed', 'active');
-            observer.unobserve(entry.target); // Smooth scroll-down reveal
+            observer.unobserve(entry.target); // Trigger once smoothly
           }
         });
       }, observerOptions);
@@ -1865,7 +1858,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // -------------------------------------------------------------
+  // ANIMATED STATS NUMBER COUNT-UP ENGINE
+  // -------------------------------------------------------------
+  function initNumberCountUpEngine() {
+    const statElements = document.querySelectorAll('[data-count-to], .stat-count, .number-count');
+    if (statElements.length === 0) return;
+
+    function animateCount(el) {
+      const targetStr = el.getAttribute('data-count-to') || el.innerText;
+      const targetNum = parseInt(targetStr.replace(/[^0-9]/g, ''), 10);
+      if (isNaN(targetNum)) return;
+
+      const duration = 1800; // ms
+      const startTime = performance.now();
+      const prefix = targetStr.match(/^[^\d]+/)?.[0] || '';
+      const suffix = targetStr.match(/[^\d]+$/)?.[0] || '';
+
+      function updateNumber(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3); // Ease Out Cubic
+        const currentVal = Math.floor(easeProgress * targetNum);
+        el.innerText = `${prefix}${currentVal.toLocaleString()}${suffix}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateNumber);
+        } else {
+          el.innerText = targetStr;
+        }
+      }
+      requestAnimationFrame(updateNumber);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const countObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      statElements.forEach(el => countObserver.observe(el));
+    }
+  }
+
   initScrollRevealEngine();
+  initNumberCountUpEngine();
 
 
 
